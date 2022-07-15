@@ -10,7 +10,7 @@ const GNB: NextPage = ({ setTitle }) => {
       className="bg-black-400 border-#f5f5f5 fixed z-[2] flex h-28 w-[100%]  flex-row border-b-2 bg-white"
     >
       <div className="mx-auto flex">
-        <div className="flex">
+        <div className="flex" onClick={() => setTitle('홈')}>
           <Link href="/home">
             <a>
               <div id="logo" className="flex h-[112px] w-[350px] cursor-pointer overflow-y-hidden">
@@ -26,18 +26,22 @@ const GNB: NextPage = ({ setTitle }) => {
             <div className="mx-2 flex h-28 w-52 cursor-pointer items-center justify-center font-medium  ">
               <div className="dropdown relative mx-2 inline-block h-28 w-40">
                 <div>
-                  <div className="py-[2.7rem] text-center">
-                    <span className="font-bold">센터 소개</span>
+                  <div onClick={() => setTitle('센터 소개')} className="py-[2.7rem] text-center">
+                    <Link href="/introduce">
+                      <a>
+                        <span className="font-bold">센터 소개</span>
+                      </a>
+                    </Link>
                   </div>
                   <ul className="dropdown-menu absolute mt-[1px] hidden min-w-[250px] bg-white py-1 text-sm text-[#777777] shadow-[0_6px_12px_rgb(0,0,0,0.3)] dark:text-gray-200">
-                    <li onClick={() => setTitle('센터 소개')} className="">
+                    <li onClick={() => setTitle('센터 소개')}>
                       <Link href="/introduce">
                         <a className="block px-4 py-6 hover:bg-[#a9ce8e] hover:text-white" href="#">
                           센터 소개
                         </a>
                       </Link>
                     </li>
-                    <li onClick={() => setTitle('센터 소개')} className="">
+                    <li onClick={() => setTitle('센터 소개')}>
                       <Link href="/introduce/member">
                         <a className="block px-4 py-6 hover:bg-[#a9ce8e] hover:text-white">
                           센터 구성원 소개
@@ -58,8 +62,15 @@ const GNB: NextPage = ({ setTitle }) => {
             <div className="mx-2 flex h-28 w-52 cursor-pointer items-center justify-center font-medium ">
               <div className="dropdown relative mx-2 inline-block h-28 w-48">
                 <div>
-                  <div className="py-[2.7rem] text-center">
-                    <span className="font-bold">상담 및 심리검사 서비스</span>
+                  <div
+                    onClick={() => setTitle('상담 및 심리검사 서비스')}
+                    className="py-[2.7rem] text-center"
+                  >
+                    <Link href="/counsel/private">
+                      <a>
+                        <span className="font-bold">상담 및 심리검사 서비스</span>
+                      </a>
+                    </Link>
                   </div>
                   <ul className="dropdown-menu absolute mt-[1px] hidden min-w-[250px] bg-white py-1 text-sm  text-[#777777] shadow-[0_6px_12px_rgb(0,0,0,0.3)] dark:text-gray-200">
                     <li onClick={() => setTitle('상담 및 심리검사 서비스')} className="">
@@ -97,8 +108,12 @@ const GNB: NextPage = ({ setTitle }) => {
             <div className="mx-2 flex h-28 w-52 cursor-pointer items-center justify-center font-medium ">
               <div className="dropdown relative mx-2 inline-block h-28 w-40">
                 <div>
-                  <div className="py-[2.7rem] text-center">
-                    <span className="font-bold">교육 서비스</span>
+                  <div onClick={() => setTitle('교육 서비스')} className="py-[2.7rem] text-center">
+                    <Link href="/education/counselor">
+                      <a>
+                        <span className="font-bold">교육 서비스</span>
+                      </a>
+                    </Link>
                   </div>
                   <ul className="dropdown-menu absolute  mt-[1px] hidden min-w-[250px] bg-white py-1 text-sm text-[#777777] shadow-[0_6px_12px_rgb(0,0,0,0.3)] dark:text-gray-200">
                     <li onClick={() => setTitle('교육 서비스')} className="">
@@ -122,8 +137,15 @@ const GNB: NextPage = ({ setTitle }) => {
             <div className="mx-2 flex h-28 w-52 cursor-pointer items-center justify-center font-medium ">
               <div className="dropdown relative mx-2 inline-block h-28 w-40">
                 <div>
-                  <div className="py-[2.7rem] text-center">
-                    <span className="font-bold">상담문의 및 신청</span>
+                  <div
+                    onClick={() => setTitle('상담문의 및 신청')}
+                    className="py-[2.7rem] text-center"
+                  >
+                    <Link href="/proposal">
+                      <a>
+                        <span className="font-bold">상담문의 및 신청</span>
+                      </a>
+                    </Link>
                   </div>
                   <ul className="dropdown-menu absolute  mt-[1px] hidden min-w-[250px] bg-white py-1 text-sm text-[#777777] shadow-[0_6px_12px_rgb(0,0,0,0.3)] dark:text-gray-200">
                     <li onClick={() => setTitle('상담문의 및 신청')} className="">
@@ -147,8 +169,12 @@ const GNB: NextPage = ({ setTitle }) => {
             <div className="mx-2 flex h-28 w-52 cursor-pointer items-center justify-center font-medium ">
               <div className="dropdown relative mx-2 inline-block h-28 w-40">
                 <div>
-                  <div className="py-[2.7rem] text-center">
-                    <span className="font-bold">센터 소식</span>
+                  <div onClick={() => setTitle('센터 소식')} className="py-[2.7rem] text-center">
+                    <Link href="/news/notice">
+                      <a>
+                        <span className="font-bold">센터 소식</span>
+                      </a>
+                    </Link>
                   </div>
                   <ul className="dropdown-menu absolute  mt-[1px] hidden min-w-[250px] bg-white py-1 text-sm text-[#777777] shadow-[0_6px_12px_rgb(0,0,0,0.3)] dark:text-gray-200">
                     <li onClick={() => setTitle('센터 소식')} className="">

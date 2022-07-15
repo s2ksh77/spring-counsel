@@ -11,27 +11,40 @@ import Footer from '@components/Footer';
 import { useRouter } from 'next/router';
 import Menu from '@components/Menu';
 import { useEffect, useState } from 'react';
+import Section from '@components/Section';
+import Content from '@components/Content';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const [key, setKey] = useState('');
+  const [menu, setMenu] = useState('');
+  const [title, setTitle] = useState('홈');
 
   useEffect(() => {
-    console.log(router.pathname.split('/')[1]);
-    setKey(router.pathname.split('/')[1]);
-    console.log(key);
-  }, [router, key]);
+    setMenu(router.pathname.split('/')[1]);
+  }, [router, menu]);
+
+  const isHome = (): boolean => {
+    return router.pathname === '/' || router.pathname === '/home';
+  };
 
   return (
     <SWRConfig value={{ fetcher: (url: string) => fetch(url).then((res) => res.json()) }}>
       <Head>
-        <title>봄, 심리상담센터</title>
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <title>{title ? `${title} | 봄, 심리상담센터` : '홈 | 봄, 심리상담센터'} </title>
       </Head>
       <div className="mx-auto w-full">
-        <GNB />
+        <GNB setTitle={setTitle} />
+        {isHome() ? <Section /> : null}
         <Layout>
-          <Menu key={key} />
-          <Component {...pageProps} />
+          {isHome() ? null : <Menu menu={menu} title={title} />}
+          {isHome() ? (
+            <Component {...pageProps} />
+          ) : (
+            <Content>
+              <Component {...pageProps} />
+            </Content>
+          )}
         </Layout>
       </div>
       <Footer />

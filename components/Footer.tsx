@@ -1,17 +1,19 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from '../public/logo.jpg';
+import logo from '../public/logo-main.jpg';
 
 const Footer: NextPage = () => {
   return (
     <div className="flex h-[150px] w-[100%] flex-row border-t-[1px]">
-      <div id="logo" className="flex items-center px-6">
-        <Link href="/home">
-          <a>
-            <Image src={logo} width="300px" height="72px" />
-          </a>
-        </Link>
+      <div id="logo" className="flex cursor-pointer items-center overflow-y-hidden px-6">
+        <div>
+          <Link href="/home">
+            <a>
+              <Image src={logo} width={250} height={250} />
+            </a>
+          </Link>
+        </div>
       </div>
       <div id="copyright" className="ml-4 flex flex-col p-4">
         <ul className="flex last:mr-0 [&>li]:mr-3 [&>li]:border-r-[2px] [&>li]:border-[#e1e1e1] [&>li]:pr-3 [&>li:hover]:cursor-pointer [&>li:hover]:underline">
@@ -35,11 +37,7 @@ const Footer: NextPage = () => {
           stroke="currentColor"
           strokeWidth={2}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M8 7l4-4m0 0l4 4m-4-4v18"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 7l4-4m0 0l4 4m-4-4v18" />
         </svg>
       </div>
     </div>

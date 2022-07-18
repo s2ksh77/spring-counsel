@@ -10,6 +10,7 @@ import Image from 'next/image';
 import test1 from '../assets/test1.jpg';
 import test4 from '../assets/test4.jpg';
 import test5 from '../assets/test5.jpg';
+import test6 from '../assets/test6.jpg';
 
 const Section: NextPage = () => {
   return (

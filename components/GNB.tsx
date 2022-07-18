@@ -1,9 +1,17 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import logo from '../public/logo-small.jpg';
 
 const GNB: NextPage = ({ setTitle }) => {
+  const router = useRouter();
+
+  const onClick = () => {
+    setTitle('로그인');
+    router.push('/login');
+  };
+
   return (
     <div
       id="gnb"
@@ -196,7 +204,9 @@ const GNB: NextPage = ({ setTitle }) => {
               </div>
             </div>
             <div id="login" className="mr-4 flex w-20 py-7">
-              <button className="text-black-300 w-20 bg-yellow-300">로그인</button>
+              <button onClick={onClick} className="text-black-300 w-20 bg-yellow-300">
+                로그인
+              </button>
             </div>
           </div>
         </div>

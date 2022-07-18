@@ -27,6 +27,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     return router.pathname === '/' || router.pathname === '/home';
   };
 
+  const isLogin = (): boolean => {
+    return router.pathname === '/login';
+  };
+
   return (
     <SWRConfig value={{ fetcher: (url: string) => fetch(url).then((res) => res.json()) }}>
       <Head>
@@ -35,10 +39,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <div className="mx-auto w-full">
         <GNB setTitle={setTitle} />
-        {isHome() ? <Section /> : null}
+        {isHome() && !isLogin() ? <Section /> : null}
         <Layout>
-          {isHome() ? null : <Menu menu={menu} title={title} />}
-          {isHome() ? (
+          {isHome() || isLogin() ? null : <Menu menu={menu} title={title} />}
+          {isHome() || isLogin() ? (
             <Component {...pageProps} />
           ) : (
             <Content>

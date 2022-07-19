@@ -1,16 +1,24 @@
+import useLogin from '@libs/client/useLogin';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import logo from '../public/logo-small.jpg';
 
-const GNB: NextPage = ({ setTitle }) => {
+const GNB: NextPage = ({ setTitle, isLogin }) => {
+  const { data } = useSWR('/api/login');
   const router = useRouter();
 
   const onClick = () => {
     setTitle('로그인');
     router.push('/login');
   };
+
+  useEffect(() => {
+    localStorage.setItem('isLogin', data?.ok);
+  }, [data]);
 
   return (
     <div
@@ -203,11 +211,19 @@ const GNB: NextPage = ({ setTitle }) => {
                 </div>
               </div>
             </div>
-            <div id="login" className="mr-4 flex w-20 py-7">
-              <button onClick={onClick} className="text-black-300 w-20 bg-yellow-300">
-                로그인
-              </button>
-            </div>
+            {!isLogin ? (
+              <div id="login" className="mr-4 flex w-20 py-7">
+                <button onClick={onClick} className="text-black-300 w-20 rounded-lg bg-[#a9ce8e]">
+                  로그인
+                </button>
+              </div>
+            ) : (
+              <div className="mr-4 flex w-20 py-7">
+                <button onClick={onClick} className="text-black-300 w-20 rounded-lg bg-[#a9ce8e]">
+                  로그아웃
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

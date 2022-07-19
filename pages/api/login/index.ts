@@ -6,13 +6,28 @@ import { withApiSession } from '@libs/server/withSession';
 async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) {
   const {
     body: { userId, password },
-    session: { user },
   } = req;
   if (req.method === 'POST') {
-    res.json({ ok: true });
+    const user = await client.user.findMany({
+      where: {
+        OR: [{ userId }, { password }],
+      },
+    });
+    if (user) {
+      const data = user[0];
+      req.session.user = {
+        id: data.id,
+      };
+      await req.session.save();
+
+      res.json({ ok: true });
+    }
   }
   if (req.method === 'GET') {
-    res.json({ ok: true });
+    const {
+      session: { user },
+    } = req;
+    res.json({ ok: user?.id ? true : false });
   }
 }
 

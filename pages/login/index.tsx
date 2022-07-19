@@ -1,5 +1,7 @@
 import useMutation from '@libs/client/useMutation';
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface LoginForm {
@@ -8,13 +10,22 @@ interface LoginForm {
 }
 
 const Login: NextPage = () => {
+  const router = useRouter();
   const { register, handleSubmit } = useForm<LoginForm>();
   const [login, { data, loading }] = useMutation<LoginForm>('/api/login');
 
-  const onValid = (data: LoginForm) => {
+  const onValid = (form: LoginForm) => {
     if (loading) return;
-    login(data);
+    login(form);
   };
+
+  useEffect(() => {
+    if (data?.ok) {
+      localStorage.setItem('isLogin', true);
+      console.log('여기서 날리고');
+      router.push('/home');
+    }
+  }, [data]);
 
   return (
     <div className="m-auto flex flex-col rounded-2xl border-[2px] py-16 px-16">

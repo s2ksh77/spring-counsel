@@ -6,19 +6,33 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import logo from '../public/logo-small.jpg';
+import { Dialog } from '@mui/material';
 
-const GNB: NextPage = ({ setTitle, isLogin }) => {
+const GNB: NextPage = ({ setTitle }) => {
   const { data } = useSWR('/api/login');
+  const [isLogin, setIsLogin] = useState(false);
+  const [dialogVisible, setDialogVisible] = useState(false);
   const router = useRouter();
 
-  const onClick = () => {
+  const goLogIn = () => {
     setTitle('로그인');
     router.push('/login');
+  };
+
+  const handleLogout = () => {
+    setDialogVisible(true);
+    localStorage.setItem('isLogin', false);
+    setIsLogin(false);
   };
 
   useEffect(() => {
     localStorage.setItem('isLogin', data?.ok);
   }, [data]);
+
+  useEffect(() => {
+    setIsLogin(localStorage.getItem('isLogin'));
+    console.log(isLogin);
+  }, []);
 
   return (
     <div
@@ -213,17 +227,40 @@ const GNB: NextPage = ({ setTitle, isLogin }) => {
             </div>
             {!isLogin ? (
               <div id="login" className="mr-4 flex w-20 py-7">
-                <button onClick={onClick} className="text-black-300 w-20 rounded-lg bg-[#a9ce8e]">
+                <button onClick={goLogIn} className="text-black-300 w-20 rounded-lg bg-[#a9ce8e]">
                   로그인
                 </button>
               </div>
             ) : (
               <div className="mr-4 flex w-20 py-7">
-                <button onClick={onClick} className="text-black-300 w-20 rounded-lg bg-[#a9ce8e]">
+                <button
+                  onClick={handleLogout}
+                  className="text-black-300 w-20 rounded-lg bg-[#a9ce8e]"
+                >
                   로그아웃
                 </button>
               </div>
             )}
+            <Dialog
+              open={dialogVisible}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  Let Google help apps determine location. This means sending anonymous location
+                  data to Google, even when no apps are running.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Disagree</Button>
+                <Button onClick={handleClose} autoFocus>
+                  Agree
+                </Button>
+              </DialogActions>
+            </Dialog>
           </div>
         </div>
       </div>

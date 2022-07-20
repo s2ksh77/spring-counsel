@@ -22,8 +22,9 @@ const Login: NextPage = () => {
   useEffect(() => {
     if (data?.ok) {
       localStorage.setItem('isLogin', true);
-      console.log('여기서 날리고');
-      router.push('/home');
+      router.push('/home').then(() => {
+        window.location.reload();
+      });
     }
   }, [data]);
 

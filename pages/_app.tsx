@@ -19,9 +19,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [menu, setMenu] = useState('');
   const [title, setTitle] = useState('홈');
-  const isLogin = useLogin();
-
-  console.log(isLogin);
 
   useEffect(() => {
     setMenu(router.pathname.split('/')[1]);
@@ -31,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return router.pathname === '/' || router.pathname === '/home';
   };
 
-  const isLoginPath = (): boolean => {
+  const isLogin = (): boolean => {
     return router.pathname === '/login';
   };
 
@@ -42,11 +39,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>{title ? `${title} | 봄, 심리상담센터` : '홈 | 봄, 심리상담센터'} </title>
       </Head>
       <div className="mx-auto w-full">
-        <GNB setTitle={setTitle} isLogin={isLogin} />
-        {isHome() && !isLoginPath() ? <Section /> : null}
+        <GNB setTitle={setTitle} />
+        {isHome() && !isLogin() ? <Section /> : null}
         <Layout>
-          {isHome() || isLoginPath() ? null : <Menu menu={menu} title={title} />}
-          {isHome() || isLoginPath() ? (
+          {isHome() || isLogin() ? null : <Menu menu={menu} title={title} />}
+          {isHome() || isLogin() ? (
             <Component {...pageProps} />
           ) : (
             <Content>

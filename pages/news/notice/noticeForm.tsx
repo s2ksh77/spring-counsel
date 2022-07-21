@@ -62,47 +62,50 @@ const NoticeForm: NextPage = () => {
   return (
     <div className="flex h-full w-full flex-col p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">공지사항</div>
-      <div className="float-right ml-auto flex">
-        <div>
-          공지로 등록
-          <Checkbox
-            checked={checked}
-            onChange={handleCheckBoxChange}
-            inputProps={{ 'aria-label': 'controlled' }}
-            className="transition-none"
-          />
-        </div>
-      </div>
 
-      <div className="w-full pt-8">
-        <div className="flex w-full flex-row items-center">
-          <div className="w-[50px] items-center">
-            <label>제목</label>
-          </div>
-          <div className="w-full">
-            <input
-              onChange={handleChange}
-              type="text"
-              className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
+      <>
+        <div className="float-right ml-auto flex">
+          <div>
+            공지로 등록
+            <Checkbox
+              checked={checked}
+              onChange={handleCheckBoxChange}
+              inputProps={{ 'aria-label': 'controlled' }}
+              className="transition-none"
             />
           </div>
         </div>
-      </div>
-      <div className="h-full pt-8">
-        <Editor
-          apiKey="90655irb9nds5o8ycj2bpivk0v2y34e2oa6qta82nclxrnx3"
-          init={{
-            height: '100%',
-            plugins:
-              '  autolink   lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
-            toolbar:
-              'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignment | numlist bullist | outdent indent | link | insertImage insertfile | hr table codesample insertdatetime print',
-            statusbar: false,
-            menubar: false,
-          }}
-          onEditorChange={handleEditorChange}
-        />
-      </div>
+
+        <div className="w-full pt-8">
+          <div className="flex w-full flex-row items-center">
+            <div className="w-[50px] items-center">
+              <label>제목</label>
+            </div>
+            <div className="w-full">
+              <input
+                onChange={handleChange}
+                type="text"
+                className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="h-full pt-8">
+          <Editor
+            apiKey="90655irb9nds5o8ycj2bpivk0v2y34e2oa6qta82nclxrnx3"
+            init={{
+              height: '100%',
+              plugins:
+                '  autolink   lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
+              toolbar:
+                'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignment | numlist bullist | outdent indent | link | insertImage insertfile | hr table codesample insertdatetime print',
+              statusbar: false,
+              menubar: false,
+            }}
+            onEditorChange={handleEditorChange}
+          />
+        </div>
+      </>
       <div>
         <div className="float-right ml-auto flex pt-2">
           <Button onClick={goBack} className="mr-2 text-black">

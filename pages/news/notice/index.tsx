@@ -38,10 +38,10 @@ const Notice: NextPage = () => {
       <div className="border-b-2 pb-8 text-3xl font-bold">공지사항</div>
       <TableContainer className="min-h-[85%]">
         <Table stickyHeader className="">
-          <TableHead>
+          <TableHead className="sticky">
             <TableRow>
               <TableCell className="w-16 text-center">번호</TableCell>
-              <TableCell className="text-center">제목</TableCell>
+              <TableCell className="">제목</TableCell>
               <TableCell className="w-20 text-center">작성자</TableCell>
               <TableCell className="w-36 text-center">날짜</TableCell>
             </TableRow>
@@ -51,7 +51,11 @@ const Notice: NextPage = () => {
               <TableRow
                 onClick={handleNotice.bind(null, notice.id)}
                 key={notice.id}
-                className="h-[30px] hover:cursor-pointer hover:bg-[#eeeeee]"
+                className={
+                  notice.isPrimary
+                    ? 'h-[30px] bg-[#e6e6e6] hover:cursor-pointer hover:bg-[#eeeeee]'
+                    : 'h-[30px] hover:cursor-pointer hover:bg-[#eeeeee]'
+                }
               >
                 <TableCell className="h-[30px] w-16 text-center">{index + 1}</TableCell>
                 <TableCell className="h-[30px]">{notice.title}</TableCell>

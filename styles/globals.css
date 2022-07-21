@@ -6,6 +6,17 @@
     display: block;
   }
 
+.PrivateSwitchBase-input{
+  top:10px;
+  left:10px;
+}
+.MuiTableCell-root{
+  padding:5px;
+}
+
+.no-toolbar .tox-editor-header{
+    display: none;
+}
   
 .swiper {
   width: 100%;

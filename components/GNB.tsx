@@ -6,7 +6,14 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import logo from '../public/logo-small.jpg';
-import { Dialog } from '@mui/material';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+} from '@mui/material';
 
 const GNB: NextPage = ({ setTitle }) => {
   const { data } = useSWR('/api/login');
@@ -19,11 +26,16 @@ const GNB: NextPage = ({ setTitle }) => {
     router.push('/login');
   };
 
-  const handleLogout = () => {
+  const openDialog = () => {
     setDialogVisible(true);
+  };
+
+  const handleLogout = () => {
     localStorage.setItem('isLogin', false);
     setIsLogin(false);
   };
+
+  const handleClose = () => setDialogVisible(false);
 
   useEffect(() => {
     localStorage.setItem('isLogin', data?.ok);
@@ -234,7 +246,7 @@ const GNB: NextPage = ({ setTitle }) => {
             ) : (
               <div className="mr-4 flex w-20 py-7">
                 <button
-                  onClick={handleLogout}
+                  onClick={openDialog}
                   className="text-black-300 w-20 rounded-lg bg-[#a9ce8e]"
                 >
                   로그아웃
@@ -247,17 +259,16 @@ const GNB: NextPage = ({ setTitle }) => {
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
             >
-              <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+              <DialogTitle id="alert-dialog-title">{'로그아웃'}</DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                  Let Google help apps determine location. This means sending anonymous location
-                  data to Google, even when no apps are running.
+                  로그아웃 하시겠습니까?
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>Disagree</Button>
-                <Button onClick={handleClose} autoFocus>
-                  Agree
+                <Button onClick={handleClose}>취소</Button>
+                <Button onClick={handleLogout} autoFocus>
+                  확인
                 </Button>
               </DialogActions>
             </Dialog>

@@ -11,6 +11,14 @@ import test1 from '../assets/test1.jpg';
 import test4 from '../assets/test4.jpg';
 import test5 from '../assets/test5.jpg';
 import test6 from '../assets/test6.jpg';
+import test11 from '../assets/test1.png';
+import test22 from '../assets/test2.png';
+import test33 from '../assets/test3.png';
+import test44 from '../assets/test4.png';
+import test55 from '../assets/test5.png';
+import test66 from '../assets/test6.png';
+import test77 from '../assets/test7.png';
+import test88 from '../assets/banner.webp';
 
 const Section: NextPage = () => {
   return (
@@ -52,10 +60,31 @@ const Section: NextPage = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test4} layout="fill" />
+          <Image src={test11} layout="fixed" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test5} layout="fill" />
+          <Image src={test22} layout="fixed" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image src={test33} layout="fixed" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image src={test44} layout="fixed" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image src={test4} layout="fixed" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image src={test55} layout="fixed" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image src={test66} layout="fixed" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image src={test77} layout="fixed" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image src={test88} width={2400} height={525} />
         </SwiperSlide>
       </Swiper>
     </div>

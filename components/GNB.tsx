@@ -14,11 +14,15 @@ import {
   DialogActions,
   Button,
 } from '@mui/material';
+import { withSsrSession } from '@libs/server/withSession';
+import { withIronSessionSsr } from 'iron-session/next';
+import useMutation from '@libs/client/useMutation';
 
 const GNB: NextPage = ({ setTitle }) => {
   const { data } = useSWR('/api/login');
   const [isLogin, setIsLogin] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
+  const [logout, { data: logoutData }] = useMutation('/api/login/logout');
   const router = useRouter();
 
   const goLogIn = () => {
@@ -31,26 +35,44 @@ const GNB: NextPage = ({ setTitle }) => {
   };
 
   const handleLogout = () => {
-    localStorage.setItem('isLogin', false);
-    setIsLogin(false);
+    logout();
+    setDialogVisible(false);
   };
 
   const handleClose = () => setDialogVisible(false);
 
   useEffect(() => {
     localStorage.setItem('isLogin', data?.ok);
+    setIsLogin(data?.ok);
   }, [data]);
 
   useEffect(() => {
-    setIsLogin(localStorage.getItem('isLogin'));
-    console.log(isLogin);
-  }, []);
+    if (logoutData && logoutData?.ok) {
+      localStorage.removeItem('isLogin');
+      setIsLogin(false);
+    }
+  }, [logoutData]);
 
   return (
     <div
       id="gnb"
-      className="bg-black-400 border-#f5f5f5 fixed z-[2] flex h-28 w-[100%]  flex-row border-b-2 bg-white"
+      className="bg-black-400 border-#f5f5f5 fixed z-[2] flex h-28 w-[100%] flex-col border-b-2 bg-white"
     >
+      <div className="fixed right-20">
+        {!isLogin ? (
+          <div id="login" className="padding-[0.5rem]">
+            <button onClick={goLogIn} className="text-black-300 w-20 hover:text-gray-400">
+              로그인
+            </button>
+          </div>
+        ) : (
+          <div className="padding-[0.5rem]">
+            <button onClick={openDialog} className="text-black-300 w-20 hover:text-gray-400">
+              로그아웃
+            </button>
+          </div>
+        )}
+      </div>
       <div className="mx-auto flex">
         <div className="flex" onClick={() => setTitle('홈')}>
           <Link href="/home">
@@ -198,7 +220,7 @@ const GNB: NextPage = ({ setTitle }) => {
                       </Link>
                     </li>
                     <li onClick={() => setTitle('상담문의 및 신청')} className="">
-                      <Link href="/proposal/proposal">
+                      <Link href="/proposal/reservationForm">
                         <a className="block px-4 py-6 hover:bg-[#a9ce8e] hover:text-white" href="#">
                           상담신청
                         </a>
@@ -237,22 +259,24 @@ const GNB: NextPage = ({ setTitle }) => {
                 </div>
               </div>
             </div>
-            {!isLogin ? (
-              <div id="login" className="mr-4 flex w-20 py-7">
-                <button onClick={goLogIn} className="text-black-300 w-20 rounded-lg bg-[#a9ce8e]">
-                  로그인
-                </button>
+            {isLogin ? (
+              <div className="mx-2 flex h-28 w-52 cursor-pointer items-center justify-center font-medium ">
+                <div className="dropdown relative mx-2 inline-block h-28 w-40">
+                  <div>
+                    <div
+                      onClick={() => setTitle('상담 신청 내역')}
+                      className="py-[2.7rem] text-center"
+                    >
+                      <Link href="/proposal/list">
+                        <a>
+                          <span className="font-bold">상담 신청 내역</span>
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
-            ) : (
-              <div className="mr-4 flex w-20 py-7">
-                <button
-                  onClick={openDialog}
-                  className="text-black-300 w-20 rounded-lg bg-[#a9ce8e]"
-                >
-                  로그아웃
-                </button>
-              </div>
-            )}
+            ) : null}
             <Dialog
               open={dialogVisible}
               onClose={handleClose}

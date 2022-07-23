@@ -18,15 +18,15 @@ import { DialogContent } from '@mui/material';
 import { DialogContentText } from '@mui/material';
 import { DialogActions } from '@mui/material';
 import useLogin from '@libs/client/useLogin';
+import { withSsrSession } from '@libs/server/withSession';
 
 interface NoticeResponse {
   ok: boolean;
   notice: Notice;
 }
 
-const NoticeDetail: NextPage = () => {
+const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   const router = useRouter();
-  const isLogin = useLogin();
   const [editor, setEditor] = useState(null);
   const [editState, setEditState] = useState(false);
   const [title, setTitle] = useState('');
@@ -115,13 +115,6 @@ const NoticeDetail: NextPage = () => {
       router.push('/news/notice');
     }
   }, [deleteData, mutate]);
-
-  // useEffect(() => {
-  //   if (editor) {
-  //     console.log(editor);
-
-  //   }
-  // }, [editor]);
 
   return (
     <div className="flex h-full w-full flex-col p-8">
@@ -294,5 +287,13 @@ const NoticeDetail: NextPage = () => {
     </div>
   );
 };
+
+export const getServerSideProps = withSsrSession(async function ({ req }: NextPageContext) {
+  return {
+    props: {
+      isLogin: req?.session?.user?.id ? true : false,
+    },
+  };
+});
 
 export default NoticeDetail;

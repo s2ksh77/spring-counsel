@@ -24,7 +24,7 @@ export const getMenu = (key: string): [] => {
     case 'proposal':
       return [
         { key: 'introduce', name: '상담신청 안내', value: '' },
-        { key: 'proposal', name: '상담신청', value: '/proposal' },
+        { key: 'proposal', name: '상담신청', value: '/reservationForm' },
       ];
       break;
     case 'news':
@@ -35,3 +35,29 @@ export const getMenu = (key: string): [] => {
       break;
   }
 };
+
+export function phoneFomatter(num, type) {
+  var formatNum = '';
+
+  if (num.length == 11) {
+    formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+  } else if (num.length == 8) {
+    formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
+  } else {
+    if (num.indexOf('02') == 0) {
+      if (type == 0) {
+        formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-****-$3');
+      } else {
+        formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+      }
+    } else {
+      if (type == 0) {
+        formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-***-$3');
+      } else {
+        formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+      }
+    }
+  }
+
+  return formatNum;
+}

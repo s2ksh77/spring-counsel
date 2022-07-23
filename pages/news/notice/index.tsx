@@ -14,15 +14,15 @@ import useLogin from '@libs/client/useLogin';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { Notice } from '@prisma/client';
+import { withSsrSession } from '@libs/server/withSession';
 
 interface NoticeResponse {
   ok: boolean;
   notices: Notice[];
 }
 
-const Notice: NextPage = () => {
+const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   const router = useRouter();
-  const isLogin = useLogin();
   const { data } = useSWR<NoticeResponse>('/api/notice');
 
   const onClick = () => {
@@ -79,5 +79,13 @@ const Notice: NextPage = () => {
     </div>
   );
 };
+
+export const getServerSideProps = withSsrSession(async function ({ req }: NextPageContext) {
+  return {
+    props: {
+      isLogin: req?.session?.user?.id ? true : false,
+    },
+  };
+});
 
 export default Notice;

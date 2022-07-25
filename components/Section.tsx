@@ -61,31 +61,19 @@ const Section: NextPage = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test33} width={1920} height={545} />
+          <Image src={test55} layout="fill" objectFit="cover" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test44} width={1920} height={545} />
+          <Image src={test66} layout="fill" objectFit="cover" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test55} width={1920} height={545} />
+          <Image src={test88} layout="fill" objectFit="cover" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test66} width={1920} height={545} />
+          <Image src={bb} layout="fill" objectFit="cover" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test77} width={1920} height={545} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={test88} width={1920} height={545} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={aa} width={1920} height={545} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={bb} width={1920} height={545} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={cc} width={1920} height={545} />
+          <Image src={cc} layout="fill" objectFit="cover" />
         </SwiperSlide>
       </Swiper>
     </div>

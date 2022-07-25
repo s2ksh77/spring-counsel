@@ -8,21 +8,22 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import Image from 'next/image';
 import test1 from '../assets/test1.jpg';
-import test4 from '../assets/test4.jpg';
-import test5 from '../assets/test5.jpg';
 import test6 from '../assets/test6.jpg';
 import test11 from '../assets/test1.png';
 import test22 from '../assets/test2.png';
-import test33 from '../assets/test3.png';
-import test44 from '../assets/test4.png';
-import test55 from '../assets/test5.png';
-import test66 from '../assets/test6.png';
-import test77 from '../assets/test7.png';
-import test88 from '../assets/banner.webp';
+import test33 from '../assets/banner/Frame 13.png';
+import test44 from '../assets/banner/Frame 28.png';
+import test55 from '../assets/banner/Frame 29.png';
+import test66 from '../assets/banner/Frame 32.png';
+import test77 from '../assets/banner/Frame 35.png';
+import test88 from '../assets/banner/Frame 36.png';
+import aa from '../assets/banner/Frame 42.png';
+import bb from '../assets/banner/Frame 44.png';
+import cc from '../assets/banner/Frame 48.png';
 
 const Section: NextPage = () => {
   return (
-    <div className="h-[600px] pt-[112px]">
+    <div className="h-[540px] pt-[112px]">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -60,31 +61,31 @@ const Section: NextPage = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test11} layout="fixed" />
+          <Image src={test33} width={1920} height={545} />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test22} layout="fixed" />
+          <Image src={test44} width={1920} height={545} />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test33} layout="fixed" />
+          <Image src={test55} width={1920} height={545} />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test44} layout="fixed" />
+          <Image src={test66} width={1920} height={545} />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test4} layout="fixed" />
+          <Image src={test77} width={1920} height={545} />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test55} layout="fixed" />
+          <Image src={test88} width={1920} height={545} />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test66} layout="fixed" />
+          <Image src={aa} width={1920} height={545} />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test77} layout="fixed" />
+          <Image src={bb} width={1920} height={545} />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test88} width={2400} height={525} />
+          <Image src={cc} width={1920} height={545} />
         </SwiperSlide>
       </Swiper>
     </div>

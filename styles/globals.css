@@ -17,10 +17,38 @@
 .no-toolbar .tox-editor-header{
     display: none;
 }
+
+:root {
+  --swiper-navigation-size : 22px !important;
+  --swiper-theme-color: #000000 !important;
+}
+.swiper-button-next:after,
+.swiper-button-prev:after{
+  font-weight: 600;
+}
+.swiper-button-next,
+.swiper-button-prev{
+  display: none !important;
+  padding: 20px;
+  border-radius: 25px;
+  border: 1px solid #000000;
+}
   
 .swiper {
   width: 100%;
   height: 100%;
+}
+
+.swiper-pagination{
+  display: none !important;
+}
+.swiper-wrapper:hover ~ .swiper-pagination{
+  display: block !important;
+}
+
+.swiper-wrapper:hover ~ .swiper-button-prev,
+.swiper-wrapper:hover ~ .swiper-button-next{
+  display: flex !important;
 }
 
 .swiper-slide {

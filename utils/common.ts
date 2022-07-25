@@ -61,3 +61,7 @@ export function phoneFomatter(num, type) {
 
   return formatNum;
 }
+
+export function cls(...classnames: string[]) {
+  return classnames.join(' ');
+}

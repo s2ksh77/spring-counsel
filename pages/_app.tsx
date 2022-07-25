@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import Section from '@components/Section';
 import Content from '@components/Content';
 import useLogin from '@libs/client/useLogin';
+import Script from 'next/script';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -54,6 +55,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Layout>
       </div>
       <Footer />
+      <Script
+        strategy="beforeInterative"
+        src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=r19hf0h6dl"
+      />
     </SWRConfig>
   );
 }

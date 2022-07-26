@@ -16,11 +16,11 @@ import Section from '@components/Section';
 import Content from '@components/Content';
 import useLogin from '@libs/client/useLogin';
 import Script from 'next/script';
+import banner from '../assets/banner/private.png';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [menu, setMenu] = useState('');
-  const [title, setTitle] = useState('홈');
 
   useEffect(() => {
     setMenu(router.pathname.split('/')[1]);
@@ -34,17 +34,26 @@ function MyApp({ Component, pageProps }: AppProps) {
     return router.pathname === '/login';
   };
 
+  const isProposalList = (): boolean => {
+    return router.pathname === '/proposal/list' || router.pathname === '/proposal/[id]';
+  };
+
+  const isCounsel = (): boolean => {
+    return router.pathname.split('/')[1] === 'counsel';
+  };
+
   return (
     <SWRConfig value={{ fetcher: (url: string) => fetch(url).then((res) => res.json()) }}>
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <title>{title ? `${title} | 봄, 심리상담센터` : '홈 | 봄, 심리상담센터'} </title>
+        <title>{'봄, 심리상담센터'} </title>
       </Head>
       <div className="mx-auto w-full">
-        <GNB setTitle={setTitle} />
+        <GNB />
         {isHome() && !isLogin() ? <Section /> : null}
-        <Layout>
-          {isHome() || isLogin() ? null : <Menu menu={menu} title={title} />}
+        {isCounsel() ? <Image src={banner} /> : null}
+        <Layout isBanner={isCounsel()}>
+          {isHome() || isLogin() || isProposalList() ? null : <Menu menu={menu} />}
           {isHome() || isLogin() ? (
             <Component {...pageProps} />
           ) : (

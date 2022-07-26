@@ -24,6 +24,7 @@ import frame from '../assets/banner/Frame 49.png';
 import kakao from '../assets/i_kakao.png';
 import kakaologo from '../assets/kakao-logo.png';
 import kakaohow from '../assets/kakao-how.png';
+import Link from 'next/link';
 
 interface NoticeResponse {
   ok: boolean;
@@ -123,7 +124,16 @@ const Home: NextPage = () => {
               >
                 상담신청 바로가기
               </button>
-              <button className="mt-8 h-[75px] w-[220px] items-center rounded-full border border-transparent  bg-[#fae100] font-bold text-black shadow-sm focus:outline-none focus:ring-2 focus:ring-[#fae100] focus:ring-offset-2">
+              <button
+                onClick={() =>
+                  window.open(
+                    'http://pf.kakao.com/_jxggLb/friend',
+                    '_blank',
+                    'width=480, height=500, left=600, top=300'
+                  )
+                }
+                className="mt-8 h-[75px] w-[220px] items-center rounded-full border border-transparent  bg-[#fae100] font-bold text-black shadow-sm focus:outline-none focus:ring-2 focus:ring-[#fae100] focus:ring-offset-2"
+              >
                 <div className="flex flex-row p-2">
                   <Image src={kakao} width={50} height={50} className="rounded-full" />
                   <span className="ml-2 flex items-center">카카오톡 신청하기</span>
@@ -157,9 +167,9 @@ const Home: NextPage = () => {
       <div className="my-32 flex flex-col ">
         <div className="flex items-center justify-center text-3xl font-bold">찾아오시는 길</div>
         <div className="mx-auto mt-20 w-full">
-          <div id="map" style={{ width: '100%', height: '500px' }}></div>
+          <div id="map" style={{ width: '80%', height: '500px', margin: 'auto' }}></div>
         </div>
-        <span className="mt-8 text-2xl font-bold">
+        <span className="mt-8 text-xl font-bold">
           주소 : 경기 용인시 기흥구 흥덕중앙로 55 (흥덕역 리써밋 타워) 711호
         </span>
       </div>

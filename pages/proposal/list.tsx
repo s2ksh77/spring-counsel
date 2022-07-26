@@ -72,6 +72,7 @@ const ProposalList: NextPage = () => {
               <TableCell className="">신청자</TableCell>
               <TableCell className="">연락처</TableCell>
               <TableCell className="">신청 날짜</TableCell>
+              <TableCell className="">수정 날짜</TableCell>
               <TableCell className="w-24 text-center">상태</TableCell>
             </TableRow>
           </TableHead>
@@ -87,6 +88,9 @@ const ProposalList: NextPage = () => {
                 <TableCell className="h-[30px]">{phoneFomatter('0' + reservation.phone)}</TableCell>
                 <TableCell className="h-[30px] w-36">
                   {reservation.createdAt.split('T')[0]?.replaceAll('-', '.')}
+                </TableCell>
+                <TableCell className="h-[30px] w-36">
+                  {reservation.updatedAt.split('T')[0]?.replaceAll('-', '.')}
                 </TableCell>
                 <TableCell className="h-[30px] w-20 text-center">
                   {getStatusIcon(reservation.status)}

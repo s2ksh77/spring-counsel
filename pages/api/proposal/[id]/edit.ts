@@ -6,13 +6,13 @@ import { withApiSession } from '@libs/server/withSession';
 async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) {
   const {
     query: { id },
-    body: { stauts },
+    body: { status },
     session: { user },
   } = req;
 
-  const reservation = await client.notice.update({
+  const reservation = await client.reservation.update({
     data: {
-      stauts,
+      status,
     },
     where: {
       id,

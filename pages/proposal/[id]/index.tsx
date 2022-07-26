@@ -153,6 +153,7 @@ const ReservationDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     if (editData?.ok) {
       setEditState(false);
       mutate();
+      goBack();
     }
   }, [editData, mutate]);
 

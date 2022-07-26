@@ -44,6 +44,9 @@ function useMap() {
         center: new naver.maps.LatLng(myLocation.latitude, myLocation.longitude),
         zoom: 19,
         zoomControl: true,
+        zoomControlOptions: {
+          position: naver.maps.Position.TOP_RIGHT,
+        },
       });
 
       markerRef.current = new naver.maps.Marker({

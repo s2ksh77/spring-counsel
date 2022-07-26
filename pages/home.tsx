@@ -21,6 +21,9 @@ import useSWR from 'swr';
 import center1 from '../assets/center1.jpg';
 import center2 from '../assets/center2.jpg';
 import frame from '../assets/banner/Frame 49.png';
+import kakao from '../assets/i_kakao.png';
+import kakaologo from '../assets/kakao-logo.png';
+import kakaohow from '../assets/kakao-how.png';
 
 interface NoticeResponse {
   ok: boolean;
@@ -42,10 +45,11 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex w-full flex-col">
+      <div className="mb-12 flex items-center justify-center text-3xl font-bold">센터 소식</div>
       <div className="mb-16 flex w-full flex-row">
-        <div className="mx-auto h-[360px] w-[750px] rounded-3xl border-[1px] p-4">
+        <div className="mr-auto h-[360px] w-[100%] border-y-[1px] p-4 shadow-lg">
           <div className="flex justify-between">
-            <div className="mb-4 text-2xl font-bold">공지사항</div>
+            <div className="mb-4 border-b-4 pb-4 text-2xl font-bold">공지사항</div>
             <div
               onClick={() => router.push(`/news/notice`)}
               className="text-[#dddddd] hover:cursor-pointer"
@@ -53,28 +57,18 @@ const Home: NextPage = () => {
               <AddCircleOutline />
             </div>
           </div>
-          <div className="max-h-[280px] overflow-y-auto">
+          <div className="max-h-[260px] overflow-y-auto">
             <TableContainer className="min-h-[85%]">
               <Table stickyHeader className="">
-                <TableHead className="sticky">
-                  <TableRow>
-                    <TableCell className="">제목</TableCell>
-                    <TableCell className="w-20 text-center">날짜</TableCell>
-                  </TableRow>
-                </TableHead>
                 <TableBody className="">
                   {data?.notices?.map((notice, index) => (
                     <TableRow
                       onClick={handleNotice.bind(null, notice.id)}
                       key={notice.id}
-                      className={
-                        notice.isPrimary
-                          ? 'h-[30px] bg-[#e6e6e6] hover:cursor-pointer hover:bg-[#eeeeee]'
-                          : 'h-[30px] hover:cursor-pointer hover:bg-[#eeeeee]'
-                      }
+                      className="hover:cursor-pointer hover:bg-[#eeeeee]"
                     >
                       <TableCell className="h-[45px]">{notice.title}</TableCell>
-                      <TableCell className="h-[45px] w-20 text-center">
+                      <TableCell className="h-[45px] w-36 text-center">
                         {notice.updatedAt.split('T')[0]?.replaceAll('-', '.')}
                       </TableCell>
                     </TableRow>
@@ -84,94 +78,78 @@ const Home: NextPage = () => {
             </TableContainer>
           </div>
         </div>
-        <div className="h-[360px] w-[360px] rounded-3xl border-[1px] p-4">
-          <div className="flex justify-between">
-            <div className="mb-4 text-2xl font-bold">상담 문의</div>
-            <div
-              onClick={() => router.push('/proposal')}
-              className="text-[#dddddd] hover:cursor-pointer"
-            >
-              <AddCircleOutline />
+      </div>
+
+      <div className="flex w-full flex-col">
+        <div className="mt-8 mb-12 flex items-center justify-center text-3xl font-bold">
+          상담신청 및 문의
+        </div>
+        <div className="mb-16 flex w-full flex-row justify-center">
+          <div className="mx-auto h-[360px] w-[360px] rounded-3xl border-[1px] p-4 shadow-lg">
+            <div className="flex justify-between">
+              <div className="mb-4 border-b-4 pb-4 text-2xl font-bold">상담 문의</div>
+              <div
+                onClick={() => router.push('/proposal')}
+                className="text-[#dddddd] hover:cursor-pointer"
+              >
+                <AddCircleOutline />
+              </div>
+            </div>
+            <div className="px-4">
+              <div className="text-3xl font-bold text-red-400">010-4829-3961</div>
+              <div className="mt-1 text-xl">Fax: 031-000-0000</div>
+              <div className="mt-8 px-4">
+                <div className="text-2xl font-bold">업무시간</div>
+                <div className="mt-4">평일: 10:00 – 20:00</div>
+                <div className="mt-2">토요일: 10:00 – 15:00</div>
+                <div className="mt-2">휴무일: 일요일, 공휴일</div>
+              </div>
             </div>
           </div>
-          <div className="text-3xl font-bold text-red-400">010-4829-3961</div>
-          <div className="mt-1 text-xl">Fax: 031-000-0000</div>
-          <div className="mt-8 px-4">
-            <div className="text-2xl font-bold">업무시간</div>
-            <div className="mt-4">평일: 10:00 – 20:00</div>
-            <div className="mt-2">토요일: 10:00 – 15:00</div>
-            <div className="mt-2">휴무일: 일요일, 공휴일</div>
+          <div className="mx-auto h-[360px] w-[360px] rounded-3xl border-[1px] p-4 shadow-lg">
+            <div className="flex justify-between">
+              <div className="mb-4 border-b-4 pb-4 text-2xl font-bold ">상담 신청</div>
+              <div
+                onClick={() => router.push('/proposal')}
+                className="text-[#dddddd] hover:cursor-pointer"
+              >
+                <AddCircleOutline />
+              </div>
+            </div>
+            <div className="flex h-[calc(100%_-_70px)] flex-col items-center justify-center">
+              <button
+                onClick={() => router.push('/proposal/reservationForm')}
+                className="h-[75px] w-[220px] items-center rounded-full border border-transparent  bg-[#a9ce8e] font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#a9ce8e] focus:ring-offset-2"
+              >
+                상담신청 바로가기
+              </button>
+              <button className="mt-8 h-[75px] w-[220px] items-center rounded-full border border-transparent  bg-[#fae100] font-bold text-black shadow-sm focus:outline-none focus:ring-2 focus:ring-[#fae100] focus:ring-offset-2">
+                <div className="flex flex-row p-2">
+                  <Image src={kakao} width={50} height={50} className="rounded-full" />
+                  <span className="ml-2 flex items-center">카카오톡 신청하기</span>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="mb-16 flex w-full flex-row justify-center">
-        <div className="mx-auto h-[630px] w-[750px] rounded-3xl border-[1px] p-4">
-          <div className="flex justify-between">
-            <div className="mb-4 text-2xl font-bold">센터 소개</div>
-            <div
-              onClick={() => router.push('/introduce')}
-              className="text-[#dddddd] hover:cursor-pointer"
-            >
-              <AddCircleOutline />
-            </div>
-          </div>
-          <div>
-            <Swiper
-              spaceBetween={30}
-              centeredSlides={true}
-              autoplay={{
-                delay: 2500,
-                disableOnInteraction: false,
-              }}
-              modules={[Autoplay]}
-              className="mySwiper"
-            >
-              <SwiperSlide>
+      <div>
+        <div className="mt-8 mb-12 flex items-center justify-center text-3xl font-bold">
+          센터 소개
+        </div>
+
+        <div className="col mr-auto flex h-[630px] w-[100%] border-y-[1px] p-4 shadow-lg">
+          <div className="flex flex-col">
+            <div className="mb-4 flex w-[6.6rem] border-b-4 pb-4 text-2xl font-bold">센터 사진</div>
+            <div className="flex flex-row pt-8">
+              <div className="mr-auto w-[48%]">
                 <Image src={center1} />
-              </SwiperSlide>
-              <SwiperSlide>
+              </div>
+              <div className="w-[48%]">
                 <Image src={center2} />
-              </SwiperSlide>
-            </Swiper>
-          </div>
-        </div>
-        <div className="h-[360px] w-[360px] rounded-3xl border-[1px] p-4">
-          <div className="flex justify-between">
-            <div className="mb-4 text-2xl font-bold">상담 신청</div>
-            <div
-              onClick={() => router.push('/proposal')}
-              className="text-[#dddddd] hover:cursor-pointer"
-            >
-              <AddCircleOutline />
+              </div>
             </div>
-          </div>
-          <div>카카오톡 플러스 친구</div>
-        </div>
-      </div>
-
-      <div className="mt-32">
-        <div className="mt-8 flex items-center justify-center text-3xl font-bold">심리 상담</div>
-        <div className="mt-8 flex w-full flex-row">
-          <div className="mx-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
-            <div className="font-xl p-2 font-semibold text-[#a9ce8e]">개인상담</div>
-          </div>
-          <div className="mr-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
-            <div className="font-xl p-2 font-semibold text-[#a9ce8e]">커플·부부상담</div>
-          </div>
-          <div className="mr-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
-            <div className="font-xl p-2 font-semibold text-[#a9ce8e]">집단상담</div>
-          </div>
-          <div className="mr-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
-            <div className="font-xl p-2 font-semibold text-[#a9ce8e]">심리검사</div>
-          </div>
-        </div>
-        <div className="my-8 flex w-full flex-row">
-          <div className="mx-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
-            <div className="font-xl p-2 font-semibold text-[#a9ce8e]">상담자 교육</div>
-          </div>
-          <div className="mr-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
-            <div className="font-xl p-2 font-semibold text-[#a9ce8e]">교육분석</div>
           </div>
         </div>
       </div>
@@ -190,3 +168,32 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+// 6개 box
+{
+  /* <div className="mt-32">
+<div className="mt-8 flex items-center justify-center text-3xl font-bold">심리 상담</div>
+<div className="mt-8 flex w-full flex-row">
+  <div className="mx-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
+    <div className="font-xl p-2 font-semibold text-[#a9ce8e]">개인상담</div>
+  </div>
+  <div className="mr-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
+    <div className="font-xl p-2 font-semibold text-[#a9ce8e]">커플·부부상담</div>
+  </div>
+  <div className="mr-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
+    <div className="font-xl p-2 font-semibold text-[#a9ce8e]">집단상담</div>
+  </div>
+  <div className="mr-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
+    <div className="font-xl p-2 font-semibold text-[#a9ce8e]">심리검사</div>
+  </div>
+</div>
+<div className="my-8 flex w-full flex-row">
+  <div className="mx-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
+    <div className="font-xl p-2 font-semibold text-[#a9ce8e]">상담자 교육</div>
+  </div>
+  <div className="mr-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
+    <div className="font-xl p-2 font-semibold text-[#a9ce8e]">교육분석</div>
+  </div>
+</div>
+</div> */
+}

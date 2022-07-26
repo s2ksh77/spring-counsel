@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { NextPage, NextPageContext } from 'next';
 import { Editor } from '@tinymce/tinymce-react';
 import { useEffect, useState } from 'react';
 import { Button, Checkbox, MenuItem, Select } from '@mui/material';
@@ -20,7 +20,6 @@ import { DialogTitle } from '@mui/material';
 import { DialogContent } from '@mui/material';
 import { DialogContentText } from '@mui/material';
 import { DialogActions } from '@mui/material';
-import useLogin from '@libs/client/useLogin';
 import { withSsrSession } from '@libs/server/withSession';
 import { Reservation } from '@prisma/client';
 import { phoneFomatter } from 'utils/common';
@@ -78,7 +77,7 @@ const ReservationDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
 
   const handleDelete = () => {
     if (deleteLoading) return;
-    deleteNotice();
+    deleteNotice('');
     setDialogVisible(false);
   };
 
@@ -90,7 +89,7 @@ const ReservationDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     }
   }, [data]);
 
-  const getStatus = (status) => {
+  const getStatus = (status: any) => {
     switch (status) {
       case 'pending':
         return (
@@ -118,12 +117,12 @@ const ReservationDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     }
   };
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: any) => {
     const { value } = event.target;
     setItem(value);
   };
 
-  const getSelectBox = (status) => {
+  const getSelectBox = (status: any) => {
     switch (status) {
       case 'pending':
         return (
@@ -188,7 +187,7 @@ const ReservationDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
               <label>신청 날짜</label>
             </div>
             <label className="w-[150px] text-lg font-bold">
-              {data?.reservation?.createdAt.split('T')[0]?.replaceAll('-', '.')}
+              {data?.reservation?.createdAt.toString().split('T')[0]?.replaceAll('-', '.')}
             </label>
           </div>
 
@@ -198,7 +197,7 @@ const ReservationDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
             </div>
             <div className="w-full">
               <label className="text-lg font-bold">
-                {phoneFomatter('0' + data?.reservation?.phone)}
+                {phoneFomatter('0' + data?.reservation?.phone, '')}
               </label>
             </div>
           </div>

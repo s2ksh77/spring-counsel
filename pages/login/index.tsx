@@ -9,10 +9,14 @@ interface LoginForm {
   password: string;
 }
 
+interface LoginResponse {
+  ok: boolean;
+}
+
 const Login: NextPage = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<LoginForm>();
-  const [login, { data, loading }] = useMutation<LoginForm>('/api/login');
+  const [login, { data, loading }] = useMutation<LoginResponse>('/api/login');
 
   const onValid = (form: LoginForm) => {
     if (loading) return;
@@ -21,7 +25,8 @@ const Login: NextPage = () => {
 
   useEffect(() => {
     if (data?.ok) {
-      localStorage.setItem('isLogin', true);
+      const result = data?.ok;
+      localStorage.setItem('isLogin', JSON.stringify(result));
       router.push('/home').then(() => {
         window.location.reload();
       });

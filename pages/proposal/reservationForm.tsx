@@ -6,6 +6,7 @@ import { MenuOutlined, EditOutlined, CancelOutlined } from '@mui/icons-material'
 import { useRouter } from 'next/router';
 import useMutation from '@libs/client/useMutation';
 import { useForm } from 'react-hook-form';
+import { Reservation } from '@prisma/client';
 
 interface NoticeProps {
   title: string;
@@ -19,13 +20,18 @@ interface ResvFormData {
   phone: number;
 }
 
+interface ResvResponse {
+  ok: boolean;
+  reservation: Reservation;
+}
+
 const ReservationForm: NextPage = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<ResvFormData>();
   const [content, setContent] = useState('');
-  const [createReservation, { data, loading }] = useMutation<NoticeProps>('/api/proposal');
+  const [createReservation, { data, loading }] = useMutation<ResvResponse>('/api/proposal');
 
-  const handleEditorChange = (content) => {
+  const handleEditorChange = (content: any) => {
     setContent(content);
   };
 

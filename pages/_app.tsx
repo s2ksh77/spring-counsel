@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-before-interactive-script-outside-document */
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { SWRConfig } from 'swr';
@@ -14,7 +15,6 @@ import Menu from '@components/Menu';
 import { useEffect, useState } from 'react';
 import Section from '@components/Section';
 import Content from '@components/Content';
-import useLogin from '@libs/client/useLogin';
 import Script from 'next/script';
 import banner from '../assets/banner/private.png';
 
@@ -65,7 +65,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </div>
       <Footer />
       <Script
-        strategy="beforeInterative"
+        strategy="beforeInteractive"
         src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=r19hf0h6dl"
       />
     </SWRConfig>

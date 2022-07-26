@@ -5,6 +5,7 @@ import { Button, Checkbox } from '@mui/material';
 import { MenuOutlined, EditOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import useMutation from '@libs/client/useMutation';
+import { Notice } from '@prisma/client';
 
 interface NoticeProps {
   title: string;
@@ -12,23 +13,28 @@ interface NoticeProps {
   isPrimay: boolean;
 }
 
+interface NoticeResponse {
+  ok: boolean;
+  notice: Notice;
+}
+
 const NoticeForm: NextPage = () => {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [checked, setChecked] = useState(false);
-  const [createNotice, { data, loading }] = useMutation<NoticeProps>('/api/notice');
+  const [createNotice, { data, loading }] = useMutation<NoticeResponse>('/api/notice');
 
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(!checked);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setTitle(value);
   };
 
-  const handleEditorChange = (content) => {
+  const handleEditorChange = (content: any) => {
     setContent(content);
   };
 
@@ -36,7 +42,7 @@ const NoticeForm: NextPage = () => {
     router.push('/news/notice');
   };
 
-  const submitForm = (): NoticeProps => {
+  const submitForm = () => {
     if (loading) return;
     if (title === '') {
       alert('제목을 입력하세요.');

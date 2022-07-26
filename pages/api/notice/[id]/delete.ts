@@ -11,7 +11,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
 
   await client.notice.delete({
     where: {
-      id,
+      id: id?.toString(),
     },
   });
 

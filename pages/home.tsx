@@ -40,7 +40,7 @@ const Home: NextPage = () => {
     router.push(`/news/notice`);
   };
 
-  const handleNotice = (id) => {
+  const handleNotice = (id: string) => {
     router.push(`/news/notice/${id}`);
   };
 
@@ -70,7 +70,7 @@ const Home: NextPage = () => {
                     >
                       <TableCell className="h-[45px]">{notice.title}</TableCell>
                       <TableCell className="h-[45px] w-36 text-center">
-                        {notice.updatedAt.split('T')[0]?.replaceAll('-', '.')}
+                        {notice.updatedAt.toString().split('T')[0]?.replaceAll('-', '.')}
                       </TableCell>
                     </TableRow>
                   ))}

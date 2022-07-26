@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { NextPage, NextPageContext } from 'next';
 import { Editor } from '@tinymce/tinymce-react';
 import { useEffect, useState } from 'react';
 import { Button, Checkbox } from '@mui/material';
@@ -17,8 +17,8 @@ import { DialogTitle } from '@mui/material';
 import { DialogContent } from '@mui/material';
 import { DialogContentText } from '@mui/material';
 import { DialogActions } from '@mui/material';
-import useLogin from '@libs/client/useLogin';
 import { withSsrSession } from '@libs/server/withSession';
+import { Notice } from '@prisma/client';
 
 interface NoticeResponse {
   ok: boolean;
@@ -29,8 +29,8 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   const router = useRouter();
   const [editor, setEditor] = useState(null);
   const [editState, setEditState] = useState(false);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState();
+  let [title, setTitle] = useState<any | null>('');
+  let [content, setContent] = useState<any | null>('');
   const [checked, setChecked] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
 
@@ -54,12 +54,12 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     setEditState(true);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setTitle(value);
   };
 
-  const handleEditorChange = (content) => {
+  const handleEditorChange = (content: any) => {
     setContent(content);
   };
 
@@ -92,7 +92,7 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
 
   const handleDelete = () => {
     if (deleteLoading) return;
-    deleteNotice();
+    deleteNotice('');
     setDialogVisible(false);
   };
 
@@ -145,9 +145,9 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
               </div>
               <div className="w-full">
                 <label>
-                  {data?.notice?.updatedAt.split('T')[0] +
+                  {data?.notice?.updatedAt.toString().split('T')[0] +
                     ' ' +
-                    data?.notice?.updatedAt.split('T')[1].slice(0, 5)}
+                    data?.notice?.updatedAt.toString().split('T')[1].slice(0, 5)}
                 </label>
               </div>
             </div>

@@ -15,7 +15,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
       status,
     },
     where: {
-      id,
+      id: id?.toString(),
     },
   });
 

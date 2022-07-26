@@ -11,7 +11,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
 
   const reservation = await client.reservation.findUnique({
     where: {
-      id,
+      id: id?.toString(),
     },
   });
 

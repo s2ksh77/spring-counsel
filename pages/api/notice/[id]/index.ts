@@ -11,7 +11,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
 
   const notice = await client.notice.findUnique({
     where: {
-      id,
+      id: id?.toString(),
     },
   });
 

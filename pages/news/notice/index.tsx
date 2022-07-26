@@ -1,5 +1,5 @@
 import Layout from '@components/Layout';
-import { NextPage } from 'next';
+import { NextPage, NextPageContext } from 'next';
 import {
   Table,
   TableHead,
@@ -10,7 +10,6 @@ import {
   Button,
 } from '@mui/material';
 import { EditOutlined } from '@mui/icons-material';
-import useLogin from '@libs/client/useLogin';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { Notice } from '@prisma/client';
@@ -29,7 +28,7 @@ const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     router.push('/news/notice/noticeForm');
   };
 
-  const handleNotice = (id) => {
+  const handleNotice = (id: string) => {
     router.push(`/news/notice/${id}`);
   };
 
@@ -61,7 +60,7 @@ const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
                 <TableCell className="h-[30px]">{notice.title}</TableCell>
                 <TableCell className="h-[30px] w-20 text-center">{'관리자'}</TableCell>
                 <TableCell className="h-[30px] w-36 text-center">
-                  {notice.updatedAt.split('T')[0]?.replaceAll('-', '.')}
+                  {notice.updatedAt.toString().split('T')[0]?.replaceAll('-', '.')}
                 </TableCell>
               </TableRow>
             ))}

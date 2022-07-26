@@ -1,4 +1,3 @@
-import useLogin from '@libs/client/useLogin';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -34,7 +33,7 @@ const GNB: NextPage = () => {
   };
 
   const handleLogout = () => {
-    logout();
+    logout('');
     setDialogVisible(false);
   };
 

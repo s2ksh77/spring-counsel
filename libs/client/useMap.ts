@@ -11,7 +11,7 @@ function useMap() {
     ''
   );
 
-  const markerClickEvent = (marker) => {
+  const markerClickEvent = (marker: any) => {
     naver.maps.Event.addListener(marker, 'click', (e: any) => {
       const mapLatLng = new naver.maps.LatLng(37.276486370527316, 127.0733467265119);
       console.log(mapRef.current);
@@ -31,8 +31,6 @@ function useMap() {
       });
     }
   }, []);
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
     if (typeof myLocation !== 'string') {

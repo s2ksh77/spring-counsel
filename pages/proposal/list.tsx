@@ -29,11 +29,11 @@ const ProposalList: NextPage = () => {
     router.push('/news/notice/noticeForm');
   };
 
-  const handleReservation = (id) => {
+  const handleReservation = (id: any) => {
     router.push(`/proposal/${id}`);
   };
 
-  const getStatusIcon = (status) => {
+  const getStatusIcon = (status: any) => {
     switch (status) {
       case 'pending':
         return (
@@ -85,12 +85,14 @@ const ProposalList: NextPage = () => {
               >
                 <TableCell className="h-[30px] w-16 text-center">{index + 1}</TableCell>
                 <TableCell className="h-[30px]">{reservation.name}</TableCell>
-                <TableCell className="h-[30px]">{phoneFomatter('0' + reservation.phone)}</TableCell>
-                <TableCell className="h-[30px] w-36">
-                  {reservation.createdAt.split('T')[0]?.replaceAll('-', '.')}
+                <TableCell className="h-[30px]">
+                  {phoneFomatter('0' + reservation.phone, '')}
                 </TableCell>
                 <TableCell className="h-[30px] w-36">
-                  {reservation.updatedAt.split('T')[0]?.replaceAll('-', '.')}
+                  {reservation.createdAt.toString().split('T')[0]?.replaceAll('-', '.')}
+                </TableCell>
+                <TableCell className="h-[30px] w-36">
+                  {reservation.updatedAt.toString().split('T')[0]?.replaceAll('-', '.')}
                 </TableCell>
                 <TableCell className="h-[30px] w-20 text-center">
                   {getStatusIcon(reservation.status)}

@@ -1,4 +1,15 @@
-export const getMenu = (key: string): [] => {
+interface DataType {
+  title: string;
+  value: ValueType[];
+}
+
+interface ValueType {
+  key: string;
+  name: string;
+  value: string;
+}
+
+export const getMenu = (key: string) => {
   switch (key) {
     case 'introduce':
       return {
@@ -51,7 +62,7 @@ export const getMenu = (key: string): [] => {
   }
 };
 
-export function phoneFomatter(num, type) {
+export function phoneFomatter(num: any, type: any) {
   var formatNum = '';
 
   if (num.length == 11) {

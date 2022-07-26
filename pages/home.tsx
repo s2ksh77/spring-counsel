@@ -42,8 +42,8 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex w-full flex-col">
-      <div className="flex w-full flex-row">
-        <div className="mr-auto h-[360px] w-[360px] rounded-3xl border-[1px] p-4">
+      <div className="mb-16 flex w-full flex-row">
+        <div className="mx-auto h-[360px] w-[750px] rounded-3xl border-[1px] p-4">
           <div className="flex justify-between">
             <div className="mb-4 text-2xl font-bold">공지사항</div>
             <div
@@ -84,7 +84,29 @@ const Home: NextPage = () => {
             </TableContainer>
           </div>
         </div>
-        <div className="mr-auto h-[360px] w-[360px] rounded-3xl border-[1px] p-4">
+        <div className="h-[360px] w-[360px] rounded-3xl border-[1px] p-4">
+          <div className="flex justify-between">
+            <div className="mb-4 text-2xl font-bold">상담 문의</div>
+            <div
+              onClick={() => router.push('/proposal')}
+              className="text-[#dddddd] hover:cursor-pointer"
+            >
+              <AddCircleOutline />
+            </div>
+          </div>
+          <div className="text-3xl font-bold text-red-400">010-4829-3961</div>
+          <div className="mt-1 text-xl">Fax: 031-000-0000</div>
+          <div className="mt-8 px-4">
+            <div className="text-2xl font-bold">업무시간</div>
+            <div className="mt-4">평일: 10:00 – 20:00</div>
+            <div className="mt-2">토요일: 10:00 – 15:00</div>
+            <div className="mt-2">휴무일: 일요일, 공휴일</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mb-16 flex w-full flex-row justify-center">
+        <div className="mx-auto h-[630px] w-[750px] rounded-3xl border-[1px] p-4">
           <div className="flex justify-between">
             <div className="mb-4 text-2xl font-bold">센터 소개</div>
             <div
@@ -116,7 +138,7 @@ const Home: NextPage = () => {
         </div>
         <div className="h-[360px] w-[360px] rounded-3xl border-[1px] p-4">
           <div className="flex justify-between">
-            <div className="mb-4 text-2xl font-bold">상담 문의</div>
+            <div className="mb-4 text-2xl font-bold">상담 신청</div>
             <div
               onClick={() => router.push('/proposal')}
               className="text-[#dddddd] hover:cursor-pointer"
@@ -124,14 +146,7 @@ const Home: NextPage = () => {
               <AddCircleOutline />
             </div>
           </div>
-          <div className="text-3xl font-bold text-red-400">010-4829-3961</div>
-          <div className="mt-1 text-xl">Fax: 031-000-0000</div>
-          <div className="mt-8 px-4">
-            <div className="text-2xl font-bold">업무시간</div>
-            <div className="mt-4">평일: 10:00 – 20:00</div>
-            <div className="mt-2">토요일: 10:00 – 15:00</div>
-            <div className="mt-2">휴무일: 일요일, 공휴일</div>
-          </div>
+          <div>카카오톡 플러스 친구</div>
         </div>
       </div>
 

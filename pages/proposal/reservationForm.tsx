@@ -111,12 +111,20 @@ const ReservationForm: NextPage = () => {
             init={{
               height: '100%',
               plugins:
-                'autolink   lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
+                'autolink lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
               toolbar:
                 'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignment | numlist bullist | outdent indent | link | hr table codesample insertdatetime',
               statusbar: false,
               menubar: false,
               placeholder: '상담받고 싶은 내용을 적어주세요.',
+              setup(editor) {
+                editor.on('init', () => {
+                  // setEditor(editor);
+                  setTimeout(() => {
+                    editor?.mode?.set('design');
+                  }, 100);
+                });
+              },
             }}
             onEditorChange={handleEditorChange}
           />

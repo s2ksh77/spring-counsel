@@ -24,7 +24,7 @@ interface NoticeResponse {
 const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   const router = useRouter();
   const { data } = useSWR<NoticeResponse>('/api/notice');
-  const [sortedData, setSortedData] = useState([
+  const [sortedData, setSortedData] = useState<any | null>([
     {
       primary: [],
       normal: [],
@@ -42,10 +42,7 @@ const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   const sortNoticeData = () => {
     const primary = data?.notices?.filter((notice) => notice.isPrimary === true);
     const normal = data?.notices?.filter((notice) => notice.isPrimary === false);
-    console.log(primary, normal);
     setSortedData({ primary, normal });
-
-    console.log(sortedData);
   };
 
   useEffect(() => {
@@ -66,7 +63,7 @@ const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
             </TableRow>
           </TableHead>
           <TableBody className="">
-            {sortedData?.primary?.map((notice, index) => (
+            {sortedData?.primary?.map((notice: any, index: any) => (
               <TableRow
                 onClick={handleNotice.bind(null, notice.id)}
                 key={notice.id}
@@ -80,7 +77,7 @@ const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
                 </TableCell>
               </TableRow>
             ))}
-            {sortedData?.normal?.map((notice, index) => (
+            {sortedData?.normal?.map((notice: any, index: any) => (
               <TableRow
                 onClick={handleNotice.bind(null, notice.id)}
                 key={notice.id}

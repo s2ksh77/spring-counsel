@@ -31,7 +31,7 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   const [editState, setEditState] = useState(false);
   let [title, setTitle] = useState<any | null>('');
   let [content, setContent] = useState<any | null>('');
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState<any | false>(false);
   const [dialogVisible, setDialogVisible] = useState(false);
 
   const { data, mutate } = useSWR<NoticeResponse>(
@@ -99,6 +99,7 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   useEffect(() => {
     if (data?.ok) {
       setTitle(data?.notice?.title);
+      setChecked(data?.notice?.isPrimary);
       setContent(data?.notice?.content);
     }
   }, [data]);
@@ -212,11 +213,19 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
               init={{
                 height: '100%',
                 plugins:
-                  '  autolink   lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
+                  'autolink lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
                 toolbar:
                   'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignment | numlist bullist | outdent indent | link | insertImage insertfile | hr table codesample insertdatetime print',
                 statusbar: false,
                 menubar: false,
+                setup(editor) {
+                  editor.on('init', () => {
+                    // setEditor(editor);
+                    setTimeout(() => {
+                      editor?.mode?.set('design');
+                    }, 100);
+                  });
+                },
               }}
               onEditorChange={handleEditorChange}
             />

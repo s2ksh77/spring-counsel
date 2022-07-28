@@ -166,9 +166,6 @@ const ReviewDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
                     }, 100);
                   });
                 },
-                content_css: `
-                  .tinymce 
-                `,
               }}
             />
           </div>
@@ -202,6 +199,14 @@ const ReviewDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
                   'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignment | numlist bullist | outdent indent | link | insertImage insertfile | hr table codesample insertdatetime print',
                 statusbar: false,
                 menubar: false,
+                setup(editor) {
+                  editor.on('init', () => {
+                    // setEditor(editor);
+                    setTimeout(() => {
+                      editor?.mode?.set('design');
+                    }, 100);
+                  });
+                },
               }}
               onEditorChange={handleEditorChange}
             />

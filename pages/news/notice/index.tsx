@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { Notice } from '@prisma/client';
 import { withSsrSession } from '@libs/server/withSession';
+import { useEffect, useState } from 'react';
 
 interface NoticeResponse {
   ok: boolean;
@@ -23,6 +24,12 @@ interface NoticeResponse {
 const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   const router = useRouter();
   const { data } = useSWR<NoticeResponse>('/api/notice');
+  const [sortedData, setSortedData] = useState([
+    {
+      primary: [],
+      normal: [],
+    },
+  ]);
 
   const onClick = () => {
     router.push('/news/notice/noticeForm');
@@ -31,6 +38,19 @@ const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   const handleNotice = (id: string) => {
     router.push(`/news/notice/${id}`);
   };
+
+  const sortNoticeData = () => {
+    const primary = data?.notices?.filter((notice) => notice.isPrimary === true);
+    const normal = data?.notices?.filter((notice) => notice.isPrimary === false);
+    console.log(primary, normal);
+    setSortedData({ primary, normal });
+
+    console.log(sortedData);
+  };
+
+  useEffect(() => {
+    sortNoticeData();
+  }, [data]);
 
   return (
     <div className="h-full p-8">
@@ -46,17 +66,29 @@ const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
             </TableRow>
           </TableHead>
           <TableBody className="">
-            {data?.notices?.map((notice, index) => (
+            {sortedData?.primary?.map((notice, index) => (
               <TableRow
                 onClick={handleNotice.bind(null, notice.id)}
                 key={notice.id}
-                className={
-                  notice.isPrimary
-                    ? 'h-[30px] bg-[#e6e6e6] hover:cursor-pointer hover:bg-[#eeeeee]'
-                    : 'h-[30px] hover:cursor-pointer hover:bg-[#eeeeee]'
-                }
+                className={'h-[30px] bg-[#e6e6e6] hover:cursor-pointer hover:bg-[#eeeeee]'}
               >
-                <TableCell className="h-[30px] w-16 text-center">{index + 1}</TableCell>
+                <TableCell className="h-[30px] w-16 text-center">공지</TableCell>
+                <TableCell className="h-[30px]">{notice.title}</TableCell>
+                <TableCell className="h-[30px] w-20 text-center">{'관리자'}</TableCell>
+                <TableCell className="h-[30px] w-36 text-center">
+                  {notice.updatedAt.toString().split('T')[0]?.replaceAll('-', '.')}
+                </TableCell>
+              </TableRow>
+            ))}
+            {sortedData?.normal?.map((notice, index) => (
+              <TableRow
+                onClick={handleNotice.bind(null, notice.id)}
+                key={notice.id}
+                className={'h-[30px] hover:cursor-pointer hover:bg-[#eeeeee]'}
+              >
+                <TableCell className="h-[30px] w-16 text-center">
+                  {sortedData?.normal?.length - index}
+                </TableCell>
                 <TableCell className="h-[30px]">{notice.title}</TableCell>
                 <TableCell className="h-[30px] w-20 text-center">{'관리자'}</TableCell>
                 <TableCell className="h-[30px] w-36 text-center">

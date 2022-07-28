@@ -26,7 +26,7 @@ export const getMenu = (key: string) => {
         title: '상담 및 심리검사 서비스',
         value: [
           { key: 'private', name: '개인상담', value: '/private' },
-          { key: 'family', name: '커플·부부상담', value: '/family' },
+          { key: 'family', name: '부부·가족상담', value: '/family' },
           { key: 'group', name: '집단상담', value: '/group' },
           { key: 'test', name: '심리검사', value: '/counseltest' },
         ],

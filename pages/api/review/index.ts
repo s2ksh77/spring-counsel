@@ -5,30 +5,32 @@ import { withApiSession } from '@libs/server/withSession';
 
 async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) {
   const {
-    body: { name, email, phone, content },
+    body: { title, content },
     session: { user },
   } = req;
   if (req.method === 'POST') {
-    const reservation = await client.reservation.create({
+    const review = await client.review.create({
       data: {
-        name,
-        email,
-        phone: +phone,
+        title,
         content,
-        status: 'pending',
+        user: {
+          connect: {
+            id: user?.id,
+          },
+        },
       },
     });
     res.json({ ok: true });
   }
   if (req.method === 'GET') {
-    const reservations = await client.reservation.findMany({
+    const reviews = await client.review.findMany({
       orderBy: [
         {
           createdAt: 'desc',
         },
       ],
     });
-    res.json({ ok: true, reservations });
+    res.json({ ok: true, reviews });
   }
 }
 

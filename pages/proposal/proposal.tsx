@@ -1,7 +1,8 @@
 import { NextPage } from 'next';
+import process from '../../assets/process.jpg';
 
 const Proposal: NextPage = () => {
-  return <div>상담신청 페이지 입니다.</div>;
+  return <div className="flex h-full w-full flex-col p-8"></div>;
 };
 
 export default Proposal;

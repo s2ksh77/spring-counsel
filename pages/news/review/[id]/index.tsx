@@ -18,36 +18,35 @@ import { DialogContent } from '@mui/material';
 import { DialogContentText } from '@mui/material';
 import { DialogActions } from '@mui/material';
 import { withSsrSession } from '@libs/server/withSession';
-import { Notice } from '@prisma/client';
+import { Review } from '@prisma/client';
 
-interface NoticeResponse {
+interface ReviewResponse {
   ok: boolean;
-  notice: Notice;
+  review: Review;
 }
 
-const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
+const ReviewDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   const router = useRouter();
   const [editor, setEditor] = useState(null);
   const [editState, setEditState] = useState(false);
   let [title, setTitle] = useState<any | null>('');
   let [content, setContent] = useState<any | null>('');
-  const [checked, setChecked] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
 
-  const { data, mutate } = useSWR<NoticeResponse>(
-    router.query.id ? `/api/notice/${router.query?.id}` : null
+  const { data, mutate } = useSWR<ReviewResponse>(
+    router.query.id ? `/api/review/${router.query?.id}` : null
   );
 
-  const [editNotice, { data: editData, loading }] = useMutation(
-    `/api/notice/${router.query.id}/edit`
+  const [editReview, { data: editData, loading }] = useMutation(
+    `/api/review/${router.query.id}/edit`
   );
 
-  const [deleteNotice, { data: deleteData, loading: deleteLoading }] = useMutation(
-    `/api/notice/${router.query.id}/delete`
+  const [deleteReview, { data: deleteData, loading: deleteLoading }] = useMutation(
+    `/api/review/${router.query.id}/delete`
   );
 
   const goBack = () => {
-    router.push('/news/notice');
+    router.push('/news/review');
   };
 
   const handleEdit = () => {
@@ -63,18 +62,13 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     setContent(content);
   };
 
-  const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(!checked);
-  };
-
   const handleSave = () => {
     if (loading) return;
-    if (title === '') title = data?.notice?.title;
-    if (content === '') content = data?.notice?.content;
-    editNotice({
+    if (title === '') title = data?.review?.title;
+    if (content === '') content = data?.review?.content;
+    editReview({
       title,
       content,
-      isPrimary: checked,
     });
   };
 
@@ -92,14 +86,14 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
 
   const handleDelete = () => {
     if (deleteLoading) return;
-    deleteNotice('');
+    deleteReview('');
     setDialogVisible(false);
   };
 
   useEffect(() => {
     if (data?.ok) {
-      setTitle(data?.notice?.title);
-      setContent(data?.notice?.content);
+      setTitle(data?.review?.title);
+      setContent(data?.review?.content);
     }
   }, [data]);
 
@@ -112,13 +106,13 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
 
   useEffect(() => {
     if (deleteData?.ok) {
-      router.push('/news/notice');
+      router.push('/news/review');
     }
   }, [deleteData, mutate]);
 
   return (
     <div className="flex h-full w-full flex-col p-8">
-      <div className="border-b-2 pb-8 text-3xl font-bold">공지사항</div>
+      <div className="border-b-2 pb-8 text-3xl font-bold">상담후기</div>
 
       {!editState ? (
         <>
@@ -128,7 +122,7 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
                 <label>제목</label>
               </div>
               <div className="w-full">
-                <label className="text-lg font-bold">{data?.notice?.title}</label>
+                <label className="text-lg font-bold">{data?.review?.title}</label>
               </div>
             </div>
           </div>
@@ -145,16 +139,16 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
               </div>
               <div className="w-full">
                 <label>
-                  {data?.notice?.updatedAt.toString().split('T')[0] +
+                  {data?.review?.updatedAt.toString().split('T')[0] +
                     ' ' +
-                    data?.notice?.updatedAt.toString().split('T')[1].slice(0, 5)}
+                    data?.review?.updatedAt.toString().split('T')[1].slice(0, 5)}
                 </label>
               </div>
             </div>
           </div>
           <div className="no-toolbar h-full pt-8">
             <Editor
-              value={data?.notice?.content}
+              value={data?.review?.content}
               apiKey="90655irb9nds5o8ycj2bpivk0v2y34e2oa6qta82nclxrnx3"
               init={{
                 height: '100%',
@@ -172,24 +166,15 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
                     }, 100);
                   });
                 },
+                content_css: `
+                  .tinymce 
+                `,
               }}
             />
           </div>
         </>
       ) : (
         <>
-          <div className="float-right ml-auto flex">
-            <div>
-              공지로 등록
-              <Checkbox
-                checked={checked}
-                onChange={handleCheckBoxChange}
-                inputProps={{ 'aria-label': 'controlled' }}
-                className="transition-none"
-              />
-            </div>
-          </div>
-
           <div className="w-full pt-8">
             <div className="flex w-full flex-row items-center">
               <div className="w-[50px] items-center">
@@ -212,7 +197,7 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
               init={{
                 height: '100%',
                 plugins:
-                  '  autolink   lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
+                  'autolink lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
                 toolbar:
                   'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignment | numlist bullist | outdent indent | link | insertImage insertfile | hr table codesample insertdatetime print',
                 statusbar: false,
@@ -273,7 +258,7 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{'공지사항 삭제'}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{'상담후기 삭제'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             게시글을 삭제 하시겠습니까?
@@ -298,4 +283,4 @@ export const getServerSideProps = withSsrSession(async function ({ req }: NextPa
   };
 });
 
-export default NoticeDetail;
+export default ReviewDetail;

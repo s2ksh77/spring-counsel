@@ -83,7 +83,9 @@ const ProposalList: NextPage = () => {
                 key={reservation.id}
                 className={'h-[30px] hover:cursor-pointer hover:bg-[#eeeeee]'}
               >
-                <TableCell className="h-[30px] w-16 text-center">{index + 1}</TableCell>
+                <TableCell className="h-[30px] w-16 text-center">
+                  {data?.reservations.length - index}
+                </TableCell>
                 <TableCell className="h-[30px]">{reservation.name}</TableCell>
                 <TableCell className="h-[30px]">
                   {phoneFomatter('0' + reservation.phone, '')}

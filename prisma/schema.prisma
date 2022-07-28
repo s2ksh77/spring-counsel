@@ -19,6 +19,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   notices   Notice[]
+  reviews   Review[]
 }
 
 model Notice {
@@ -41,4 +42,14 @@ model Reservation {
   phone     Int
   content   String   @db.LongText
   status    String
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   @db.MediumText
+  content   String   @db.LongText
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
 }

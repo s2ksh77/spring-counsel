@@ -145,7 +145,7 @@ const GNB: NextPage = () => {
                     <li className="">
                       <Link href="/counsel/family">
                         <a className="block px-4 py-6 hover:bg-[#a9ce8e] hover:text-white">
-                          커플 · 부부상담
+                          부부 · 가족상담
                         </a>
                       </Link>
                     </li>

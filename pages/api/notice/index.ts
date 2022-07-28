@@ -24,7 +24,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     res.json({ ok: true });
   }
   if (req.method === 'GET') {
-    const notices = await client.notice.findMany({});
+    const notices = await client.notice.findMany({
+      orderBy: [
+        {
+          createdAt: 'desc',
+        },
+      ],
+    });
     res.json({ ok: true, notices });
   }
 }

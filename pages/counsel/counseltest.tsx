@@ -19,7 +19,9 @@ const CounselTest: NextPage = () => {
         </div>
         <hr className="my-8" />
         <div className="mb-20">
-          <span className="text-xl font-bold">정서</span>
+          <div className="mb-8">
+            <span className="text-xl font-bold">정서</span>
+          </div>
           <TableContainer className="min-h-[85%]">
             <Table stickyHeader className="">
               <TableHead className="sticky">
@@ -55,7 +57,9 @@ const CounselTest: NextPage = () => {
         </div>
 
         <div className="mb-20">
-          <span className="text-xl font-bold">성격</span>
+          <div className="mb-8">
+            <span className="text-xl font-bold">성격</span>
+          </div>
           <TableContainer className="min-h-[85%]">
             <Table stickyHeader className="">
               <TableHead className="sticky">
@@ -99,7 +103,9 @@ const CounselTest: NextPage = () => {
         </div>
 
         <div>
-          <span className="text-xl font-bold">진로</span>
+          <div className="mb-8">
+            <span className="text-xl font-bold">진로</span>
+          </div>
           <TableContainer className="min-h-[85%]">
             <Table stickyHeader className="">
               <TableHead className="sticky">

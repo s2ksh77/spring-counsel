@@ -217,7 +217,9 @@ const ReservationDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
               setup(editor) {
                 editor.on('init', () => {
                   // setEditor(editor);
-                  editor?.mode?.set('readonly');
+                  setTimeout(() => {
+                    editor?.mode?.set('readonly');
+                  }, 100);
                 });
               },
             }}

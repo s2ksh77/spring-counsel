@@ -7,19 +7,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import Image from 'next/image';
-import test1 from '../assets/test1.jpg';
-import test6 from '../assets/test6.jpg';
-import test11 from '../assets/test1.png';
-import test22 from '../assets/test2.png';
-import test33 from '../assets/banner/Frame 13.png';
-import test44 from '../assets/banner/Frame 28.png';
-import test55 from '../assets/banner/Frame 29.png';
-import test66 from '../assets/banner/Frame 32.png';
-import test77 from '../assets/banner/Frame 35.png';
-import test88 from '../assets/banner/Frame 36.png';
-import aa from '../assets/banner/Frame 42.png';
-import bb from '../assets/banner/Frame 44.png';
-import cc from '../assets/banner/Frame 48.png';
+import fixed from '../assets/fixed.png';
+import fixed2 from '../assets/fixed2.png';
+import fixed3 from '../assets/fixed3.png';
+import fixed4 from '../assets/fixed4.png';
+import fixed5 from '../assets/fixed5.png';
+
 
 const Section: NextPage = () => {
   return (
@@ -39,7 +32,7 @@ const Section: NextPage = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <Image src={test1} layout="fill" />
+          <Image src={fixed} layout="fill" />
           <div className="parallax-bg">
             <div className="title" data-swiper-parallax="-300">
               <p>봄, 심리상담센터</p>
@@ -61,19 +54,16 @@ const Section: NextPage = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test55} layout="fill" objectFit="cover" />
+          <Image src={fixed2} layout="fill" objectFit="cover" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test66} layout="fill" objectFit="cover" />
+          <Image src={fixed3} layout="fill" objectFit="cover" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={test88} layout="fill" objectFit="cover" />
+          <Image src={fixed4} layout="fill" objectFit="cover" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={bb} layout="fill" objectFit="cover" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image src={cc} layout="fill" objectFit="cover" />
+          <Image src={fixed5} layout="fill" objectFit="cover" />
         </SwiperSlide>
       </Swiper>
     </div>

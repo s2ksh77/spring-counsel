@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 import Section from '@components/Section';
 import Content from '@components/Content';
 import Script from 'next/script';
-import banner from '../assets/banner/private.png';
+import fixed5 from '../assets/fixed5.png';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -51,7 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <div className="mx-auto w-full">
         <GNB />
         {isHome() && !isLogin() ? <Section /> : null}
-        {isCounsel() ? <Image src={banner} /> : null}
+        {isCounsel() ? <Image src={fixed5} /> : null}
         <Layout isBanner={isCounsel()}>
           {isHome() || isLogin() || isProposalList() ? null : <Menu menu={menu} />}
           {isHome() || isLogin() ? (

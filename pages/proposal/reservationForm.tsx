@@ -28,6 +28,7 @@ interface ResvResponse {
 const ReservationForm: NextPage = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<ResvFormData>();
+  const [phone, setPhone] = useState('');
   const [content, setContent] = useState('');
   const [createReservation, { data, loading }] = useMutation<ResvResponse>('/api/proposal');
 
@@ -41,10 +42,27 @@ const ReservationForm: NextPage = () => {
 
   const onValid = (form: ResvFormData) => {
     if (loading) return;
+    if (phone === '') {
+      alert('핸드폰 번호를 입력 해주세요.');
+      return;
+    }
+    if (content === '') {
+      alert('상담내용을 입력 해주세요.');
+      return;
+    }
+    form.phone = +phone.replace(/\-/g, '');
     createReservation({
       ...form,
       content,
     });
+  };
+
+  const handleChange = (e: any) => {
+    const regex = /^[0-9\b -]{0,13}$/;
+    let { value } = e.target;
+    if (regex.test(value)) {
+      setPhone(value);
+    }
   };
 
   useEffect(() => {
@@ -53,6 +71,15 @@ const ReservationForm: NextPage = () => {
       router.push('/proposal');
     }
   }, [data]);
+
+  useEffect(() => {
+    setPhone(
+      phone
+        .replace(/[^0-9]/g, '')
+        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
+        .replace(/(\-{1,2})$/g, '')
+    );
+  }, [phone]);
 
   return (
     <div className="flex h-full w-full flex-col p-8">
@@ -97,9 +124,12 @@ const ReservationForm: NextPage = () => {
               </div>
               <div className="w-full">
                 <input
-                  {...register('phone', { required: true })}
-                  type="number"
+                  type="text"
+                  onChange={handleChange}
+                  value={phone}
                   className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
+                  placeholder="010부터 입력해주세요."
+                  required
                 />
               </div>
             </div>

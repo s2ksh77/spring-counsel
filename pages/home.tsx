@@ -1,30 +1,15 @@
-import Layout from '@components/Layout';
 import useMap from '@libs/client/useMap';
 import { AddCircleOutline } from '@mui/icons-material';
-import {
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 import { Notice } from '@prisma/client';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { Autoplay, Navigation, Pagination } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import useSWR from 'swr';
 import center1 from '../assets/center1.jpg';
 import center2 from '../assets/center2.jpg';
-import frame from '../assets/banner/Frame 49.png';
 import kakao from '../assets/i_kakao.png';
-import kakaologo from '../assets/kakao-logo.png';
-import kakaohow from '../assets/kakao-how.png';
-import Link from 'next/link';
 
 interface NoticeResponse {
   ok: boolean;
@@ -132,12 +117,18 @@ const Home: NextPage = () => {
                     'width=480, height=500, left=600, top=300'
                   )
                 }
-                className="mt-8 h-[75px] w-[220px] items-center rounded-full border border-transparent  bg-[#fae100] font-bold text-black shadow-sm focus:outline-none focus:ring-2 focus:ring-[#fae100] focus:ring-offset-2"
+                className="mt-4 h-[75px] w-[220px] items-center rounded-full border border-transparent  bg-[#fae100] font-bold text-black shadow-sm focus:outline-none focus:ring-2 focus:ring-[#fae100] focus:ring-offset-2"
               >
                 <div className="flex flex-row p-2">
                   <Image src={kakao} width={50} height={50} className="rounded-full" />
                   <span className="ml-2 flex items-center">카카오톡 신청하기</span>
                 </div>
+              </button>
+              <button
+                onClick={() => router.push('/news/review')}
+                className="mt-4 h-[75px] w-[220px] items-center rounded-full border border-transparent  bg-[#a9ce8e] font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#a9ce8e] focus:ring-offset-2"
+              >
+                상담후기 바로가기
               </button>
             </div>
           </div>

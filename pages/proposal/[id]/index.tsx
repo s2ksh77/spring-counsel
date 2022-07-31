@@ -48,7 +48,7 @@ const ReservationDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   );
 
   const [deleteNotice, { data: deleteData, loading: deleteLoading }] = useMutation(
-    `/api/notice/${router.query.id}/delete`
+    `/api/proposal/${router.query.id}/delete`
   );
 
   const goBack = () => {
@@ -79,6 +79,7 @@ const ReservationDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     if (deleteLoading) return;
     deleteNotice('');
     setDialogVisible(false);
+    router.push('/proposal/list');
   };
 
   useEffect(() => {
@@ -244,11 +245,12 @@ const ReservationDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        className="w-50"
       >
-        <DialogTitle id="alert-dialog-title">{'공지사항 삭제'}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{'상담신청 삭제'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            게시글을 삭제 하시겠습니까?
+            해당 상담 신청 내역을 삭제 하시겠습니까?
           </DialogContentText>
         </DialogContent>
         <DialogActions>

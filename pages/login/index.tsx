@@ -1,7 +1,7 @@
 import useMutation from '@libs/client/useMutation';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import React, { SetStateAction, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface LoginForm {
@@ -13,7 +13,9 @@ interface LoginResponse {
   ok: boolean;
 }
 
-const Login: NextPage = () => {
+const Login: NextPage<{ setLoginState: React.Dispatch<SetStateAction<boolean>> }> = ({
+  setLoginState,
+}) => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<LoginForm>();
   const [login, { data, loading }] = useMutation<LoginResponse>('/api/login');
@@ -27,9 +29,8 @@ const Login: NextPage = () => {
     if (data?.ok) {
       const result = data?.ok;
       localStorage.setItem('isLogin', JSON.stringify(result));
-      router.push('/home').then(() => {
-        window.location.reload();
-      });
+      router.push('/home');
+      setLoginState(true);
     }
   }, [data]);
 
@@ -46,6 +47,7 @@ const Login: NextPage = () => {
                 className="appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
                 type="text"
                 defaultValue=""
+                autoFocus
               />
             </div>
             <div className="my-4 flex items-center">

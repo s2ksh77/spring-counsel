@@ -9,7 +9,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     session: { user },
   } = req;
 
-  await client.notice.delete({
+  await client.reservation.delete({
     where: {
       id: id?.toString(),
     },

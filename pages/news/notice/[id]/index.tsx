@@ -155,6 +155,7 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
           </div>
           <div className="no-toolbar h-full pt-8">
             <Editor
+              id="readEditor"
               value={data?.notice?.content}
               apiKey="90655irb9nds5o8ycj2bpivk0v2y34e2oa6qta82nclxrnx3"
               init={{
@@ -179,19 +180,18 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
         </>
       ) : (
         <>
-          <div className="float-right ml-auto flex">
-            <div>
-              공지로 등록
-              <Checkbox
-                checked={checked}
-                onChange={handleCheckBoxChange}
-                inputProps={{ 'aria-label': 'controlled' }}
-                className="transition-none"
-              />
-            </div>
-          </div>
-
           <div className="w-full pt-8">
+            <div className="float-right ml-auto flex">
+              <div>
+                공지로 등록
+                <Checkbox
+                  checked={checked}
+                  onChange={handleCheckBoxChange}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                  className="transition-none"
+                />
+              </div>
+            </div>
             <div className="flex w-full flex-row items-center">
               <div className="w-[50px] items-center">
                 <label>제목</label>

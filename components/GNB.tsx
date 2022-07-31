@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import logo from '../public/logo-small.jpg';
 import {
@@ -13,11 +13,12 @@ import {
   DialogActions,
   Button,
 } from '@mui/material';
-import { withSsrSession } from '@libs/server/withSession';
-import { withIronSessionSsr } from 'iron-session/next';
 import useMutation from '@libs/client/useMutation';
 
-const GNB: NextPage = () => {
+const GNB: NextPage<{
+  loginState: boolean;
+  setLoginState: React.Dispatch<SetStateAction<boolean>>;
+}> = ({ loginState, setLoginState }) => {
   const { data } = useSWR('/api/login');
   const [isLogin, setIsLogin] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -35,6 +36,7 @@ const GNB: NextPage = () => {
   const handleLogout = () => {
     logout('');
     setDialogVisible(false);
+    setLoginState(false);
   };
 
   const handleClose = () => setDialogVisible(false);
@@ -42,7 +44,12 @@ const GNB: NextPage = () => {
   useEffect(() => {
     localStorage.setItem('isLogin', data?.ok);
     setIsLogin(data?.ok);
+    console.log('로그인 후에 왜 안타', data?.ok);
   }, [data]);
+
+  useEffect(() => {
+    setIsLogin(loginState);
+  }, [loginState]);
 
   useEffect(() => {
     if (logoutData && logoutData?.ok) {
@@ -51,26 +58,28 @@ const GNB: NextPage = () => {
     }
   }, [logoutData]);
 
+  const removeCache = async (e: any) => {
+    console.log(e);
+    debugger;
+    if (e.isTrusted) {
+      await logout('');
+      localStorage.removeItem('isLogin');
+      setIsLogin(false);
+    }
+  };
+
+  // todo beforeunload
+  // useEffect(()=>{
+  // if(window) window.addEventListener('beforeunload', removeCache);
+  // return () => window.removeEventListener('beforeunload', removeCache);
+  // return () => logout('');
+  // },[])
+
   return (
     <div
       id="gnb"
       className="bg-black-400 border-#f5f5f5 fixed z-[2] flex h-28 w-[100%] flex-col border-b-2 bg-white"
     >
-      <div className="fixed right-20">
-        {!isLogin ? (
-          <div id="login" className="padding-[0.5rem]">
-            <button onClick={goLogIn} className="text-black-300 w-20 hover:text-gray-400">
-              로그인
-            </button>
-          </div>
-        ) : (
-          <div className="padding-[0.5rem]">
-            <button onClick={openDialog} className="text-black-300 w-20 hover:text-gray-400">
-              로그아웃
-            </button>
-          </div>
-        )}
-      </div>
       <div className="mx-auto flex">
         <div className="flex">
           <Link href="/home">
@@ -86,12 +95,27 @@ const GNB: NextPage = () => {
             </a>
           </Link>
         </div>
-        <div>
+        <div className="flex flex-col">
+          <div className="flex justify-end">
+            {!isLogin ? (
+              <div id="login" className="padding-[0.5rem]">
+                <button onClick={goLogIn} className="text-black-300 w-20 hover:text-gray-400">
+                  로그인
+                </button>
+              </div>
+            ) : (
+              <div className="padding-[0.5rem]">
+                <button onClick={openDialog} className="text-black-300 w-20 hover:text-gray-400">
+                  로그아웃
+                </button>
+              </div>
+            )}
+          </div>
           <div id="menu" className="flex">
-            <div className="mx-2 flex h-28 w-52 cursor-pointer items-center justify-center font-medium  ">
-              <div className="dropdown relative mx-2 inline-block h-28 w-40">
+            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium  ">
+              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40">
                 <div>
-                  <div className="py-[2.7rem] text-center">
+                  <div className="py-[2rem] text-center">
                     <Link href="/introduce">
                       <a>
                         <span className="font-bold">센터 소개</span>
@@ -124,10 +148,10 @@ const GNB: NextPage = () => {
                 </div>
               </div>
             </div>
-            <div className="mx-2 flex h-28 w-52 cursor-pointer items-center justify-center font-medium ">
-              <div className="dropdown relative mx-2 inline-block h-28 w-48">
+            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium ">
+              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-48">
                 <div>
-                  <div className="py-[2.7rem] text-center">
+                  <div className="py-[2rem] text-center">
                     <Link href="/counsel/private">
                       <a>
                         <span className="font-bold">상담 및 심리검사 서비스</span>
@@ -167,10 +191,10 @@ const GNB: NextPage = () => {
                 </div>
               </div>
             </div>
-            <div className="mx-2 flex h-28 w-52 cursor-pointer items-center justify-center font-medium ">
-              <div className="dropdown relative mx-2 inline-block h-28 w-40">
+            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium ">
+              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40">
                 <div>
-                  <div className="py-[2.7rem] text-center">
+                  <div className="py-[2rem] text-center">
                     <Link href="/education/counselor">
                       <a>
                         <span className="font-bold">교육 서비스</span>
@@ -196,10 +220,10 @@ const GNB: NextPage = () => {
                 </div>
               </div>
             </div>
-            <div className="mx-2 flex h-28 w-52 cursor-pointer items-center justify-center font-medium ">
-              <div className="dropdown relative mx-2 inline-block h-28 w-40">
+            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium ">
+              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40">
                 <div>
-                  <div className="py-[2.7rem] text-center">
+                  <div className="py-[2rem] text-center">
                     <Link href="/proposal">
                       <a>
                         <span className="font-bold">상담문의 및 신청</span>
@@ -225,10 +249,10 @@ const GNB: NextPage = () => {
                 </div>
               </div>
             </div>
-            <div className="mx-2 flex h-28 w-52 cursor-pointer items-center justify-center font-medium ">
-              <div className="dropdown relative mx-2 inline-block h-28 w-40">
+            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium ">
+              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40">
                 <div>
-                  <div className="py-[2.7rem] text-center">
+                  <div className="py-[2rem] text-center">
                     <Link href="/news/notice">
                       <a>
                         <span className="font-bold">센터 소식</span>
@@ -255,10 +279,10 @@ const GNB: NextPage = () => {
               </div>
             </div>
             {isLogin ? (
-              <div className="mx-2 flex h-28 w-52 cursor-pointer items-center justify-center font-medium ">
-                <div className="dropdown relative mx-2 inline-block h-28 w-40">
+              <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium ">
+                <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40">
                   <div>
-                    <div className="py-[2.7rem] text-center">
+                    <div className="py-[2rem] text-center">
                       <Link href="/proposal/list">
                         <a>
                           <span className="font-bold">상담 신청 내역</span>

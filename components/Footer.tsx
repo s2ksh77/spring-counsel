@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../public/logo-main.jpg';
+import kakao from '../assets/kakao-logo.png';
 
 const Footer: NextPage = () => {
   const handleScrollTop = () => {
@@ -51,6 +52,19 @@ const Footer: NextPage = () => {
         <p className="text-[#999]">대표자: 김정희 </p>
         <p className="text-[#999]">전화번호 : 010-4829-3961 </p>
         <p className="text-[#999]">Copyright © 봄, 심리상담센터 All Rights Reserved.</p>
+      </div>
+      <div
+        onClick={() =>
+          window.open(
+            'http://pf.kakao.com/_jxggLb/friend',
+            '_blank',
+            'width=480, height=500, left=600, top=300'
+          )
+        }
+      >
+        <div className="fixed right-10 bottom-28 cursor-pointer">
+          <Image src={kakao} width={58} height={58} className="rounded-full" />
+        </div>
       </div>
       <div
         onClick={handleScrollTop}

@@ -21,6 +21,8 @@ import fixed5 from '../assets/fixed5.png';
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [menu, setMenu] = useState('');
+  const [loginState, setLoginState] = useState(false);
+  const title = '봄, 심리상담센터';
 
   useEffect(() => {
     setMenu(router.pathname.split('/')[1]);
@@ -46,16 +48,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     <SWRConfig value={{ fetcher: (url: string) => fetch(url).then((res) => res.json()) }}>
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <title>{'봄, 심리상담센터'} </title>
+        <title>{title}</title>
       </Head>
       <div className="mx-auto w-full">
-        <GNB />
+        <GNB loginState={loginState} setLoginState={setLoginState} />
         {isHome() && !isLogin() ? <Section /> : null}
         {isCounsel() ? <Image src={fixed5} /> : null}
         <Layout isBanner={isCounsel()}>
           {isHome() || isLogin() || isProposalList() ? null : <Menu menu={menu} />}
           {isHome() || isLogin() ? (
-            <Component {...pageProps} />
+            <Component {...pageProps} setLoginState={setLoginState} />
           ) : (
             <Content>
               <Component {...pageProps} />

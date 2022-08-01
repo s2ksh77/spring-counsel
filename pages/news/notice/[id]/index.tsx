@@ -157,7 +157,7 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
             <Editor
               id="readEditor"
               value={data?.notice?.content}
-              apiKey="90655irb9nds5o8ycj2bpivk0v2y34e2oa6qta82nclxrnx3"
+              apiKey="8p9h7icidtp8v7ebuiyjo96ymstju4oy95g1xi68gdhvejph"
               init={{
                 height: '100%',
                 plugins:
@@ -209,7 +209,7 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
           <div className="h-full pt-8">
             <Editor
               value={content}
-              apiKey="90655irb9nds5o8ycj2bpivk0v2y34e2oa6qta82nclxrnx3"
+              apiKey="8p9h7icidtp8v7ebuiyjo96ymstju4oy95g1xi68gdhvejph"
               init={{
                 height: '100%',
                 plugins:

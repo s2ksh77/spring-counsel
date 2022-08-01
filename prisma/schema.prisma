@@ -31,6 +31,8 @@ model Notice {
   isPrimary Boolean?
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
+
+  @@index([userId])
 }
 
 model Reservation {
@@ -52,4 +54,6 @@ model Review {
   content   String   @db.LongText
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
+
+  @@index([userId])
 }

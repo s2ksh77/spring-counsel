@@ -63,13 +63,6 @@ const Private: NextPage = () => {
           </div>
         </div>
         <hr className="my-8" />
-        <div className="flex flex-col">
-          <span className="text-xl font-bold">신청방법 및 이용 절차</span>
-          <div className="mx-auto flex">
-            <Image src={process} />
-          </div>
-        </div>
-        <hr className="my-8" />
         <div>
           <span className="text-xl font-bold">상담 내용</span>
           <div className="mt-8 mb-4 w-[90px] font-bold text-[#444]">학업</div>

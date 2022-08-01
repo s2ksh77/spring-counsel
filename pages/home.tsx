@@ -83,12 +83,12 @@ const Home: NextPage = () => {
             </div>
             <div className="px-4">
               <div className="text-3xl font-bold text-red-400">010-4829-3961</div>
-              <div className="mt-1 text-xl">Fax: 031-000-0000</div>
-              <div className="mt-8 px-4">
+              <div className="mt-4 text-xl">상담은 사전 예약제로 진행 됩니다.</div>
+              <div className="mt-[1.5rem] px-2">
                 <div className="text-2xl font-bold">업무시간</div>
-                <div className="mt-4">평일: 10:00 – 20:00</div>
-                <div className="mt-2">토요일: 10:00 – 15:00</div>
-                <div className="mt-2">휴무일: 일요일, 공휴일</div>
+                <div className="mt-4">평일: 오전 10:00 – 오후 21:00</div>
+                <div className="mt-2">주말: 상담자와 사전 협의 후 진행</div>
+                <div className="mt-2">(토요일 ~ 일요일)</div>
               </div>
             </div>
           </div>

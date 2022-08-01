@@ -17,6 +17,8 @@ import Section from '@components/Section';
 import Content from '@components/Content';
 import Script from 'next/script';
 import fixed5 from '../assets/fixed5.png';
+import fixed4 from '../assets/fixed4.png';
+import fixed3 from '../assets/banner3.png';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -44,6 +46,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     return router.pathname.split('/')[1] === 'counsel';
   };
 
+  const isEducation = (): boolean => {
+    return router.pathname.split('/')[1] === 'education';
+  };
+
+  const isProposal = (): boolean => {
+    return router.pathname.split('/')[1] === 'proposal';
+  };
+
   return (
     <SWRConfig value={{ fetcher: (url: string) => fetch(url).then((res) => res.json()) }}>
       <Head>
@@ -53,8 +63,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       <div className="mx-auto w-full">
         <GNB loginState={loginState} setLoginState={setLoginState} />
         {isHome() && !isLogin() ? <Section /> : null}
-        {isCounsel() ? <Image src={fixed5} /> : null}
-        <Layout isBanner={isCounsel()}>
+        {isCounsel() ? (
+          <Image src={fixed5} />
+        ) : isEducation() ? (
+          <Image src={fixed4} />
+        ) : isProposal() ? (
+          <Image src={fixed3} />
+        ) : null}
+        <Layout isBanner={isCounsel() || isEducation() || isProposal()}>
           {isHome() || isLogin() || isProposalList() ? null : <Menu menu={menu} />}
           {isHome() || isLogin() ? (
             <Component {...pageProps} setLoginState={setLoginState} />

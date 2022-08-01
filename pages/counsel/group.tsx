@@ -66,14 +66,6 @@ const Group: NextPage = () => {
             </div>
           </div>
         </div>
-        <hr className="my-8" />
-
-        <div className="flex flex-col">
-          <span className="text-xl font-bold">신청방법 및 이용 절차</span>
-          <div className="mx-auto flex">
-            <Image src={process} />
-          </div>
-        </div>
       </span>
     </div>
   );

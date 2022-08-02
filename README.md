@@ -1,7 +1,16 @@
-## 봄, 심리상담센터
+## Spring-Counsel
 
-## 홈페이지
+## 봄, 심리상담센터 홈페이지 제작
 
-## author
+---
 
-Soohyun Kim
+- **Skill : Next.js / Prisma / Pscale / Tailwind.css**
+- **Deploy : Vercel**
+
+---
+
+참조 : [봄, 심리상담센터](http://bom-counseling.com '봄, 심리상담센터')
+
+### author
+
+- #### Soohyun Kim

@@ -44,7 +44,6 @@ const GNB: NextPage<{
   useEffect(() => {
     localStorage.setItem('isLogin', data?.ok);
     setIsLogin(data?.ok);
-    console.log('로그인 후에 왜 안타', data?.ok);
   }, [data]);
 
   useEffect(() => {
@@ -59,21 +58,12 @@ const GNB: NextPage<{
   }, [logoutData]);
 
   const removeCache = async (e: any) => {
-    console.log(e);
-    debugger;
     if (e.isTrusted) {
       await logout('');
       localStorage.removeItem('isLogin');
       setIsLogin(false);
     }
   };
-
-  // todo beforeunload
-  // useEffect(()=>{
-  // if(window) window.addEventListener('beforeunload', removeCache);
-  // return () => window.removeEventListener('beforeunload', removeCache);
-  // return () => logout('');
-  // },[])
 
   return (
     <div

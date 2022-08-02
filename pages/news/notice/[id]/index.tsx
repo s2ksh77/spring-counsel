@@ -25,7 +25,7 @@ interface NoticeResponse {
   notice: Notice;
 }
 
-const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
+const NoticeDetail: NextPage = () => {
   const router = useRouter();
   const [editor, setEditor] = useState(null);
   const [editState, setEditState] = useState(false);
@@ -33,6 +33,9 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   let [content, setContent] = useState<any | null>('');
   const [checked, setChecked] = useState<any | false>(false);
   const [dialogVisible, setDialogVisible] = useState(false);
+  const { data: loginData } = useSWR('/api/login');
+
+  const [isLogin, setIsLogin] = useState<any | false>(false);
 
   const { data, mutate } = useSWR<NoticeResponse>(
     router.query.id ? `/api/notice/${router.query?.id}` : null
@@ -117,8 +120,14 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     }
   }, [deleteData, mutate]);
 
+  useEffect(() => {
+    if (loginData?.ok) {
+      setIsLogin(loginData?.ok);
+    }
+  }, [loginData]);
+
   return (
-    <div className="flex h-full w-full flex-col p-8">
+    <div className="flex h-full w-full flex-col overflow-y-auto p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">공지사항</div>
 
       {!editState ? (
@@ -153,15 +162,16 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
               </div>
             </div>
           </div>
-          <div className="no-toolbar h-full pt-8">
+          <div className="no-toolbar h-fit min-h-[500px] pt-8">
             <Editor
               id="readEditor"
               value={data?.notice?.content}
               apiKey="8p9h7icidtp8v7ebuiyjo96ymstju4oy95g1xi68gdhvejph"
               init={{
                 height: '100%',
+                min_height: 500,
                 plugins:
-                  'autolink lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
+                  'autoresize autolink lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
                 toolbar:
                   'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignment | numlist bullist | outdent indent | link | insertImage insertfile | hr table codesample insertdatetime print',
                 statusbar: false,
@@ -206,14 +216,15 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
               </div>
             </div>
           </div>
-          <div className="h-full pt-8">
+          <div className="min-h h-fit min-h-[500px] pt-8">
             <Editor
               value={content}
               apiKey="8p9h7icidtp8v7ebuiyjo96ymstju4oy95g1xi68gdhvejph"
               init={{
                 height: '100%',
+                min_height: 500,
                 plugins:
-                  'autolink lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
+                  'autoresize autolink lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
                 toolbar:
                   'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignment | numlist bullist | outdent indent | link | insertImage insertfile | hr table codesample insertdatetime print',
                 statusbar: false,
@@ -226,6 +237,9 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
                     }, 100);
                   });
                 },
+                content_css: `
+                
+                `,
               }}
               onEditorChange={handleEditorChange}
             />
@@ -298,13 +312,5 @@ const NoticeDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     </div>
   );
 };
-
-export const getServerSideProps = withSsrSession(async function ({ req }: NextPageContext) {
-  return {
-    props: {
-      isLogin: req?.session?.user?.id ? true : false,
-    },
-  };
-});
 
 export default NoticeDetail;

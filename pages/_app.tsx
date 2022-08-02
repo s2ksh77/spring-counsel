@@ -60,7 +60,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="shortcut icon" href="/favicon.ico" />
         <title>{title}</title>
       </Head>
-      <div className="mx-auto w-full">
+      <div className="mx-auto w-full overflow-y-auto">
         <GNB loginState={loginState} setLoginState={setLoginState} />
         {isHome() && !isLogin() ? <Section /> : null}
         {isCounsel() ? (

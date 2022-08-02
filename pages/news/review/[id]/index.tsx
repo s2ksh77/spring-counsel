@@ -25,13 +25,15 @@ interface ReviewResponse {
   review: Review;
 }
 
-const ReviewDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
+const ReviewDetail: NextPage = () => {
   const router = useRouter();
   const [editor, setEditor] = useState(null);
   const [editState, setEditState] = useState(false);
   let [title, setTitle] = useState<any | null>('');
   let [content, setContent] = useState<any | null>('');
   const [dialogVisible, setDialogVisible] = useState(false);
+  const { data: loginData } = useSWR('/api/login');
+  const [isLogin, setIsLogin] = useState<any | false>(false);
 
   const { data, mutate } = useSWR<ReviewResponse>(
     router.query.id ? `/api/review/${router.query?.id}` : null
@@ -110,6 +112,12 @@ const ReviewDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     }
   }, [deleteData, mutate]);
 
+  useEffect(() => {
+    if (loginData?.ok) {
+      setIsLogin(loginData?.ok);
+    }
+  }, [loginData]);
+
   return (
     <div className="flex h-full w-full flex-col p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담후기</div>
@@ -146,12 +154,13 @@ const ReviewDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
               </div>
             </div>
           </div>
-          <div className="no-toolbar h-full pt-8">
+          <div className="no-toolbar h-fit min-h-[500px] pt-8">
             <Editor
               value={data?.review?.content}
               apiKey="8p9h7icidtp8v7ebuiyjo96ymstju4oy95g1xi68gdhvejph"
               init={{
                 height: '100%',
+                min_height: 500,
                 plugins:
                   'autolink lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
                 toolbar:
@@ -187,12 +196,13 @@ const ReviewDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
               </div>
             </div>
           </div>
-          <div className="h-full pt-8">
+          <div className="h-fit min-h-[500px] pt-8">
             <Editor
               value={content}
               apiKey="8p9h7icidtp8v7ebuiyjo96ymstju4oy95g1xi68gdhvejph"
               init={{
                 height: '100%',
+                min_height: 500,
                 plugins:
                   'autolink lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
                 toolbar:
@@ -279,13 +289,5 @@ const ReviewDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     </div>
   );
 };
-
-export const getServerSideProps = withSsrSession(async function ({ req }: NextPageContext) {
-  return {
-    props: {
-      isLogin: req?.session?.user?.id ? true : false,
-    },
-  };
-});
 
 export default ReviewDetail;

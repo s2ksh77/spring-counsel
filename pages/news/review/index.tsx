@@ -23,6 +23,7 @@ interface ReviewResponse {
 
 const Review: NextPage = () => {
   const router = useRouter();
+  const { data: loginData } = useSWR('/api/login');
   const { data } = useSWR<ReviewResponse>('/api/review');
   const [isLogin, setIsLogin] = useState<any | false>(false);
 
@@ -35,9 +36,8 @@ const Review: NextPage = () => {
   };
 
   useEffect(() => {
-    const flag = localStorage.getItem('isLogin');
-    setIsLogin(flag);
-  }, []);
+    if (loginData?.ok) setIsLogin(loginData?.ok);
+  }, [loginData]);
 
   return (
     <div className="h-full p-8">

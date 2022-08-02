@@ -23,6 +23,7 @@ interface NoticeResponse {
 
 const Notice: NextPage = () => {
   const router = useRouter();
+  const { data: loginData } = useSWR('/api/login');
   const { data } = useSWR<NoticeResponse>('/api/notice');
   const [sortedData, setSortedData] = useState<any | null>([
     {
@@ -51,9 +52,10 @@ const Notice: NextPage = () => {
   }, [data]);
 
   useEffect(() => {
-    const flag = localStorage.getItem('isLogin');
-    setIsLogin(flag);
-  }, []);
+    if (loginData?.ok) {
+      setIsLogin(loginData?.ok);
+    }
+  }, [loginData]);
 
   return (
     <div className="h-full p-8">

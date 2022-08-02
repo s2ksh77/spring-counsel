@@ -4,8 +4,10 @@
 
 ---
 
-- **Skill : Next.js / Prisma / Pscale / Tailwind.css**
-- **Deploy : Vercel**
+```
+- Skill : Next.js / Prisma / Pscale / Tailwind.css**
+- Deploy : Vercel**
+```
 
 ---
 

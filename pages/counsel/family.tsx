@@ -25,9 +25,9 @@ const Family: NextPage = () => {
             <Image src={family} />
             <div className="absolute bottom-4 w-[50%] py-4 px-[4rem] text-xl text-white">
               <p>
-                가족체계는 움직이는 장남간 모빌과 같다. <br />
+                가족체계는 움직이는 장난감 모빌과 같다. <br />
                 <br />
-                장남감 모빌에서와 같이 가족 모빌에서도 한 부분을 움직이면 다른 부분들도 움직인다.
+                장난감 모빌에서와 같이 가족 모빌에서도 한 부분을 움직이면 다른 부분들도 움직인다.
                 <br /> <br />
                 (Satir, 1972)
               </p>

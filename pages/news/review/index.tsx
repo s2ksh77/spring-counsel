@@ -14,15 +14,17 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { Review } from '@prisma/client';
 import { withSsrSession } from '@libs/server/withSession';
+import { useEffect, useState } from 'react';
 
 interface ReviewResponse {
   ok: boolean;
   reviews: Review[];
 }
 
-const Review: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
+const Review: NextPage = () => {
   const router = useRouter();
   const { data } = useSWR<ReviewResponse>('/api/review');
+  const [isLogin, setIsLogin] = useState(false);
 
   const onClick = () => {
     router.push('/news/review/reviewForm');
@@ -31,6 +33,11 @@ const Review: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   const handleReview = (id: string) => {
     router.push(`/news/review/${id}`);
   };
+
+  useEffect(() => {
+    const flag = localStorage.getItem('isLogin');
+    setIsLogin(flag);
+  }, []);
 
   return (
     <div className="h-full p-8">
@@ -81,13 +88,5 @@ const Review: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     </div>
   );
 };
-
-export const getServerSideProps = withSsrSession(async function ({ req }: NextPageContext) {
-  return {
-    props: {
-      isLogin: req?.session?.user?.id ? true : false,
-    },
-  };
-});
 
 export default Review;

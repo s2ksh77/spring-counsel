@@ -21,7 +21,7 @@ interface NoticeResponse {
   notices: Notice[];
 }
 
-const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
+const Notice: NextPage = () => {
   const router = useRouter();
   const { data } = useSWR<NoticeResponse>('/api/notice');
   const [sortedData, setSortedData] = useState<any | null>([
@@ -30,6 +30,7 @@ const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
       normal: [],
     },
   ]);
+  const [isLogin, setIsLogin] = useState(false);
 
   const onClick = () => {
     router.push('/news/notice/noticeForm');
@@ -48,6 +49,11 @@ const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
   useEffect(() => {
     sortNoticeData();
   }, [data]);
+
+  useEffect(() => {
+    const flag = localStorage.getItem('isLogin');
+    setIsLogin(flag);
+  }, []);
 
   return (
     <div className="h-full p-8">
@@ -107,13 +113,5 @@ const Notice: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     </div>
   );
 };
-
-export const getServerSideProps = withSsrSession(async function ({ req }: NextPageContext) {
-  return {
-    props: {
-      isLogin: req?.session?.user?.id ? true : false,
-    },
-  };
-});
 
 export default Notice;

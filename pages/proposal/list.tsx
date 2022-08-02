@@ -12,7 +12,7 @@ import {
 import { Reservation } from '@prisma/client';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AccessTime, CheckCircleOutline, PendingActions } from '@mui/icons-material';
 import { phoneFomatter } from 'utils/common';
 
@@ -24,6 +24,7 @@ interface ReservationResponse {
 const ProposalList: NextPage = () => {
   const router = useRouter();
   const { data } = useSWR<ReservationResponse>('/api/proposal');
+  const [isLogin, setIsLogin] = useState(false);
 
   const onClick = () => {
     router.push('/news/notice/noticeForm');
@@ -60,6 +61,11 @@ const ProposalList: NextPage = () => {
         return;
     }
   };
+
+  useEffect(() => {
+    const flag = localStorage.getItem('isLogin');
+    setIsLogin(flag);
+  }, []);
 
   return (
     <div className="h-full p-8">

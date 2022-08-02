@@ -29,7 +29,7 @@ interface ReservationResponse {
   reservation: Reservation;
 }
 
-const ReservationDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
+const ReservationDetail: NextPage = () => {
   const router = useRouter();
   const [editor, setEditor] = useState(null);
   const [editState, setEditState] = useState(false);
@@ -263,13 +263,5 @@ const ReservationDetail: NextPage<{ isLogin: boolean }> = ({ isLogin }) => {
     </div>
   );
 };
-
-export const getServerSideProps = withSsrSession(async function ({ req }: NextPageContext) {
-  return {
-    props: {
-      isLogin: req?.session?.user?.id ? true : false,
-    },
-  };
-});
 
 export default ReservationDetail;

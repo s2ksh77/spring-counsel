@@ -24,7 +24,7 @@ interface ReservationResponse {
 const ProposalList: NextPage = () => {
   const router = useRouter();
   const { data } = useSWR<ReservationResponse>('/api/proposal');
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState<any | false>(false);
 
   const onClick = () => {
     router.push('/news/notice/noticeForm');

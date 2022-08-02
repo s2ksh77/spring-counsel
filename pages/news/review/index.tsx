@@ -24,7 +24,7 @@ interface ReviewResponse {
 const Review: NextPage = () => {
   const router = useRouter();
   const { data } = useSWR<ReviewResponse>('/api/review');
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState<any | false>(false);
 
   const onClick = () => {
     router.push('/news/review/reviewForm');

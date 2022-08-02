@@ -30,7 +30,7 @@ const Notice: NextPage = () => {
       normal: [],
     },
   ]);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState<any | false>(false);
 
   const onClick = () => {
     router.push('/news/notice/noticeForm');

@@ -54,8 +54,7 @@ const ContextMenu: NextPage = () => {
     },
   ];
 
-  const handleContextMenu = (event) => {
-    console.log('눌리냐', event);
+  const handleContextMenu = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
 

@@ -27,6 +27,8 @@ body {
     height: auto;
 }
 
+
+
 :root {
   --swiper-navigation-size : 22px !important;
   --swiper-theme-color: #000000 !important;
@@ -112,6 +114,9 @@ body {
   }
   .swiper-slide .subtitle{
     font-size: 16px;
+  }
+  .tox-sidebar-wrap{
+    height: 500px !important;
   }
 }
 

@@ -12,8 +12,12 @@ import {
   DialogContentText,
   DialogActions,
   Button,
+  IconButton,
+  Menu,
 } from '@mui/material';
 import useMutation from '@libs/client/useMutation';
+import { MenuOutlined } from '@mui/icons-material';
+import ContextMenu from './ContextMenu';
 
 const GNB: NextPage<{
   loginState: boolean;
@@ -68,7 +72,7 @@ const GNB: NextPage<{
   return (
     <div
       id="gnb"
-      className="bg-black-400 border-#f5f5f5 fixed z-[2] flex h-28 w-[100%] flex-col border-b-2 bg-white"
+      className="bg-black-400 border-#f5f5f5 fixed z-[2] flex h-28 w-[100%] flex-col border-b-2 bg-white sm:h-[4.6rem]"
     >
       <div className="mx-auto flex">
         <div className="flex">
@@ -76,7 +80,7 @@ const GNB: NextPage<{
             <a>
               <div
                 id="logo"
-                className="flex h-[112px] min-w-[350px] cursor-pointer overflow-y-hidden"
+                className="flex h-[112px] min-w-[350px] cursor-pointer overflow-y-hidden sm:h-[75px] sm:w-[130px] sm:min-w-[230px]"
               >
                 <div>
                   <Image src={logo} width={350} height={112} />
@@ -101,7 +105,7 @@ const GNB: NextPage<{
               </div>
             )}
           </div>
-          <div id="menu" className="flex">
+          <div id="menu" className="flex sm:hidden">
             <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium  ">
               <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40">
                 <div>
@@ -303,6 +307,7 @@ const GNB: NextPage<{
               </DialogActions>
             </Dialog>
           </div>
+          <ContextMenu />
         </div>
       </div>
     </div>

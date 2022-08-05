@@ -8,9 +8,12 @@ const Layout: NextPage<{ children: React.ReactNode; isBanner: boolean }> = ({
 }) => {
   return (
     <div
-      className={cls('bg-yello-500 mx-auto h-auto w-full max-w-7xl', isBanner ? '' : ' pt-[112px]')}
+      className={cls(
+        'bg-yello-500 mx-auto h-auto w-full max-w-7xl sm:w-full',
+        isBanner ? '' : ' pt-[112px] sm:pt-[40px]'
+      )}
     >
-      <div className="flex min-h-[795px] flex-row">{children}</div>
+      <div className="flex min-h-[795px] flex-row sm:w-full sm:flex-col">{children}</div>
     </div>
   );
 };

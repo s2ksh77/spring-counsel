@@ -11,7 +11,7 @@ const Footer: NextPage = () => {
 
   return (
     <div className="flex h-[150px] w-[100%] flex-row border-t-[1px]">
-      <div id="logo" className="flex cursor-pointer items-center overflow-y-hidden px-6">
+      <div id="logo" className="flex cursor-pointer items-center overflow-y-hidden px-6 sm:hidden">
         <div>
           <Link href="/home">
             <a>
@@ -21,7 +21,7 @@ const Footer: NextPage = () => {
         </div>
       </div>
       <div id="copyright" className="ml-4 flex flex-col p-4">
-        <ul className="flex last:mr-0 [&>a>li]:mr-3 [&>a>li]:border-r-[2px] [&>a>li]:border-[#e1e1e1] [&>a>li]:pr-3 [&>a>li:hover]:cursor-pointer [&>a>li:hover]:underline">
+        <ul className="flex last:mr-0 sm:hidden [&>a>li]:mr-3 [&>a>li]:border-r-[2px] [&>a>li]:border-[#e1e1e1] [&>a>li]:pr-3 [&>a>li:hover]:cursor-pointer [&>a>li:hover]:underline">
           <Link href="/introduce">
             <a>
               <li>센터 소개</li>
@@ -62,7 +62,7 @@ const Footer: NextPage = () => {
           )
         }
       >
-        <div className="fixed right-10 bottom-28 cursor-pointer">
+        <div className="z-101 fixed right-10 bottom-28 cursor-pointer">
           <Image src={kakao} width={58} height={58} className="rounded-full" />
         </div>
       </div>

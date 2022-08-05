@@ -64,16 +64,24 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GNB loginState={loginState} setLoginState={setLoginState} />
         {isHome() && !isLogin() ? <Section /> : null}
         {isCounsel() ? (
-          <Image src={fixed5} />
+          <div className="sm:pt-[74px]">
+            <Image src={fixed5} />
+          </div>
         ) : isEducation() ? (
-          <Image src={fixed4} />
+          <div className="sm:pt-[74px]">
+            <Image src={fixed4} />
+          </div>
         ) : isProposal() ? (
-          <Image src={fixed3} />
+          <div className="sm:pt-[74px]">
+            <Image src={fixed3} />
+          </div>
         ) : null}
         <Layout isBanner={isCounsel() || isEducation() || isProposal()}>
           {isHome() || isLogin() || isProposalList() ? null : <Menu menu={menu} />}
           {isHome() || isLogin() ? (
-            <Component {...pageProps} setLoginState={setLoginState} />
+            <div className="sm:w-full">
+              <Component {...pageProps} setLoginState={setLoginState} />
+            </div>
           ) : (
             <Content>
               <Component {...pageProps} />

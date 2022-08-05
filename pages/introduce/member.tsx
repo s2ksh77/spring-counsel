@@ -7,10 +7,10 @@ import member2 from '../../assets/member2.jpg';
 
 const Member: NextPage = () => {
   return (
-    <div className="overflow-y-auto">
-      <Image src={member1} layout="fixed" />
-      <Image src={member3} layout="fixed" />
-      <Image src={member2} layout="fixed" />
+    <div className="overflow-y-auto sm:w-full">
+      <Image src={member1} />
+      <Image src={member3} />
+      <Image src={member2} />
     </div>
   );
 };

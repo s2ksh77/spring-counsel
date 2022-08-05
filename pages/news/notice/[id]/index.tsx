@@ -144,10 +144,10 @@ const NoticeDetail: NextPage = () => {
           </div>
           <div className="w-full pt-8">
             <div className="flex w-full flex-row items-center">
-              <div className="w-[140px] items-center">
+              <div className="w-[140px] items-center ">
                 <label>작성자 :</label>
               </div>
-              <div className="w-full">
+              <div className="w-full sm:w-[50%]">
                 <label>관리자</label>
               </div>
               <div className="w-[120px] items-center">

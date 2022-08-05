@@ -12,7 +12,7 @@ import fixed3 from '../assets/fixed3.png';
 
 const Section: NextPage = () => {
   return (
-    <div className="h-[540px] pt-[112px]">
+    <div className="h-[540px] pt-[112px] sm:w-full sm:pt-[0px]">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -28,7 +28,7 @@ const Section: NextPage = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <Image src={fixed} layout="fill" />
+          <Image src={fixed} layout="fill" className="sm:w-full" />
           {/* <div className="parallax-bg">
             <div className="title" data-swiper-parallax="-300">
               <p>봄, 심리상담센터</p>
@@ -50,9 +50,9 @@ const Section: NextPage = () => {
           </div> */}
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={fixed2} layout="fill" objectFit="cover" />
-          <div className="parallax-bg">
-            <div className="title" data-swiper-parallax="-300">
+          <Image src={fixed2} layout="fill" objectFit="cover" className="sm:w-full" />
+          <div className="parallax-bg sm:w-[100%] sm:py-[120px] sm:px-[40px]">
+            <div className="title sm:text-sm" data-swiper-parallax="-300">
               <p>봄, 심리상담센터</p>
             </div>
             <div className="subtitle" data-swiper-parallax="-200">
@@ -72,7 +72,7 @@ const Section: NextPage = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={fixed3} layout="fill" objectFit="cover" />
+          <Image src={fixed3} layout="fill" objectFit="cover" className="sm:w-full" />
           {/* <div className="parallax-bg">
             <div className="title" data-swiper-parallax="-300">
               <p>봄, 심리상담센터</p>

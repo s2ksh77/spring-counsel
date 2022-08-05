@@ -64,10 +64,10 @@ const Notice: NextPage = () => {
         <Table stickyHeader className="">
           <TableHead className="sticky">
             <TableRow>
-              <TableCell className="w-16 text-center">번호</TableCell>
-              <TableCell className="">제목</TableCell>
-              <TableCell className="w-20 text-center">작성자</TableCell>
-              <TableCell className="w-36 text-center">날짜</TableCell>
+              <TableCell className="w-16 text-center sm:w-4">번호</TableCell>
+              <TableCell className="sw:w-36">제목</TableCell>
+              <TableCell className="w-20 text-center sm:w-4">작성자</TableCell>
+              <TableCell className="w-36 text-center sm:w-4">날짜</TableCell>
             </TableRow>
           </TableHead>
           <TableBody className="">
@@ -77,10 +77,10 @@ const Notice: NextPage = () => {
                 key={notice.id}
                 className={'h-[30px] bg-[#e6e6e6] hover:cursor-pointer hover:bg-[#eeeeee]'}
               >
-                <TableCell className="h-[30px] w-16 text-center">공지</TableCell>
-                <TableCell className="h-[30px]">{notice.title}</TableCell>
-                <TableCell className="h-[30px] w-20 text-center">{'관리자'}</TableCell>
-                <TableCell className="h-[30px] w-36 text-center">
+                <TableCell className="h-[30px] w-16 text-center sm:w-4">공지</TableCell>
+                <TableCell className="sw:w-36 h-[30px]">{notice.title}</TableCell>
+                <TableCell className="h-[30px] w-20 text-center sm:w-4">{'관리자'}</TableCell>
+                <TableCell className="h-[30px] w-36 text-center sm:w-4">
                   {notice.updatedAt.toString().split('T')[0]?.replaceAll('-', '.')}
                 </TableCell>
               </TableRow>
@@ -91,12 +91,12 @@ const Notice: NextPage = () => {
                 key={notice.id}
                 className={'h-[30px] hover:cursor-pointer hover:bg-[#eeeeee]'}
               >
-                <TableCell className="h-[30px] w-16 text-center">
+                <TableCell className="h-[30px] w-16 text-center sm:w-4">
                   {sortedData?.normal?.length - index}
                 </TableCell>
-                <TableCell className="h-[30px]">{notice.title}</TableCell>
-                <TableCell className="h-[30px] w-20 text-center">{'관리자'}</TableCell>
-                <TableCell className="h-[30px] w-36 text-center">
+                <TableCell className="h-[30px] sm:w-36">{notice.title}</TableCell>
+                <TableCell className="h-[30px] w-20 text-center sm:w-4">{'관리자'}</TableCell>
+                <TableCell className="h-[30px] w-36 text-center sm:w-4">
                   {notice.updatedAt.toString().split('T')[0]?.replaceAll('-', '.')}
                 </TableCell>
               </TableRow>

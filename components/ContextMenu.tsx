@@ -64,13 +64,13 @@ const ContextMenu: NextPage = () => {
 
   return (
     <>
-      <div className="mt-4 flex items-center justify-center sm:flex">
+      <div className="mt-4 hidden items-center justify-center sm:flex">
         <IconButton
           onClick={handleContextMenu}
           className="h-[30px] w-[30px] text-black"
           color="primary"
         >
-          <MenuOutlined />
+          <MenuOutlined className="text-black" />
         </IconButton>
       </div>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>

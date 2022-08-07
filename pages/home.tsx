@@ -71,7 +71,7 @@ const Home: NextPage = () => {
           상담신청 및 문의
         </div>
         <div className="mb-16 flex w-full flex-row justify-center">
-          <div className="h-[360px] w-[360px] rounded-3xl border-[1px] p-4 shadow-lg sm:ml-0 sm:mr-8 sm:max-w-[210px]">
+          <div className="h-[360px] w-[360px] rounded-3xl border-[1px] p-4 shadow-lg sm:ml-0 sm:mr-8 sm:max-w-[210px] md:mr-8 md:max-w-[300px] lg:mr-12">
             <div className="flex justify-between">
               <div className="mb-4 border-b-4 pb-4 text-2xl font-bold sm:text-lg">상담 문의</div>
               <div
@@ -86,13 +86,13 @@ const Home: NextPage = () => {
               <div className="mt-4 text-xl sm:text-lg">상담은 사전 예약제로 진행 됩니다.</div>
               <div className="mt-[1.5rem] px-2 sm:mt-4">
                 <div className="text-2xl font-bold sm:text-xl">업무시간</div>
-                <div className="mt-4 sm:text-sm">평일: 오전 10:00 – 오후 21:00</div>
-                <div className="mt-2 sm:text-xs">주말: 상담자와 사전 협의 후 진행</div>
-                <div className="mt-2 sm:text-sm">(토요일 ~ 일요일)</div>
+                <div className="mt-4 sm:text-sm md:text-sm">평일: 오전 10:00 – 오후 21:00</div>
+                <div className="mt-2 sm:text-xs md:text-sm">주말: 상담자와 사전 협의 후 진행</div>
+                <div className="mt-2 sm:text-sm md:text-sm">(토요일 ~ 일요일)</div>
               </div>
             </div>
           </div>
-          <div className="h-[360px] w-[360px] rounded-3xl border-[1px] p-4 shadow-lg sm:ml-0 sm:w-[150px]">
+          <div className="h-[360px] w-[360px] rounded-3xl border-[1px] p-4 shadow-lg sm:ml-0 sm:w-[150px] md:max-w-[250px]">
             <div className="flex justify-between">
               <div className="mb-4 border-b-4 pb-4 text-2xl font-bold sm:text-lg">상담 신청</div>
               <div
@@ -145,7 +145,7 @@ const Home: NextPage = () => {
           센터 소개
         </div>
 
-        <div className="col mr-auto flex h-[630px] w-[100%] border-y-[1px] p-4 shadow-lg sm:h-[300px]">
+        <div className="col mr-auto flex h-[630px] w-[100%] border-y-[1px] p-4 shadow-lg sm:h-[300px] md:max-h-[500px] md:min-h-[450px]">
           <div className="flex flex-col">
             <div className="mb-4 flex w-[6.6rem] border-b-4 pb-4 text-2xl font-bold">센터 사진</div>
             <div className="flex flex-row pt-8">

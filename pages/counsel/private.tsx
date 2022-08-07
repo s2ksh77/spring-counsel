@@ -13,7 +13,7 @@ import process from '../../assets/process.jpg';
 
 const Private: NextPage = () => {
   return (
-    <div className="flex h-full w-full flex-col p-8 sm:w-full">
+    <div className="flex h-full w-full flex-col p-8 sm:w-full md:w-full">
       <div className="border-b-2 pb-8 text-3xl font-bold">개인상담</div>
       <span>
         <div className=" w-[100%] bg-white p-4 ">

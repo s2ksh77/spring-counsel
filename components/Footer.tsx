@@ -21,7 +21,7 @@ const Footer: NextPage = () => {
         </div>
       </div>
       <div id="copyright" className="ml-4 flex flex-col p-4">
-        <ul className="flex last:mr-0 sm:hidden [&>a>li]:mr-3 [&>a>li]:border-r-[2px] [&>a>li]:border-[#e1e1e1] [&>a>li]:pr-3 [&>a>li:hover]:cursor-pointer [&>a>li:hover]:underline">
+        <ul className="flex last:mr-0 sm:hidden md:hidden [&>a>li]:mr-3 [&>a>li]:border-r-[2px] [&>a>li]:border-[#e1e1e1] [&>a>li]:pr-3 [&>a>li:hover]:cursor-pointer [&>a>li:hover]:underline">
           <Link href="/introduce">
             <a>
               <li>센터 소개</li>

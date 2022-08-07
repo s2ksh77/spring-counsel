@@ -4,10 +4,10 @@ module.exports = {
   theme: {
     extend: {},
     screens: {
-      sm: { min: '200px', max: '599px' },
-      md: { min: '768px', max: '899px' },
-      lg: { min: '992px', max: '1199px' },
-      xl: { min: '1200px', max: '1799px' },
+      sm: { min: '200px', max: '599px' }, // 모바일
+      md: { min: '600px', max: '1023px' }, // 태블릿 세로
+      lg: { min: '1024px', max: '1200px' }, // 태블릿 가로
+      xl: { min: '1200px' }, // pc
     },
   },
   darkMode: 'media', // media:브라우저 설정 class:우리가 state로 설정 부모 하위에 요소 위치로

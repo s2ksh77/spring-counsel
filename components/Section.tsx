@@ -64,7 +64,7 @@ const Section: NextPage = () => {
             <div className="subtitle" data-swiper-parallax="-200">
               <p>새롭게 보다.</p>
             </div>
-            <div className="text" data-swiper-parallax="-100">
+            <div className="subtitle" data-swiper-parallax="-100">
               <p>
                 봄, 은 이름에서 상담에서 다루어야 하는 과정이 그대로 표현되는 따뜻한 공간입니다.
               </p>

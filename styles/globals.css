@@ -31,7 +31,7 @@ body {
 
 :root {
   --swiper-navigation-size : 22px !important;
-  --swiper-theme-color: #000000 !important;
+  --swiper-theme-color: #eeeeee !important;
 }
 .swiper-button-next:after,
 .swiper-button-prev:after{
@@ -42,7 +42,7 @@ body {
   display: none !important;
   padding: 20px;
   border-radius: 25px;
-  border: 1px solid #000000;
+  border: 0px solid #000000;
 }
   
 .swiper {
@@ -120,9 +120,13 @@ body {
   }
 }
 
+.tox-sidebar-wrap{
+  height: 500px !important;
+}
+
 .swiper-slide .subtitle {
   font-size: 21px;
-  margin-top: 15px;
+  margin-top: 22px;
 }
 
 .swiper-slide .text {

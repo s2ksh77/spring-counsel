@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { SetStateAction, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import logo from '../public/logo-small.jpg';
+import logoLarge from '../public/logo-main.jpg';
 import {
   Dialog,
   DialogTitle,
@@ -74,16 +75,19 @@ const GNB: NextPage<{
       id="gnb"
       className="bg-black-400 border-#f5f5f5 fixed z-[2] flex h-28 w-[100%] flex-col border-b-2 bg-white sm:h-[4.6rem]"
     >
-      <div className="mx-auto flex">
+      <div className="mx-auto flex sm:w-full sm:justify-between md:w-full md:justify-between lg:w-full">
         <div className="flex">
           <Link href="/home">
             <a>
               <div
                 id="logo"
-                className="flex h-[112px] min-w-[350px] cursor-pointer overflow-y-hidden sm:h-[75px] sm:w-[130px] sm:min-w-[230px]"
+                className="flex h-[112px] min-w-[350px] cursor-pointer overflow-y-hidden sm:h-[75px] sm:w-[130px] sm:min-w-[230px] lg:h-[112px] lg:w-[225px] lg:min-w-[225px]"
               >
-                <div>
-                  <Image src={logo} width={350} height={112} />
+                <div className="lg:hidden lg:h-[110px]">
+                  <Image src={logo} width={350} height={112} className="lg:h-[110px]" />
+                </div>
+                <div className="hidden lg:flex lg:h-[112px]">
+                  <Image src={logo} width={225} height={112} className="lg:h-[112px]" />
                 </div>
               </div>
             </a>
@@ -105,9 +109,9 @@ const GNB: NextPage<{
               </div>
             )}
           </div>
-          <div id="menu" className="flex sm:hidden">
-            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium  ">
-              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40">
+          <div id="menu" className="flex sm:hidden md:hidden">
+            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-28">
+              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40 lg:w-28">
                 <div>
                   <div className="py-[2rem] text-center">
                     <Link href="/introduce">
@@ -142,10 +146,10 @@ const GNB: NextPage<{
                 </div>
               </div>
             </div>
-            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium ">
-              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-48">
+            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-32">
+              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-48 lg:w-32">
                 <div>
-                  <div className="py-[2rem] text-center">
+                  <div className="py-[2rem] text-center lg:py-[1.2rem]">
                     <Link href="/counsel/private">
                       <a>
                         <span className="font-bold">상담 및 심리검사 서비스</span>
@@ -185,8 +189,8 @@ const GNB: NextPage<{
                 </div>
               </div>
             </div>
-            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium ">
-              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40">
+            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-28">
+              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40 lg:w-28">
                 <div>
                   <div className="py-[2rem] text-center">
                     <Link href="/education/counselor">
@@ -214,8 +218,8 @@ const GNB: NextPage<{
                 </div>
               </div>
             </div>
-            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium ">
-              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40">
+            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-32">
+              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40 lg:w-32">
                 <div>
                   <div className="py-[2rem] text-center">
                     <Link href="/proposal">
@@ -243,8 +247,8 @@ const GNB: NextPage<{
                 </div>
               </div>
             </div>
-            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium ">
-              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40">
+            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-24">
+              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40 lg:w-24">
                 <div>
                   <div className="py-[2rem] text-center">
                     <Link href="/news/notice">
@@ -273,8 +277,8 @@ const GNB: NextPage<{
               </div>
             </div>
             {isLogin ? (
-              <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium ">
-                <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40">
+              <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-32">
+                <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40 lg:w-32">
                   <div>
                     <div className="py-[2rem] text-center">
                       <Link href="/proposal/list">

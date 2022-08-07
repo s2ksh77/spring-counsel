@@ -71,7 +71,7 @@ const Home: NextPage = () => {
           상담신청 및 문의
         </div>
         <div className="mb-16 flex w-full flex-row justify-center">
-          <div className="h-[360px] w-[360px] rounded-3xl border-[1px] p-4 shadow-lg sm:ml-0 sm:mr-8 sm:max-w-[210px] md:mr-8 md:max-w-[300px] lg:mr-12">
+          <div className="mr-16 h-[360px] w-[360px] rounded-3xl border-[1px] p-4 shadow-lg sm:ml-0 sm:mr-8 sm:max-w-[210px] md:mr-8 md:max-w-[300px] lg:mr-12">
             <div className="flex justify-between">
               <div className="mb-4 border-b-4 pb-4 text-2xl font-bold sm:text-lg">상담 문의</div>
               <div

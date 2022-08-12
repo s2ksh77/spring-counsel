@@ -13,6 +13,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     where: {
       id: id?.toString(),
     },
+    include: {
+      files: true,
+    },
   });
 
   return res.json({

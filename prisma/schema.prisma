@@ -23,37 +23,76 @@ model User {
 }
 
 model Notice {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.MediumText
-  content   String   @db.LongText
+  id        String       @id @default(uuid())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  title     String       @db.MediumText
+  content   String       @db.LongText
   isPrimary Boolean?
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
+  files     NoticeFile[]
 
   @@index([userId])
 }
 
 model Reservation {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String            @id @default(uuid())
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
   name      String
   email     String?
   phone     Int
-  content   String   @db.LongText
+  content   String            @db.LongText
   status    String
+  files     ReservationFile[]
 }
 
 model Review {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.MediumText
-  content   String   @db.LongText
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String       @id @default(uuid())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  title     String       @db.MediumText
+  content   String       @db.LongText
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
+  files     ReviewFile[]
 
   @@index([userId])
+}
+
+model ReviewFile {
+  id        String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String   @db.MediumText
+  url       String   @db.MediumText
+  review    Review?  @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  reviewId  String?
+
+  @@index([reviewId])
+}
+
+model NoticeFile {
+  id        String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String   @db.MediumText
+  url       String   @db.MediumText
+  notice    Notice?  @relation(fields: [noticeId], references: [id], onDelete: Cascade)
+  noticeId  String?
+
+  @@index([noticeId])
+}
+
+model ReservationFile {
+  id            String       @id
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  name          String       @db.MediumText
+  url           String       @db.MediumText
+  reservation   Reservation? @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+  reservationId String?
+
+  @@index([reservationId])
 }

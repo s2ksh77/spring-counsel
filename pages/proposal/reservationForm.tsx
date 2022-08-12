@@ -1,12 +1,13 @@
 import { NextPage } from 'next';
 import { Editor } from '@tinymce/tinymce-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, Checkbox } from '@mui/material';
 import { MenuOutlined, EditOutlined, CancelOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import useMutation from '@libs/client/useMutation';
 import { useForm } from 'react-hook-form';
 import { Reservation } from '@prisma/client';
+import Uploader from '@components/Uploader';
 
 interface NoticeProps {
   title: string;
@@ -25,12 +26,19 @@ interface ResvResponse {
   reservation: Reservation;
 }
 
+interface FileResponse {
+  ok: boolean;
+}
+
 const ReservationForm: NextPage = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<ResvFormData>();
   const [phone, setPhone] = useState('');
   const [content, setContent] = useState('');
   const [createReservation, { data, loading }] = useMutation<ResvResponse>('/api/proposal');
+  const [uploadType, setUploadType] = useState('');
+  const editorRef = useRef<HTMLInputElement | null | any>(null);
+  const [createUpload] = useMutation<FileResponse>('/api/upload');
 
   const handleEditorChange = (content: any) => {
     setContent(content);
@@ -65,8 +73,29 @@ const ReservationForm: NextPage = () => {
     }
   };
 
+  const onUploadClick = (type: string) => setUploadType(type);
+
+  const uploadFileMeta = (id: string) => {
+    const imageList = editorRef?.current?.editor?.getBody()?.querySelectorAll('img');
+    if (imageList && imageList.length > 0) {
+      [...imageList].map((el) => {
+        const fileId = el.getAttribute('id');
+        const url = el.getAttribute('src');
+        const name = el.getAttribute('data-name');
+        createUpload({
+          url,
+          name,
+          form: 'reservation',
+          id,
+          fileId,
+        });
+      });
+    }
+  };
+
   useEffect(() => {
     if (data?.ok) {
+      uploadFileMeta(data?.reservation?.id);
       alert('상담 신청이 접수 되었습니다.');
       router.push('/proposal');
     }
@@ -137,6 +166,7 @@ const ReservationForm: NextPage = () => {
         </div>
         <div className="h-fit min-h-[500px] pt-8">
           <Editor
+            ref={editorRef}
             apiKey="8p9h7icidtp8v7ebuiyjo96ymstju4oy95g1xi68gdhvejph"
             init={{
               height: '100%',
@@ -144,7 +174,7 @@ const ReservationForm: NextPage = () => {
               plugins:
                 'autolink lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
               toolbar:
-                'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignment | numlist bullist | outdent indent | link | hr table codesample insertdatetime',
+                'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignment | numlist bullist | outdent indent | insertImage | hr table codesample insertdatetime',
               statusbar: false,
               menubar: false,
               placeholder: '상담받고 싶은 내용을 적어주세요.',
@@ -155,17 +185,30 @@ const ReservationForm: NextPage = () => {
                     editor?.mode?.set('design');
                   }, 100);
                 });
+                editor.ui.registry.addButton('insertImage', {
+                  icon: 'image',
+                  onAction() {
+                    onUploadClick('image');
+                  },
+                });
+                editor.ui.registry.addButton('insertFile', {
+                  icon: 'upload',
+                  onAction() {
+                    onUploadClick('file');
+                  },
+                });
               },
             }}
             onEditorChange={handleEditorChange}
           />
+          <Uploader type={uploadType} setType={setUploadType} editor={editorRef?.current} />
         </div>
       </>
       <div>
         <div className="float-right ml-auto flex pt-2">
           <Button onClick={handleSubmit(onValid)} className="text-black">
             <EditOutlined className="mr-1" />
-            신청
+            <span className="text-black">신청</span>
           </Button>
         </div>
       </div>

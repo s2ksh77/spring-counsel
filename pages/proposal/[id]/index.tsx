@@ -21,12 +21,15 @@ import { DialogContent } from '@mui/material';
 import { DialogContentText } from '@mui/material';
 import { DialogActions } from '@mui/material';
 import { withSsrSession } from '@libs/server/withSession';
-import { Reservation } from '@prisma/client';
+import { Reservation, ReservationFile } from '@prisma/client';
 import { phoneFomatter } from 'utils/common';
 
+interface ReservationResponseWithFile extends Reservation {
+  files: ReservationFile[];
+}
 interface ReservationResponse {
   ok: boolean;
-  reservation: Reservation;
+  reservation: ReservationResponseWithFile;
 }
 
 const ReservationDetail: NextPage = () => {
@@ -38,6 +41,7 @@ const ReservationDetail: NextPage = () => {
   const [checked, setChecked] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [item, setItem] = useState('');
+  const [fileData, setFileData] = useState<any[]>([]);
 
   const { data, mutate } = useSWR<ReservationResponse>(
     router.query.id ? `/api/proposal/${router.query?.id}` : null
@@ -87,6 +91,7 @@ const ReservationDetail: NextPage = () => {
       if (data?.reservation?.status === 'pending') setItem('ready');
       else if (data?.reservation?.status === 'ready') setItem('pending');
       else setItem('pending');
+      setFileData(data?.reservation?.files);
     }
   }, [data]);
 
@@ -227,6 +232,23 @@ const ReservationDetail: NextPage = () => {
             }}
           />
         </div>
+        {fileData?.length > 0 ? (
+          <div className="my-4 flex w-full flex-row">
+            <div className="flex min-w-[70px]">첨부파일 : </div>
+            <div className="flex max-h-20 w-full flex-col overflow-y-auto">
+              {data?.reservation?.files?.map((file) => (
+                <>
+                  <a
+                    key={file.id}
+                    className="ml-4 text-blue-400 hover:cursor-pointer hover:underline"
+                  >
+                    {file.name}
+                  </a>
+                </>
+              ))}
+            </div>
+          </div>
+        ) : null}
       </>
 
       <div className="flex justify-between">

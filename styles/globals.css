@@ -136,3 +136,16 @@ body {
   margin-top: 15px;
   white-space: nowrap;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 6px;
+  border-radius: 8px;
+  background-color: rgb(217, 217, 217);
+  border: 0px;
+  opacity: 1;
+}

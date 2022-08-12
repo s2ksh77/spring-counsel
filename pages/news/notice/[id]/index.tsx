@@ -1,6 +1,6 @@
 import { NextPage, NextPageContext } from 'next';
 import { Editor } from '@tinymce/tinymce-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, Checkbox } from '@mui/material';
 import {
   MenuOutlined,
@@ -18,11 +18,19 @@ import { DialogContent } from '@mui/material';
 import { DialogContentText } from '@mui/material';
 import { DialogActions } from '@mui/material';
 import { withSsrSession } from '@libs/server/withSession';
-import { Notice } from '@prisma/client';
+import { Notice, NoticeFile } from '@prisma/client';
+import Uploader from '@components/Uploader';
+
+interface NoticeResponseWithFile extends Notice {
+  files: NoticeFile[];
+}
 
 interface NoticeResponse {
   ok: boolean;
-  notice: Notice;
+  notice: NoticeResponseWithFile;
+}
+interface FileResponse {
+  ok: boolean;
 }
 
 const NoticeDetail: NextPage = () => {
@@ -34,6 +42,10 @@ const NoticeDetail: NextPage = () => {
   const [checked, setChecked] = useState<any | false>(false);
   const [dialogVisible, setDialogVisible] = useState(false);
   const { data: loginData } = useSWR('/api/login');
+  const [uploadType, setUploadType] = useState('');
+  const editorRef = useRef<HTMLInputElement | null | any>(null);
+  const [fileData, setFileData] = useState<any[]>([]);
+  const [uploadData, setUploadData] = useState<any[]>([]);
 
   const [isLogin, setIsLogin] = useState<any | false>(false);
 
@@ -48,6 +60,8 @@ const NoticeDetail: NextPage = () => {
   const [deleteNotice, { data: deleteData, loading: deleteLoading }] = useMutation(
     `/api/notice/${router.query.id}/delete`
   );
+
+  const [createUpload] = useMutation<FileResponse>('/api/upload');
 
   const goBack = () => {
     router.push('/news/notice');
@@ -79,6 +93,18 @@ const NoticeDetail: NextPage = () => {
       content,
       isPrimary: checked,
     });
+    if (uploadData.length > 0) {
+      uploadData?.map((el: any) => {
+        createUpload({
+          url: '',
+          name: el.name,
+          form: 'notice',
+          id: router.query?.id,
+          fileId: el.id[0],
+        });
+      });
+      setUploadData([]);
+    }
   };
 
   const handleCancel = () => {
@@ -99,11 +125,19 @@ const NoticeDetail: NextPage = () => {
     setDialogVisible(false);
   };
 
+  const onUploadClick = (type: string) => setUploadType(type);
+
+  const pushObj = (obj: any) => {
+    setUploadData([...uploadData, obj]);
+    setFileData([...fileData, obj]);
+  };
+
   useEffect(() => {
     if (data?.ok) {
       setTitle(data?.notice?.title);
       setChecked(data?.notice?.isPrimary);
       setContent(data?.notice?.content);
+      setFileData(data?.notice?.files);
     }
   }, [data]);
 
@@ -135,11 +169,29 @@ const NoticeDetail: NextPage = () => {
           <div className="w-full pt-8">
             <div className="flex w-full flex-row items-center">
               <div className="w-[50px] items-center">
-                <label>제목</label>
+                <label className="flex">제목</label>
               </div>
               <div className="w-full">
                 <label className="text-lg font-bold">{data?.notice?.title}</label>
               </div>
+              {isLogin && !editState ? (
+                <div className="flex flex-row">
+                  <>
+                    <div className="flex">
+                      <Button onClick={handleEdit} className="mr-2 min-w-[73px] text-black">
+                        <EditOutlined className="mr-1" />
+                        수정
+                      </Button>
+                    </div>
+                    <div className="flex">
+                      <Button onClick={handleDialogOpen} className="mr-2 min-w-[73px] text-black">
+                        <DeleteOutlineOutlined className="mr-1" />
+                        삭제
+                      </Button>
+                    </div>
+                  </>
+                </div>
+              ) : null}
             </div>
           </div>
           <div className="w-full pt-8">
@@ -187,6 +239,23 @@ const NoticeDetail: NextPage = () => {
               }}
             />
           </div>
+          {fileData?.length > 0 ? (
+            <div className="my-4 flex w-full flex-row">
+              <div className="flex min-w-[70px]">첨부파일 : </div>
+              <div className="flex max-h-20 w-full flex-col overflow-y-auto">
+                {fileData?.map((file) => (
+                  <>
+                    <a
+                      key={file.id}
+                      className="ml-4 text-blue-400 hover:cursor-pointer hover:underline"
+                    >
+                      {file.name}
+                    </a>
+                  </>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </>
       ) : (
         <>
@@ -206,18 +275,35 @@ const NoticeDetail: NextPage = () => {
               <div className="w-[50px] items-center">
                 <label>제목</label>
               </div>
-              <div className="w-full">
+              <div className="flex w-full flex-row">
                 <input
                   value={title}
                   onChange={handleChange}
                   type="text"
                   className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
                 />
+                {isLogin && editState ? (
+                  <>
+                    <div className="flex">
+                      <Button onClick={handleSave} className="mx-2 min-w-[73px] text-black">
+                        <DoneOutlined className="mr-1" />
+                        저장
+                      </Button>
+                    </div>
+                    <div className="flex">
+                      <Button onClick={handleCancel} className="mr-2 min-w-[73px] text-black">
+                        <CancelOutlined className="mr-1" />
+                        취소
+                      </Button>
+                    </div>
+                  </>
+                ) : null}
               </div>
             </div>
           </div>
           <div className="min-h h-fit min-h-[500px] pt-8">
             <Editor
+              ref={editorRef}
               value={content}
               apiKey="8p9h7icidtp8v7ebuiyjo96ymstju4oy95g1xi68gdhvejph"
               init={{
@@ -236,53 +322,50 @@ const NoticeDetail: NextPage = () => {
                       editor?.mode?.set('design');
                     }, 100);
                   });
+                  editor.ui.registry.addButton('insertImage', {
+                    icon: 'image',
+                    onAction() {
+                      onUploadClick('image');
+                    },
+                  });
+                  editor.ui.registry.addButton('insertFile', {
+                    icon: 'upload',
+                    onAction() {
+                      onUploadClick('file');
+                    },
+                  });
                 },
-                content_css: `
-                
-                `,
               }}
               onEditorChange={handleEditorChange}
             />
+            <Uploader
+              type={uploadType}
+              setType={setUploadType}
+              editor={editorRef?.current}
+              pushObj={pushObj}
+            />
+            {fileData?.length > 0 ? (
+              <div className="my-4 flex w-full flex-row">
+                <div className="flex min-w-[70px]">첨부파일 : </div>
+                <div className="flex max-h-20 w-full flex-col overflow-y-auto">
+                  {fileData?.map((file) => (
+                    <>
+                      <a
+                        key={file.id}
+                        className="ml-4 text-blue-400 hover:cursor-pointer hover:underline"
+                      >
+                        {file.name}
+                      </a>
+                    </>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
         </>
       )}
 
       <div className="flex justify-between">
-        {isLogin ? (
-          <div className="flex flex-row">
-            {!editState ? (
-              <>
-                <div className="flex pt-2">
-                  <Button onClick={handleEdit} className="mr-2 text-black">
-                    <EditOutlined className="mr-1" />
-                    수정
-                  </Button>
-                </div>
-                <div className="flex pt-2">
-                  <Button onClick={handleDialogOpen} className="mr-2 text-black">
-                    <DeleteOutlineOutlined className="mr-1" />
-                    삭제
-                  </Button>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="flex pt-2">
-                  <Button onClick={handleSave} className="mr-2 text-black">
-                    <DoneOutlined className="mr-1" />
-                    저장
-                  </Button>
-                </div>
-                <div className="flex pt-2">
-                  <Button onClick={handleCancel} className="mr-2 text-black">
-                    <CancelOutlined className="mr-1" />
-                    취소
-                  </Button>
-                </div>
-              </>
-            )}
-          </div>
-        ) : null}
         <div className="float-right ml-auto flex pt-2">
           <Button onClick={goBack} className="mr-2 text-black">
             <MenuOutlined className="mr-1" />

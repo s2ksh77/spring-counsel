@@ -14,7 +14,6 @@ function useMap() {
   const markerClickEvent = (marker: any) => {
     naver.maps.Event.addListener(marker, 'click', (e: any) => {
       const mapLatLng = new naver.maps.LatLng(37.276486370527316, 127.0733467265119);
-      console.log(mapRef.current);
 
       // 선택한 마커로 부드럽게 이동합니다.
       mapRef.current.panTo(mapLatLng, e?.coord);

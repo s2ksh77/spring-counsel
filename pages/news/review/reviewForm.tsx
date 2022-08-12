@@ -1,11 +1,12 @@
 import { NextPage } from 'next';
 import { Editor } from '@tinymce/tinymce-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, Checkbox } from '@mui/material';
 import { MenuOutlined, EditOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import useMutation from '@libs/client/useMutation';
 import { Review } from '@prisma/client';
+import Uploader from '@components/Uploader';
 
 interface ReviewProps {
   title: string;
@@ -17,11 +18,19 @@ interface ReviewResponse {
   review: Review;
 }
 
+interface FileResponse {
+  ok: boolean;
+}
+
 const ReviewForm: NextPage = () => {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [createReview, { data, loading }] = useMutation<ReviewResponse>('/api/review');
+  const [uploadType, setUploadType] = useState('');
+  const editorRef = useRef<HTMLInputElement | null | any>(null);
+  const [createUpload] = useMutation<FileResponse>('/api/upload');
+  const [fileData, setFileData] = useState<any[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -52,8 +61,44 @@ const ReviewForm: NextPage = () => {
     });
   };
 
+  const onUploadClick = (type: string) => setUploadType(type);
+
+  const pushObj = (obj: any) => {
+    setFileData([...fileData, obj]);
+  };
+
+  const uploadFileMeta = (id: string) => {
+    const imageList = editorRef?.current?.editor?.getBody()?.querySelectorAll('img');
+    if (imageList && imageList.length > 0) {
+      [...imageList].map((el) => {
+        const fileId = el.getAttribute('id');
+        const url = el.getAttribute('src');
+        const name = el.getAttribute('data-name');
+        createUpload({
+          url,
+          name,
+          form: 'review',
+          id,
+          fileId,
+        });
+      });
+    }
+    if (fileData && fileData.length > 0) {
+      fileData?.map((el: any) => {
+        createUpload({
+          url: '',
+          name: el.name,
+          form: 'review',
+          id,
+          fileId: el.id[0],
+        });
+      });
+    }
+  };
+
   useEffect(() => {
     if (data?.ok) {
+      uploadFileMeta(data?.review?.id);
       router.push('/news/review');
     }
   }, [data]);
@@ -79,6 +124,7 @@ const ReviewForm: NextPage = () => {
         </div>
         <div className="h-fit min-h-[500px] pt-8">
           <Editor
+            ref={editorRef}
             apiKey="8p9h7icidtp8v7ebuiyjo96ymstju4oy95g1xi68gdhvejph"
             init={{
               height: '100%',
@@ -89,10 +135,47 @@ const ReviewForm: NextPage = () => {
                 'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignment | numlist bullist | outdent indent | link | insertImage insertfile | hr table codesample insertdatetime print',
               statusbar: false,
               menubar: false,
+              setup(editor) {
+                editor.ui.registry.addButton('insertImage', {
+                  icon: 'image',
+                  onAction() {
+                    onUploadClick('image');
+                  },
+                });
+                editor.ui.registry.addButton('insertFile', {
+                  icon: 'upload',
+                  onAction() {
+                    onUploadClick('file');
+                  },
+                });
+              },
             }}
             onEditorChange={handleEditorChange}
           />
+          <Uploader
+            type={uploadType}
+            setType={setUploadType}
+            editor={editorRef?.current}
+            pushObj={pushObj}
+          />
         </div>
+        {fileData.length > 0 ? (
+          <div className="my-4 flex w-full flex-row">
+            <div className="flex min-w-[70px]">첨부파일 : </div>
+            <div className="flex max-h-20 w-full flex-col overflow-y-auto">
+              {fileData?.map((file) => (
+                <>
+                  <a
+                    key={file.id}
+                    className="ml-4 text-blue-400 hover:cursor-pointer hover:underline"
+                  >
+                    {file.name}
+                  </a>
+                </>
+              ))}
+            </div>
+          </div>
+        ) : null}
       </>
       <div>
         <div className="float-right ml-auto flex pt-2">

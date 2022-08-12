@@ -18,7 +18,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
         status: 'pending',
       },
     });
-    res.json({ ok: true });
+    res.json({ ok: true, reservation });
   }
   if (req.method === 'GET') {
     const reservations = await client.reservation.findMany({
@@ -31,6 +31,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     res.json({ ok: true, reservations });
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '100mb',
+    },
+  },
+};
 
 export default withApiSession(
   withHandler({

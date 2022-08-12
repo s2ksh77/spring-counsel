@@ -21,7 +21,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
         },
       },
     });
-    res.json({ ok: true });
+    res.json({ ok: true, notice });
   }
   if (req.method === 'GET') {
     const notices = await client.notice.findMany({
@@ -34,6 +34,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     res.json({ ok: true, notices });
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '100mb',
+    },
+  },
+};
 
 export default withApiSession(
   withHandler({

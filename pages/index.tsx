@@ -12,7 +12,6 @@ const Home: NextPage = () => {
       <Head>
         <title>봄, 심리상담센터</title>
       </Head>
-
       <Main />
     </div>
   );

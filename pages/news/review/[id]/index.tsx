@@ -169,13 +169,13 @@ const ReviewDetail: NextPage = () => {
                 <div className="flex flex-row">
                   <>
                     <div className="flex">
-                      <Button onClick={handleEdit} className="mr-2 min-w-[73px] text-black">
+                      <Button onClick={handleEdit} className="text-black-300 mr-2 w-[73px]">
                         <EditOutlined className="mr-1" />
                         수정
                       </Button>
                     </div>
                     <div className="flex">
-                      <Button onClick={handleDialogOpen} className="mr-2 min-w-[73px] text-black">
+                      <Button onClick={handleDialogOpen} className="text-black-300 mr-2 w-[73px]">
                         <DeleteOutlineOutlined className="mr-1" />
                         삭제
                       </Button>
@@ -264,13 +264,13 @@ const ReviewDetail: NextPage = () => {
                 {isLogin && editState ? (
                   <>
                     <div className="flex">
-                      <Button onClick={handleSave} className="mx-2 min-w-[73px] text-black">
+                      <Button onClick={handleSave} className="text-black-300 mx-2 w-[73px]">
                         <DoneOutlined className="mr-1" />
                         저장
                       </Button>
                     </div>
                     <div className="flex">
-                      <Button onClick={handleCancel} className="mr-2 min-w-[73px] text-black">
+                      <Button onClick={handleCancel} className="text-black-300 mr-2 w-[73px]">
                         <CancelOutlined className="mr-1" />
                         취소
                       </Button>
@@ -346,7 +346,7 @@ const ReviewDetail: NextPage = () => {
 
       <div className="flex justify-between">
         <div className="float-right ml-auto flex pt-2">
-          <Button onClick={goBack} className="mr-2 text-black">
+          <Button onClick={goBack} className="text-black-300 mr-2">
             <MenuOutlined className="mr-1" />
             목록
           </Button>

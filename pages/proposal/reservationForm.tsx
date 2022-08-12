@@ -206,9 +206,9 @@ const ReservationForm: NextPage = () => {
       </>
       <div>
         <div className="float-right ml-auto flex pt-2">
-          <Button onClick={handleSubmit(onValid)} className="text-black">
+          <Button onClick={handleSubmit(onValid)} className="text-black-300">
             <EditOutlined className="mr-1" />
-            <span className="text-black">신청</span>
+            <span className="text-black-300">신청</span>
           </Button>
         </div>
       </div>

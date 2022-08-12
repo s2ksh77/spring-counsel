@@ -177,7 +177,7 @@ const ReservationDetail: NextPage = () => {
             <label className="mr-2">{getStatus(data?.reservation?.status)}</label>
           </div>
           {getSelectBox(data?.reservation?.status)}
-          <Button onClick={handleUpdate} className="mr-2 text-black">
+          <Button onClick={handleUpdate} className="text-black-300 mr-2">
             변경
           </Button>
         </div>
@@ -253,11 +253,11 @@ const ReservationDetail: NextPage = () => {
 
       <div className="flex justify-between">
         <div className="float-right ml-auto flex pt-2">
-          <Button onClick={handleDialogOpen} className="mr-2 text-black">
+          <Button onClick={handleDialogOpen} className="text-black-300 mr-2">
             <DeleteOutlineOutlined className="mr-1" />
             삭제
           </Button>
-          <Button onClick={goBack} className="mr-2 text-black">
+          <Button onClick={goBack} className="text-black-300 mr-2">
             <MenuOutlined className="mr-1" />
             목록
           </Button>

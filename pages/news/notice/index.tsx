@@ -106,7 +106,7 @@ const Notice: NextPage = () => {
       </TableContainer>
       {isLogin ? (
         <div className="float-right ml-auto flex">
-          <Button onClick={onClick} className="text-black">
+          <Button onClick={onClick} className="text-black-300">
             <EditOutlined />
             글쓰기
           </Button>

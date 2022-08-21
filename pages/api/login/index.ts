@@ -8,20 +8,19 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
     body: { userId, password },
   } = req;
   if (req.method === 'POST') {
-    const user = await client.user.findMany({
+    const user = await client.user.findUnique({
       where: {
-        OR: [{ userId }, { password }],
+        userId_password: { userId, password }
       },
     });
     if (user) {
-      const data = user[0];
       req.session.user = {
-        id: data.id,
+        id: user.id,
       };
       await req.session.save();
 
       res.json({ ok: true });
-    }
+    }else res.json({ ok: false, message: 'fail' });
   }
   if (req.method === 'GET') {
     const {

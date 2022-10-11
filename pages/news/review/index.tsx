@@ -79,7 +79,7 @@ const Review: NextPage = () => {
       </TableContainer>
       {isLogin ? (
         <div className="float-right ml-auto flex">
-          <Button onClick={onClick} className="text-black-300">
+          <Button onClick={onClick} style={{ color: 'black' }}>
             <EditOutlined />
             글쓰기
           </Button>

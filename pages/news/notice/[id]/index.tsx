@@ -132,6 +132,14 @@ const NoticeDetail: NextPage = () => {
     setFileData([...fileData, obj]);
   };
 
+  const getDate = () => {
+    return (
+      data?.notice?.updatedAt.toString().split('T')[0] +
+      ' ' +
+      data?.notice?.updatedAt.toString().split('T')[1].slice(0, 5)
+    );
+  };
+
   useEffect(() => {
     if (data?.ok) {
       setTitle(data?.notice?.title);
@@ -160,6 +168,8 @@ const NoticeDetail: NextPage = () => {
     }
   }, [loginData]);
 
+  console.log(data?.notice?.updatedAt);
+
   return (
     <div className="flex h-full w-full flex-col overflow-y-auto p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">공지사항</div>
@@ -178,13 +188,21 @@ const NoticeDetail: NextPage = () => {
                 <div className="flex flex-row">
                   <>
                     <div className="flex">
-                      <Button onClick={handleEdit} className="text-black-300 mr-2 w-[73px]">
+                      <Button
+                        onClick={handleEdit}
+                        style={{ color: 'black' }}
+                        className="mr-2 w-[73px]"
+                      >
                         <EditOutlined className="mr-1" />
                         수정
                       </Button>
                     </div>
                     <div className="flex">
-                      <Button onClick={handleDialogOpen} className="text-black-300 mr-2 w-[73px]">
+                      <Button
+                        onClick={handleDialogOpen}
+                        style={{ color: 'black' }}
+                        className="mr-2 w-[73px]"
+                      >
                         <DeleteOutlineOutlined className="mr-1" />
                         삭제
                       </Button>
@@ -207,9 +225,11 @@ const NoticeDetail: NextPage = () => {
               </div>
               <div className="w-full">
                 <label>
-                  {data?.notice?.updatedAt.toString().split('T')[0] +
-                    ' ' +
-                    data?.notice?.updatedAt.toString().split('T')[1].slice(0, 5)}
+                  {data?.notice?.updatedAt !== undefined
+                    ? data?.notice?.updatedAt.toString().split('T')[0] +
+                      ' ' +
+                      data?.notice?.updatedAt.toString().split('T')[1].slice(0, 5)
+                    : ''}
                 </label>
               </div>
             </div>
@@ -285,13 +305,21 @@ const NoticeDetail: NextPage = () => {
                 {isLogin && editState ? (
                   <>
                     <div className="flex">
-                      <Button onClick={handleSave} className="text-black-300 mx-2 w-[73px]">
+                      <Button
+                        onClick={handleSave}
+                        style={{ color: 'black' }}
+                        className="mx-2 w-[73px]"
+                      >
                         <DoneOutlined className="mr-1" />
                         저장
                       </Button>
                     </div>
                     <div className="flex">
-                      <Button onClick={handleCancel} className="text-black-300 mr-2 w-[73px]">
+                      <Button
+                        onClick={handleCancel}
+                        style={{ color: 'black' }}
+                        className="mr-2 w-[73px]"
+                      >
                         <CancelOutlined className="mr-1" />
                         취소
                       </Button>
@@ -367,7 +395,7 @@ const NoticeDetail: NextPage = () => {
 
       <div className="flex justify-between">
         <div className="float-right ml-auto flex pt-2">
-          <Button onClick={goBack} className="text-black-300 mr-2">
+          <Button onClick={goBack} className="mr-2" style={{ color: 'black' }}>
             <MenuOutlined className="mr-1" />
             목록
           </Button>
@@ -386,8 +414,10 @@ const NoticeDetail: NextPage = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>취소</Button>
-          <Button onClick={handleDelete} autoFocus>
+          <Button onClick={handleClose} style={{ color: 'black' }}>
+            취소
+          </Button>
+          <Button onClick={handleDelete} style={{ color: 'black' }} autoFocus>
             확인
           </Button>
         </DialogActions>

@@ -75,7 +75,7 @@ const GNB: NextPage<{
       id="gnb"
       className="bg-black-400 border-#f5f5f5 fixed z-[2] flex h-28 w-[100%] flex-col border-b-2 bg-white sm:h-[4.6rem]"
     >
-      <div className="mx-auto flex sm:w-full sm:justify-between md:w-full md:justify-between lg:w-full">
+      <div className="mx-auto flex sm:w-full sm:justify-between md:w-full md:justify-between lg:w-full xl:w-full">
         <div className="flex">
           <Link href="/home">
             <a>
@@ -110,7 +110,7 @@ const GNB: NextPage<{
             )}
           </div>
           <div id="menu" className="flex sm:hidden md:hidden">
-            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-28">
+            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-28 xl:w-28">
               <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40 lg:w-28">
                 <div>
                   <div className="py-[2rem] text-center">
@@ -304,8 +304,10 @@ const GNB: NextPage<{
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>취소</Button>
-                <Button onClick={handleLogout} autoFocus>
+                <Button onClick={handleClose} style={{ color: 'black' }}>
+                  취소
+                </Button>
+                <Button onClick={handleLogout} autoFocus style={{ color: 'black' }}>
                   확인
                 </Button>
               </DialogActions>

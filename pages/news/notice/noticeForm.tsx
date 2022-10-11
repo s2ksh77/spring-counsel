@@ -198,11 +198,11 @@ const NoticeForm: NextPage = () => {
       </>
       <div>
         <div className="float-right ml-auto flex pt-2">
-          <Button onClick={goBack} className="text-black-300 mr-2">
+          <Button onClick={goBack} className=" mr-2" style={{ color: 'black' }}>
             <MenuOutlined className="mr-1" />
             목록
           </Button>
-          <Button onClick={submitForm} className="text-black-300">
+          <Button onClick={submitForm} style={{ color: 'black' }}>
             <EditOutlined className="mr-1" />
             등록
           </Button>

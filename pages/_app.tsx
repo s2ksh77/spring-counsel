@@ -19,6 +19,7 @@ import Script from 'next/script';
 import fixed5 from '../assets/fixed5.png';
 import fixed4 from '../assets/fixed4.png';
 import fixed3 from '../assets/banner3.png';
+import { Description } from 'constants/description';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -60,7 +61,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="shortcut icon" href="/favicon.ico" />
         <title>{title}</title>
       </Head>
-      <div className="mx-auto w-full overflow-y-auto">
+      <div className="mx-auto w-full overflow-y-auto overflow-x-scroll">
         <GNB loginState={loginState} setLoginState={setLoginState} />
         {isHome() && !isLogin() ? <Section /> : null}
         {isCounsel() ? (

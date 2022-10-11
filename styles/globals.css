@@ -19,7 +19,7 @@ body {
 }
 
 .no-toolbar .tox-editor-header{
-    display: none;
+    display: none !important;
 }
 
 .tinymce img {

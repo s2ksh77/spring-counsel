@@ -10,9 +10,9 @@ const Member: NextPage = () => {
   return (
     <div className="overflow-y-auto sm:w-full">
       <Image src={member1} />
+      <Image src={member2} />
       <Image src={member3} />
       <Image src={member4} />
-      <Image src={member2} />
     </div>
   );
 };

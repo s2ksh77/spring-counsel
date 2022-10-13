@@ -5,8 +5,8 @@ module.exports = {
     extend: {},
     screens: {
       sm: { min: '200px', max: '599px' }, // 모바일
-      md: { min: '600px', max: '1023px' }, // 태블릿 세로
-      lg: { min: '1024px', max: '1600px' }, // 태블릿 가로
+      md: { min: '600px', max: '1033px' }, // 태블릿 세로
+      lg: { min: '1034px', max: '1600px' }, // 태블릿 가로
       xl: { min: '1600px', max: '1800px' }, // pc
     },
   },

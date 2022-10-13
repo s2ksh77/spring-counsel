@@ -27,6 +27,7 @@ interface ReviewResponseWithFile extends Review {
 interface ReviewResponse {
   ok: boolean;
   review: ReviewResponseWithFile;
+  isLogin: boolean;
 }
 interface FileResponse {
   ok: boolean;
@@ -39,8 +40,6 @@ const ReviewDetail: NextPage = () => {
   let [title, setTitle] = useState<any | null>('');
   let [content, setContent] = useState<any | null>('');
   const [dialogVisible, setDialogVisible] = useState(false);
-  const { data: loginData } = useSWR('/api/login');
-  const [isLogin, setIsLogin] = useState<any | false>(false);
   const editorRef = useRef<HTMLInputElement | null | any>(null);
   const [uploadType, setUploadType] = useState('');
   const [fileData, setFileData] = useState<any[]>([]);
@@ -145,12 +144,6 @@ const ReviewDetail: NextPage = () => {
     }
   }, [deleteData, mutate]);
 
-  useEffect(() => {
-    if (loginData?.ok) {
-      setIsLogin(loginData?.ok);
-    }
-  }, [loginData]);
-
   return (
     <div className="flex h-full w-full flex-col p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담후기</div>
@@ -165,7 +158,7 @@ const ReviewDetail: NextPage = () => {
               <div className="w-full">
                 <label className="text-lg font-bold">{data?.review?.title}</label>
               </div>
-              {isLogin && !editState ? (
+              {data?.isLogin && !editState ? (
                 <div className="flex flex-row">
                   <>
                     <div className="flex">
@@ -271,7 +264,7 @@ const ReviewDetail: NextPage = () => {
                   type="text"
                   className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
                 />
-                {isLogin && editState ? (
+                {data?.isLogin && editState ? (
                   <>
                     <div className="flex">
                       <Button

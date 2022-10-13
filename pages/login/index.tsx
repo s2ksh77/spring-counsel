@@ -31,8 +31,6 @@ const Login: NextPage<{ setLoginState: React.Dispatch<SetStateAction<boolean>> }
 
   useEffect(() => {
     if (data?.ok) {
-      const result = data?.ok;
-      localStorage.setItem('isLogin', JSON.stringify(result));
       router.push('/home');
       setLoginState(true);
     } else if (data?.message) setError(true);

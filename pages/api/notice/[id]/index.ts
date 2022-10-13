@@ -21,6 +21,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
   return res.json({
     ok: true,
     notice,
+    isLogin: !!user?.id,
   });
 }
 

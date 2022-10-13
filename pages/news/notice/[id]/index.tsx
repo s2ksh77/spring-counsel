@@ -28,6 +28,7 @@ interface NoticeResponseWithFile extends Notice {
 interface NoticeResponse {
   ok: boolean;
   notice: NoticeResponseWithFile;
+  isLogin: boolean;
 }
 interface FileResponse {
   ok: boolean;
@@ -41,13 +42,10 @@ const NoticeDetail: NextPage = () => {
   let [content, setContent] = useState<any | null>('');
   const [checked, setChecked] = useState<any | false>(false);
   const [dialogVisible, setDialogVisible] = useState(false);
-  const { data: loginData } = useSWR('/api/login');
   const [uploadType, setUploadType] = useState('');
   const editorRef = useRef<HTMLInputElement | null | any>(null);
   const [fileData, setFileData] = useState<any[]>([]);
   const [uploadData, setUploadData] = useState<any[]>([]);
-
-  const [isLogin, setIsLogin] = useState<any | false>(false);
 
   const { data, mutate } = useSWR<NoticeResponse>(
     router.query.id ? `/api/notice/${router.query?.id}` : null
@@ -162,14 +160,6 @@ const NoticeDetail: NextPage = () => {
     }
   }, [deleteData, mutate]);
 
-  useEffect(() => {
-    if (loginData?.ok) {
-      setIsLogin(loginData?.ok);
-    }
-  }, [loginData]);
-
-  console.log(data?.notice?.updatedAt);
-
   return (
     <div className="flex h-full w-full flex-col overflow-y-auto p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">공지사항</div>
@@ -184,7 +174,7 @@ const NoticeDetail: NextPage = () => {
               <div className="w-full">
                 <label className="text-lg font-bold">{data?.notice?.title}</label>
               </div>
-              {isLogin && !editState ? (
+              {data?.isLogin && !editState ? (
                 <div className="flex flex-row">
                   <>
                     <div className="flex">
@@ -302,7 +292,7 @@ const NoticeDetail: NextPage = () => {
                   type="text"
                   className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
                 />
-                {isLogin && editState ? (
+                {data?.isLogin && editState ? (
                   <>
                     <div className="flex">
                       <Button

@@ -47,17 +47,11 @@ const GNB: NextPage<{
   const handleClose = () => setDialogVisible(false);
 
   useEffect(() => {
-    localStorage.setItem('isLogin', data?.ok);
-    setIsLogin(data?.ok);
-  }, [data]);
-
-  useEffect(() => {
     setIsLogin(loginState);
   }, [loginState]);
 
   useEffect(() => {
     if (logoutData && logoutData?.ok) {
-      localStorage.removeItem('isLogin');
       setIsLogin(false);
     }
   }, [logoutData]);
@@ -65,7 +59,6 @@ const GNB: NextPage<{
   const removeCache = async (e: any) => {
     if (e.isTrusted) {
       await logout('');
-      localStorage.removeItem('isLogin');
       setIsLogin(false);
     }
   };

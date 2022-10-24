@@ -19,7 +19,7 @@ body {
 }
 
 .no-toolbar .tox-editor-header{
-    display: none;
+    display: none !important;
 }
 
 .tinymce img {
@@ -148,4 +148,8 @@ body {
   background-color: rgb(217, 217, 217);
   border: 0px;
   opacity: 1;
+}
+
+#modal .MuiDialog-paper {
+  max-width: 700px;
 }

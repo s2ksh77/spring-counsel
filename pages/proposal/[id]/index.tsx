@@ -23,6 +23,7 @@ import { DialogActions } from '@mui/material';
 import { withSsrSession } from '@libs/server/withSession';
 import { Reservation, ReservationFile } from '@prisma/client';
 import { phoneFomatter } from 'utils/common';
+import AWS from 'aws-sdk';
 
 interface ReservationResponseWithFile extends Reservation {
   files: ReservationFile[];
@@ -154,6 +155,27 @@ const ReservationDetail: NextPage = () => {
     }
   };
 
+  const handleDownload = async (id: string, name: string) => {
+    const s3 = new AWS.S3({
+      accessKeyId: process.env.S3_UPLOAD_KEY,
+      secretAccessKey: process.env.S3_UPLOAD_SECRET,
+    });
+
+    const bucketParams = {
+      Bucket: 'spring-counsel',
+      Key: `next-s3-uploads/${id}/${name}`,
+    };
+
+    s3.getObject(bucketParams, (s3Err, data: any) => {
+      if (s3Err) throw s3Err;
+      let blob = new Blob([data?.Body], { type: data.ContentType });
+      let link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = name;
+      link.click();
+    });
+  };
+
   useEffect(() => {
     if (editData?.ok) {
       setEditState(false);
@@ -241,6 +263,7 @@ const ReservationDetail: NextPage = () => {
                   <a
                     key={file.id}
                     className="ml-4 text-blue-400 hover:cursor-pointer hover:underline"
+                    onClick={() => handleDownload(file.id, file.name)}
                   >
                     {file.name}
                   </a>

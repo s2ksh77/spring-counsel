@@ -2,10 +2,7 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { SWRConfig } from 'swr';
-import Link from 'next/link';
-import { NextPage, NextPageContext } from 'next';
 import Image from 'next/image';
-import logo from '../public/logo.jpg';
 import GNB from '@components/GNB';
 import Layout from '@components/Layout';
 import Head from 'next/head';

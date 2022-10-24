@@ -5,9 +5,9 @@ module.exports = {
     extend: {},
     screens: {
       sm: { min: '200px', max: '599px' }, // 모바일
-      md: { min: '600px', max: '1023px' }, // 태블릿 세로
-      lg: { min: '1024px', max: '1200px' }, // 태블릿 가로
-      xl: { min: '1200px' }, // pc
+      md: { min: '600px', max: '1033px' }, // 태블릿 세로
+      lg: { min: '1034px', max: '1600px' }, // 태블릿 가로
+      xl: { min: '1600px', max: '1800px' }, // pc
     },
   },
   darkMode: 'media', // media:브라우저 설정 class:우리가 state로 설정 부모 하위에 요소 위치로

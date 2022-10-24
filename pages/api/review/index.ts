@@ -30,7 +30,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
         },
       ],
     });
-    res.json({ ok: true, reviews });
+    res.json({ ok: true, reviews, isLogin: !!user?.id });
   }
 }
 

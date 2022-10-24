@@ -31,7 +31,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
         },
       ],
     });
-    res.json({ ok: true, notices });
+    res.json({ ok: true, notices, isLogin: !!user?.id });
   }
 }
 

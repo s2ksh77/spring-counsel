@@ -64,7 +64,7 @@ const ContextMenu: NextPage = () => {
 
   return (
     <>
-      <div className="mt-4 hidden items-center justify-center sm:flex md:flex md:h-full">
+      <div className="mt-4 hidden items-center justify-end sm:flex md:flex md:h-full">
         <IconButton
           onClick={handleContextMenu}
           className="h-[30px] w-[30px] text-black md:h-[50px] md:w-[50px]"

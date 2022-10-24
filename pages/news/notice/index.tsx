@@ -19,11 +19,11 @@ import { useEffect, useState } from 'react';
 interface NoticeResponse {
   ok: boolean;
   notices: Notice[];
+  isLogin?: boolean;
 }
 
 const Notice: NextPage = () => {
   const router = useRouter();
-  const { data: loginData } = useSWR('/api/login');
   const { data } = useSWR<NoticeResponse>('/api/notice');
   const [sortedData, setSortedData] = useState<any | null>([
     {
@@ -31,7 +31,6 @@ const Notice: NextPage = () => {
       normal: [],
     },
   ]);
-  const [isLogin, setIsLogin] = useState<any | false>(false);
 
   const onClick = () => {
     router.push('/news/notice/noticeForm');
@@ -50,12 +49,6 @@ const Notice: NextPage = () => {
   useEffect(() => {
     sortNoticeData();
   }, [data]);
-
-  useEffect(() => {
-    if (loginData?.ok) {
-      setIsLogin(loginData?.ok);
-    }
-  }, [loginData]);
 
   return (
     <div className="h-full p-8">
@@ -104,9 +97,9 @@ const Notice: NextPage = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {isLogin ? (
+      {data?.isLogin ? (
         <div className="float-right ml-auto flex">
-          <Button onClick={onClick} className="text-black-300">
+          <Button onClick={onClick} style={{ color: 'black' }}>
             <EditOutlined />
             글쓰기
           </Button>

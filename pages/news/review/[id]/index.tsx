@@ -27,6 +27,7 @@ interface ReviewResponseWithFile extends Review {
 interface ReviewResponse {
   ok: boolean;
   review: ReviewResponseWithFile;
+  isLogin: boolean;
 }
 interface FileResponse {
   ok: boolean;
@@ -39,8 +40,6 @@ const ReviewDetail: NextPage = () => {
   let [title, setTitle] = useState<any | null>('');
   let [content, setContent] = useState<any | null>('');
   const [dialogVisible, setDialogVisible] = useState(false);
-  const { data: loginData } = useSWR('/api/login');
-  const [isLogin, setIsLogin] = useState<any | false>(false);
   const editorRef = useRef<HTMLInputElement | null | any>(null);
   const [uploadType, setUploadType] = useState('');
   const [fileData, setFileData] = useState<any[]>([]);
@@ -166,12 +165,6 @@ const ReviewDetail: NextPage = () => {
     }
   }, [deleteData, mutate]);
 
-  useEffect(() => {
-    if (loginData?.ok) {
-      setIsLogin(loginData?.ok);
-    }
-  }, [loginData]);
-
   return (
     <div className="flex h-full w-full flex-col p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담후기</div>
@@ -186,17 +179,25 @@ const ReviewDetail: NextPage = () => {
               <div className="w-full">
                 <label className="text-lg font-bold">{data?.review?.title}</label>
               </div>
-              {isLogin && !editState ? (
+              {data?.isLogin && !editState ? (
                 <div className="flex flex-row">
                   <>
                     <div className="flex">
-                      <Button onClick={handleEdit} className="text-black-300 mr-2 w-[73px]">
+                      <Button
+                        onClick={handleEdit}
+                        style={{ color: 'black' }}
+                        className="mr-2 w-[73px]"
+                      >
                         <EditOutlined className="mr-1" />
                         수정
                       </Button>
                     </div>
                     <div className="flex">
-                      <Button onClick={handleDialogOpen} className="text-black-300 mr-2 w-[73px]">
+                      <Button
+                        onClick={handleDialogOpen}
+                        style={{ color: 'black' }}
+                        className="mr-2 w-[73px]"
+                      >
                         <DeleteOutlineOutlined className="mr-1" />
                         삭제
                       </Button>
@@ -219,9 +220,11 @@ const ReviewDetail: NextPage = () => {
               </div>
               <div className="w-full">
                 <label>
-                  {data?.review?.updatedAt.toString().split('T')[0] +
-                    ' ' +
-                    data?.review?.updatedAt.toString().split('T')[1].slice(0, 5)}
+                  {data?.review?.updatedAt !== undefined
+                    ? data?.review?.updatedAt.toString().split('T')[0] +
+                      ' ' +
+                      data?.review?.updatedAt.toString().split('T')[1].slice(0, 5)
+                    : ''}
                 </label>
               </div>
             </div>
@@ -283,16 +286,24 @@ const ReviewDetail: NextPage = () => {
                   type="text"
                   className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
                 />
-                {isLogin && editState ? (
+                {data?.isLogin && editState ? (
                   <>
                     <div className="flex">
-                      <Button onClick={handleSave} className="text-black-300 mx-2 w-[73px]">
+                      <Button
+                        onClick={handleSave}
+                        style={{ color: 'black' }}
+                        className="mx-2 w-[73px]"
+                      >
                         <DoneOutlined className="mr-1" />
                         저장
                       </Button>
                     </div>
                     <div className="flex">
-                      <Button onClick={handleCancel} className="text-black-300 mr-2 w-[73px]">
+                      <Button
+                        onClick={handleCancel}
+                        style={{ color: 'black' }}
+                        className="mr-2 w-[73px]"
+                      >
                         <CancelOutlined className="mr-1" />
                         취소
                       </Button>
@@ -369,7 +380,7 @@ const ReviewDetail: NextPage = () => {
 
       <div className="flex justify-between">
         <div className="float-right ml-auto flex pt-2">
-          <Button onClick={goBack} className="text-black-300 mr-2">
+          <Button onClick={goBack} style={{ color: 'black' }} className="mr-2">
             <MenuOutlined className="mr-1" />
             목록
           </Button>
@@ -388,8 +399,10 @@ const ReviewDetail: NextPage = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>취소</Button>
-          <Button onClick={handleDelete} autoFocus>
+          <Button onClick={handleClose} style={{ color: 'black' }}>
+            취소
+          </Button>
+          <Button onClick={handleDelete} style={{ color: 'black' }} autoFocus>
             확인
           </Button>
         </DialogActions>

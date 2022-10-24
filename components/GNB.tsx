@@ -47,17 +47,11 @@ const GNB: NextPage<{
   const handleClose = () => setDialogVisible(false);
 
   useEffect(() => {
-    localStorage.setItem('isLogin', data?.ok);
-    setIsLogin(data?.ok);
-  }, [data]);
-
-  useEffect(() => {
     setIsLogin(loginState);
   }, [loginState]);
 
   useEffect(() => {
     if (logoutData && logoutData?.ok) {
-      localStorage.removeItem('isLogin');
       setIsLogin(false);
     }
   }, [logoutData]);
@@ -65,7 +59,6 @@ const GNB: NextPage<{
   const removeCache = async (e: any) => {
     if (e.isTrusted) {
       await logout('');
-      localStorage.removeItem('isLogin');
       setIsLogin(false);
     }
   };
@@ -75,8 +68,8 @@ const GNB: NextPage<{
       id="gnb"
       className="bg-black-400 border-#f5f5f5 fixed z-[2] flex h-28 w-[100%] flex-col border-b-2 bg-white sm:h-[4.6rem]"
     >
-      <div className="mx-auto flex sm:w-full sm:justify-between md:w-full md:justify-between lg:w-full">
-        <div className="flex">
+      <div className="flex sm:w-full sm:justify-between md:w-full md:justify-between lg:w-full xl:w-full">
+        <div className="flex-1-auto flex">
           <Link href="/home">
             <a>
               <div
@@ -93,7 +86,7 @@ const GNB: NextPage<{
             </a>
           </Link>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-1 flex-col">
           <div className="flex justify-end">
             {!isLogin ? (
               <div id="login" className="padding-[0.5rem]">
@@ -109,9 +102,9 @@ const GNB: NextPage<{
               </div>
             )}
           </div>
-          <div id="menu" className="flex sm:hidden md:hidden">
-            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-28">
-              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40 lg:w-28">
+          <div id="menu" className="flex w-full justify-around sm:!hidden md:!hidden">
+            <div className="mx-2 flex h-[100%] cursor-pointer items-center justify-center font-medium">
+              <div className="dropdown relative mx-2 inline-block h-[100%]">
                 <div>
                   <div className="py-[2rem] text-center">
                     <Link href="/introduce">
@@ -146,10 +139,10 @@ const GNB: NextPage<{
                 </div>
               </div>
             </div>
-            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-32">
-              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-48 lg:w-32">
+            <div className="mx-2 flex h-[100%] cursor-pointer items-center justify-around font-medium">
+              <div className="dropdown relative mx-2 inline-block h-[100%]">
                 <div>
-                  <div className="py-[2rem] text-center lg:py-[1.2rem]">
+                  <div className="py-[2rem] text-center">
                     <Link href="/counsel/private">
                       <a>
                         <span className="font-bold">상담 및 심리검사 서비스</span>
@@ -189,8 +182,8 @@ const GNB: NextPage<{
                 </div>
               </div>
             </div>
-            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-28">
-              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40 lg:w-28">
+            <div className="mx-2 flex h-[100%] cursor-pointer items-center justify-center font-medium">
+              <div className="dropdown relative mx-2 inline-block h-[100%]">
                 <div>
                   <div className="py-[2rem] text-center">
                     <Link href="/education/counselor">
@@ -218,8 +211,8 @@ const GNB: NextPage<{
                 </div>
               </div>
             </div>
-            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-32">
-              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40 lg:w-32">
+            <div className="mx-2 flex h-[100%] cursor-pointer items-center justify-center font-medium">
+              <div className="dropdown relative mx-2 inline-block h-[100%]">
                 <div>
                   <div className="py-[2rem] text-center">
                     <Link href="/proposal">
@@ -247,7 +240,7 @@ const GNB: NextPage<{
                 </div>
               </div>
             </div>
-            <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-24">
+            <div className="mx-2 flex h-[100%] cursor-pointer items-center justify-center font-medium">
               <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40 lg:w-24">
                 <div>
                   <div className="py-[2rem] text-center">
@@ -277,8 +270,8 @@ const GNB: NextPage<{
               </div>
             </div>
             {isLogin ? (
-              <div className="mx-2 flex h-[5.3rem] w-52 cursor-pointer items-center justify-center font-medium lg:w-32">
-                <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40 lg:w-32">
+              <div className="mx-2 flex h-[100%] cursor-pointer items-center justify-center font-medium">
+                <div className="dropdown relative mx-2 inline-block h-[100%]">
                   <div>
                     <div className="py-[2rem] text-center">
                       <Link href="/proposal/list">
@@ -304,8 +297,10 @@ const GNB: NextPage<{
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>취소</Button>
-                <Button onClick={handleLogout} autoFocus>
+                <Button onClick={handleClose} style={{ color: 'black' }}>
+                  취소
+                </Button>
+                <Button onClick={handleLogout} autoFocus style={{ color: 'black' }}>
                   확인
                 </Button>
               </DialogActions>

@@ -19,13 +19,12 @@ import { useEffect, useState } from 'react';
 interface ReviewResponse {
   ok: boolean;
   reviews: Review[];
+  isLogin?: boolean;
 }
 
 const Review: NextPage = () => {
   const router = useRouter();
-  const { data: loginData } = useSWR('/api/login');
   const { data } = useSWR<ReviewResponse>('/api/review');
-  const [isLogin, setIsLogin] = useState<any | false>(false);
 
   const onClick = () => {
     router.push('/news/review/reviewForm');
@@ -34,10 +33,6 @@ const Review: NextPage = () => {
   const handleReview = (id: string) => {
     router.push(`/news/review/${id}`);
   };
-
-  useEffect(() => {
-    if (loginData?.ok) setIsLogin(loginData?.ok);
-  }, [loginData]);
 
   return (
     <div className="h-full p-8">
@@ -77,9 +72,9 @@ const Review: NextPage = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {isLogin ? (
+      {data?.isLogin ? (
         <div className="float-right ml-auto flex">
-          <Button onClick={onClick} className="text-black-300">
+          <Button onClick={onClick} style={{ color: 'black' }}>
             <EditOutlined />
             글쓰기
           </Button>

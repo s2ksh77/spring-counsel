@@ -6,8 +6,6 @@ import { Notice } from '@prisma/client';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import useSWR from 'swr';
 import center1 from '../assets/center1.jpg';
 import center2 from '../assets/center2.jpg';
 import kakao from '../assets/i_kakao.png';
@@ -17,14 +15,9 @@ interface NoticeResponse {
   notices: Notice[];
 }
 
-const Home: NextPage = () => {
+const Home: NextPage<{ data?: NoticeResponse }> = ({ data }) => {
   useMap();
   const router = useRouter();
-  const { data } = useSWR<NoticeResponse>('/api/notice');
-
-  const goNotice = () => {
-    router.push(`/news/notice`);
-  };
 
   const handleNotice = (id: string) => {
     router.push(`/news/notice/${id}`);
@@ -48,7 +41,7 @@ const Home: NextPage = () => {
             <TableContainer className="min-h-[85%]">
               <Table stickyHeader className="">
                 <TableBody className="">
-                  {data?.notices?.map((notice, index) => (
+                  {data?.notices?.map((notice) => (
                     <TableRow
                       onClick={handleNotice.bind(null, notice.id)}
                       key={notice.id}
@@ -56,7 +49,7 @@ const Home: NextPage = () => {
                     >
                       <TableCell className="h-[45px]">{notice.title}</TableCell>
                       <TableCell className="h-[45px] w-36 text-center">
-                        {notice.updatedAt.toString().split('T')[0]?.replaceAll('-', '.')}
+                        {notice?.updatedAt?.toString().split('T')[0]}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -177,31 +170,12 @@ const Home: NextPage = () => {
 
 export default Home;
 
-// 6개 box
-{
-  /* <div className="mt-32">
-<div className="mt-8 flex items-center justify-center text-3xl font-bold">심리 상담</div>
-<div className="mt-8 flex w-full flex-row">
-  <div className="mx-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
-    <div className="font-xl p-2 font-semibold text-[#a9ce8e]">개인상담</div>
-  </div>
-  <div className="mr-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
-    <div className="font-xl p-2 font-semibold text-[#a9ce8e]">커플·부부상담</div>
-  </div>
-  <div className="mr-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
-    <div className="font-xl p-2 font-semibold text-[#a9ce8e]">집단상담</div>
-  </div>
-  <div className="mr-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
-    <div className="font-xl p-2 font-semibold text-[#a9ce8e]">심리검사</div>
-  </div>
-</div>
-<div className="my-8 flex w-full flex-row">
-  <div className="mx-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
-    <div className="font-xl p-2 font-semibold text-[#a9ce8e]">상담자 교육</div>
-  </div>
-  <div className="mr-auto h-[250px] w-[250px] rounded-3xl border-[1px] bg-white p-4 hover:cursor-pointer hover:border-[2px] hover:border-[#a9ce8e]">
-    <div className="font-xl p-2 font-semibold text-[#a9ce8e]">교육분석</div>
-  </div>
-</div>
-</div> */
-}
+export const getServerSideProps = async ({ req }) => {
+  const protocol = req.headers['x-forwarded-proto'] || 'http';
+  const baseUrl = req ? `${protocol}://${req.headers.host}` : '';
+
+  const data = await fetch(baseUrl + '/api/notice').then((res) => res.json());
+  return {
+    props: { data },
+  };
+};

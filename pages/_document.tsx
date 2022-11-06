@@ -11,6 +11,15 @@ class CustomDocument extends Document {
         <Head>
           <meta name="description" content={`${Description}`} />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta property="og:title" content="봄, 심리상담 센터" />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://www.bom-counseling.com/" />
+          <meta property="og:locale" content="ko_KR" />
+          <meta
+            property="og:image"
+            content="https://spring-counsel.s3.ap-northeast-2.amazonaws.com/logo-main.jpg"
+          />
+
           <link
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
             rel="stylesheet"

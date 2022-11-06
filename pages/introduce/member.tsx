@@ -1,9 +1,9 @@
 import Layout from '@components/Layout';
 import { NextPage } from 'next';
 import Image from 'next/image';
-import member1 from '../../assets/member1.jpg';
+import member1 from '../../assets/member1.png';
 import member3 from '../../assets/member3.jpg';
-import member4 from '../../assets/member4.jpg';
+import member4 from '../../assets/member4.png';
 import member2 from '../../assets/member2.png';
 
 const Member: NextPage = () => {

@@ -1,7 +1,5 @@
-import Layout from '@components/Layout';
 import { NextPage } from 'next';
-import Image from 'next/image';
-import centerIntroduce from '../../assets/center_introduce.jpg';
+import centerIntroduce from '../../assets/center_introduce.png';
 
 const Introduce: NextPage = () => {
   return (

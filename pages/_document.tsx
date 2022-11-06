@@ -11,7 +11,8 @@ class CustomDocument extends Document {
         <Head>
           <meta name="description" content={`${Description}`} />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta property="og:title" content="봄, 심리상담 센터" />
+          <meta property="og:title" content="봄, 심리상담센터" />
+          <meta property="og:site_name" content="봄, 심리상담센터" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://www.bom-counseling.com/" />
           <meta property="og:description" content={`${Description}`} />

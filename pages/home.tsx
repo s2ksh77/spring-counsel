@@ -6,6 +6,7 @@ import { Notice } from '@prisma/client';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import useSWR from 'swr';
 import center1 from '../assets/center1.jpg';
 import center2 from '../assets/center2.jpg';
 import kakao from '../assets/i_kakao.png';
@@ -15,9 +16,10 @@ interface NoticeResponse {
   notices: Notice[];
 }
 
-const Home: NextPage<{ data?: NoticeResponse }> = ({ data }) => {
+const Home: NextPage = () => {
   useMap();
   const router = useRouter();
+  const { data } = useSWR<NoticeResponse>('/api/notice');
 
   const handleNotice = (id: string) => {
     router.push(`/news/notice/${id}`);
@@ -170,12 +172,12 @@ const Home: NextPage<{ data?: NoticeResponse }> = ({ data }) => {
 
 export default Home;
 
-export const getServerSideProps = async ({ req }) => {
-  const protocol = req.headers['x-forwarded-proto'] || 'http';
-  const baseUrl = req ? `${protocol}://${req.headers.host}` : '';
+// export const getServerSideProps = async ({ req }) => {
+//   const protocol = req.headers['x-forwarded-proto'] || 'http';
+//   const baseUrl = req ? `${protocol}://${req.headers.host}` : '';
 
-  const data = await fetch(baseUrl + '/api/notice').then((res) => res.json());
-  return {
-    props: { data },
-  };
-};
+//   const data = await fetch(baseUrl + '/api/notice').then((res) => res.json());
+//   return {
+//     props: { data },
+//   };
+// };

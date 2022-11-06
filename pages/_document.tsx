@@ -14,6 +14,7 @@ class CustomDocument extends Document {
           <meta property="og:title" content="봄, 심리상담 센터" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://www.bom-counseling.com/" />
+          <meta property="og:description" content={`${Description}`} />
           <meta property="og:locale" content="ko_KR" />
           <meta
             property="og:image"

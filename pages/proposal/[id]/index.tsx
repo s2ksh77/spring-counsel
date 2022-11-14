@@ -248,8 +248,10 @@ const ReservationDetail: NextPage = () => {
                   // setEditor(editor);
                   setTimeout(() => {
                     editor?.mode?.set('readonly');
-                    editor?.getBody().querySelector('.mce-shim')?.remove();
                   }, 100);
+                  setTimeout(() => {
+                    editor?.getBody().querySelector('.mce-shim')?.remove();
+                  }, 500);
                 });
               },
             }}

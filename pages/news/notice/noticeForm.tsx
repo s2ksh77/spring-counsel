@@ -143,13 +143,14 @@ const NoticeForm: NextPage = () => {
         </div>
         <div className="h-fit min-h-[500px] pt-8">
           <Editor
+            id="writeEditor"
             ref={editorRef}
             apiKey="8p9h7icidtp8v7ebuiyjo96ymstju4oy95g1xi68gdhvejph"
             init={{
               height: '100%',
               min_height: 500,
               plugins:
-                '  autolink   lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
+                'autolink lists link image charmap preview anchor searchreplace visualblocks  fullscreen  insertdatetime media table help wordcount',
               toolbar:
                 'undo redo | formatselect | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignment | numlist bullist | outdent indent | link | insertImage insertfile | hr table codesample insertdatetime print',
               statusbar: false,

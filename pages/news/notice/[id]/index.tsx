@@ -257,9 +257,12 @@ const NoticeDetail: NextPage = () => {
                     // setEditor(editor);
                     setTimeout(() => {
                       editor?.mode?.set('readonly');
+                      editor.getBody().querySelector('.mce-shim')?.remove();
                     }, 100);
                   });
                 },
+                content_style:
+                  '.tinymce .mce-preview-object .mce-shim { display: none !important;}',
               }}
             />
           </div>

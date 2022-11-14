@@ -27,6 +27,9 @@ body {
     height: auto;
 }
 
+.tinymce .mce-preview-object .mce-shim {
+  display: none !important;
+}
 
 
 :root {

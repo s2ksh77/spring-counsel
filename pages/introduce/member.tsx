@@ -2,7 +2,7 @@ import Layout from '@components/Layout';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import member1 from '../../assets/member1.png';
-import member3 from '../../assets/member3.jpg';
+import member3 from '../../assets/member3.png';
 import member4 from '../../assets/member4.png';
 import member2 from '../../assets/member2.png';
 

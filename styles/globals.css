@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .menu-item {
+    @apply mx-2 flex h-[100%] cursor-pointer items-center justify-center font-medium
+  }
+  .menu-dropdown {
+    @apply relative mx-2 inline-block h-[100%]
+  }
+  .menu-dropdown-ul {
+    @apply  mt-[1px] hidden min-w-[250px] bg-white py-1 text-sm text-[#777777] shadow-[0_6px_12px_rgb(0,0,0,0.3)] dark:text-gray-200
+    
+  }
+  .menu-dropdown-item {
+    @apply block px-4 py-6 hover:bg-[#a9ce8e] hover:text-white
+  }
+  .gnb {
+    @apply fixed z-[2] flex h-28 w-[100%] flex-col border-b-2 bg-white sm:h-[4.6rem]
+  }
+  .login-btn {
+    @apply w-20 hover:text-gray-400
+  }
+  .menu-banner {
+    @apply sm:pt-[74px] md:pt-[112px] lg:pt-[112px]
+  }
+  .regist-form {
+    @apply w-full appearance-none rounded-md border px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]
+  }
+}
+
+
 body {
   font-family: 'Noto Sans KR', sans-serif;
 }

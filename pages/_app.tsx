@@ -16,7 +16,6 @@ import Script from 'next/script';
 import fixed5 from '../assets/fixed5.png';
 import fixed4 from '../assets/fixed4.png';
 import fixed3 from '../assets/banner3.png';
-import { Description } from 'constants/description';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -62,15 +61,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GNB loginState={loginState} setLoginState={setLoginState} />
         {isHome() && !isLogin() ? <Section /> : null}
         {isCounsel() ? (
-          <div className="sm:pt-[74px] md:pt-[112px] lg:pt-[112px]">
+          <div className="menu-banner">
             <Image src={fixed5} />
           </div>
         ) : isEducation() ? (
-          <div className="sm:pt-[74px] md:pt-[112px] lg:pt-[112px]">
+          <div className="menu-banner">
             <Image src={fixed4} />
           </div>
         ) : isProposal() ? (
-          <div className="sm:pt-[74px] md:pt-[112px] lg:pt-[112px]">
+          <div className="menu-banner">
             <Image src={fixed3} />
           </div>
         ) : null}

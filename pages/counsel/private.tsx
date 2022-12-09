@@ -1,15 +1,4 @@
-import Layout from '@components/Layout';
-import {
-  AssignmentOutlined,
-  BorderColorOutlined,
-  FaceOutlined,
-  PsychologyOutlined,
-  ReduceCapacityOutlined,
-} from '@mui/icons-material';
 import { NextPage } from 'next';
-import Image from 'next/image';
-import banner from '../../assets/banner/private.png';
-import process from '../../assets/process.jpg';
 
 const Private: NextPage = () => {
   return (

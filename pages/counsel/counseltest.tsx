@@ -1,9 +1,5 @@
-import Layout from '@components/Layout';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { NextPage } from 'next';
-import Image from 'next/image';
-import banner from '../../assets/banner/private.png';
-import process from '../../assets/process.jpg';
 
 const CounselTest: NextPage = () => {
   return (

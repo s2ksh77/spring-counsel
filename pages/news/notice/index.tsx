@@ -54,7 +54,7 @@ const Notice: NextPage = () => {
     <div className="h-full p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">공지사항</div>
       <TableContainer className="min-h-[85%]">
-        <Table stickyHeader className="">
+        <Table stickyHeader>
           <TableHead className="sticky">
             <TableRow>
               <TableCell className="w-16 text-center sm:w-4">번호</TableCell>
@@ -63,7 +63,7 @@ const Notice: NextPage = () => {
               <TableCell className="w-36 text-center sm:w-4">날짜</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody className="">
+          <TableBody>
             {sortedData?.primary?.map((notice: any, index: any) => (
               <TableRow
                 onClick={handleNotice.bind(null, notice.id)}

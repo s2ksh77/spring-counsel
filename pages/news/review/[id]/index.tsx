@@ -1,7 +1,7 @@
-import { NextPage, NextPageContext } from 'next';
+import { NextPage } from 'next';
 import { Editor } from '@tinymce/tinymce-react';
 import { useEffect, useRef, useState } from 'react';
-import { Button, Checkbox } from '@mui/material';
+import { Button } from '@mui/material';
 import {
   MenuOutlined,
   EditOutlined,
@@ -12,11 +12,13 @@ import {
 import { useRouter } from 'next/router';
 import useMutation from '@libs/client/useMutation';
 import useSWR from 'swr';
-import { Dialog } from '@mui/material';
-import { DialogTitle } from '@mui/material';
-import { DialogContent } from '@mui/material';
-import { DialogContentText } from '@mui/material';
-import { DialogActions } from '@mui/material';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from '@mui/material';
 import { Review, ReviewFile } from '@prisma/client';
 import Uploader from '@components/Uploader';
 import AWS from 'aws-sdk';
@@ -283,12 +285,7 @@ const ReviewDetail: NextPage = () => {
                 <label>제목</label>
               </div>
               <div className="flex w-full flex-row">
-                <input
-                  value={title}
-                  onChange={handleChange}
-                  type="text"
-                  className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
-                />
+                <input value={title} onChange={handleChange} type="text" className="regist-form" />
                 {data?.isLogin && editState ? (
                   <>
                     <div className="flex">

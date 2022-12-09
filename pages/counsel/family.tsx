@@ -1,8 +1,5 @@
-import Layout from '@components/Layout';
 import { NextPage } from 'next';
 import Image from 'next/image';
-import banner from '../../assets/banner/private.png';
-import process from '../../assets/process.jpg';
 import family from '../../assets/family.jpg';
 
 const Family: NextPage = () => {

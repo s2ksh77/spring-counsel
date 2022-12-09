@@ -133,11 +133,7 @@ const NoticeForm: NextPage = () => {
               <label>제목</label>
             </div>
             <div className="w-full">
-              <input
-                onChange={handleChange}
-                type="text"
-                className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
-              />
+              <input onChange={handleChange} type="text" className="regist-form" />
             </div>
           </div>
         </div>

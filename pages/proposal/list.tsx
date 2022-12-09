@@ -65,18 +65,18 @@ const ProposalList: NextPage = () => {
     <div className="h-full p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담 신청 내역</div>
       <TableContainer className="min-h-[85%]">
-        <Table stickyHeader className="">
+        <Table stickyHeader>
           <TableHead className="sticky">
             <TableRow>
               <TableCell className="w-16 text-center">번호</TableCell>
-              <TableCell className="">신청자</TableCell>
-              <TableCell className="">연락처</TableCell>
-              <TableCell className="">신청 날짜</TableCell>
-              <TableCell className="">수정 날짜</TableCell>
+              <TableCell>신청자</TableCell>
+              <TableCell>연락처</TableCell>
+              <TableCell>신청 날짜</TableCell>
+              <TableCell>수정 날짜</TableCell>
               <TableCell className="w-40 text-center">상태</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody className="">
+          <TableBody>
             {data?.reservations?.map((reservation, index) => (
               <TableRow
                 onClick={handleReservation.bind(null, reservation.id)}

@@ -50,7 +50,7 @@ const Login: NextPage<{ setLoginState: React.Dispatch<SetStateAction<boolean>> }
               <label className="mr-8">아이디</label>
               <input
                 {...register('userId')}
-                className="appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
+                className="regist-form w-64"
                 type="text"
                 defaultValue=""
                 autoFocus
@@ -60,7 +60,7 @@ const Login: NextPage<{ setLoginState: React.Dispatch<SetStateAction<boolean>> }
               <label className="mr-4">비밀번호</label>
               <input
                 {...register('password')}
-                className="appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
+                className="regist-form w-64"
                 type="password"
                 defaultValue=""
               />

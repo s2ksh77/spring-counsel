@@ -1,5 +1,4 @@
-import Layout from '@components/Layout';
-import { NextPage, NextPageContext } from 'next';
+import { NextPage } from 'next';
 import {
   Table,
   TableHead,
@@ -13,8 +12,6 @@ import { EditOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { Review } from '@prisma/client';
-import { withSsrSession } from '@libs/server/withSession';
-import { useEffect, useState } from 'react';
 
 interface ReviewResponse {
   ok: boolean;
@@ -38,7 +35,7 @@ const Review: NextPage = () => {
     <div className="h-full p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담후기</div>
       <TableContainer className="min-h-[85%]">
-        <Table stickyHeader className="">
+        <Table stickyHeader>
           <TableHead className="sticky">
             <TableRow>
               <TableCell className="w-16 text-center sm:w-4">번호</TableCell>
@@ -47,7 +44,7 @@ const Review: NextPage = () => {
               <TableCell className="w-20 text-center sm:w-4">날짜</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody className="">
+          <TableBody>
             {data?.reviews?.map((review, index) => (
               <TableRow
                 onClick={handleReview.bind(null, review.id)}

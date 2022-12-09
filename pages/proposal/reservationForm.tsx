@@ -1,19 +1,13 @@
 import { NextPage } from 'next';
 import { Editor } from '@tinymce/tinymce-react';
 import { useEffect, useRef, useState } from 'react';
-import { Button, Checkbox } from '@mui/material';
-import { MenuOutlined, EditOutlined, CancelOutlined } from '@mui/icons-material';
+import { Button } from '@mui/material';
+import { EditOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import useMutation from '@libs/client/useMutation';
 import { useForm } from 'react-hook-form';
 import { Reservation } from '@prisma/client';
 import Uploader from '@components/Uploader';
-
-interface NoticeProps {
-  title: string;
-  content: string;
-  isPrimay: boolean;
-}
 
 interface ResvFormData {
   name: string;
@@ -130,7 +124,7 @@ const ReservationForm: NextPage = () => {
                 <input
                   {...register('name', { required: true })}
                   type="text"
-                  className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
+                  className="regist-form border-gray-300 "
                 />
               </div>
             </div>
@@ -142,7 +136,7 @@ const ReservationForm: NextPage = () => {
                 <input
                   {...register('email')}
                   type="email"
-                  className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
+                  className="regist-form border-gray-300 "
                 />
               </div>
             </div>
@@ -156,7 +150,7 @@ const ReservationForm: NextPage = () => {
                   type="text"
                   onChange={handleChange}
                   value={phone}
-                  className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
+                  className="regist-form border-gray-300 "
                   placeholder="010부터 입력해주세요."
                   required
                 />

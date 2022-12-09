@@ -28,7 +28,7 @@ const Section: NextPage = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <Image src={fixed} layout="fill" className="sm:w-full" />
+          <Image src={fixed} layout="fill" className="sm:w-full" priority />
           {/* <div className="parallax-bg">
             <div className="title" data-swiper-parallax="-300">
               <p>봄, 심리상담센터</p>
@@ -50,7 +50,7 @@ const Section: NextPage = () => {
           </div> */}
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={fixed2} layout="fill" objectFit="cover" className="sm:w-full" />
+          <Image src={fixed2} layout="fill" objectFit="cover" className="sm:w-full" priority />
           <div className="parallax-bg sm:w-[100%] sm:py-[120px] sm:px-[40px]">
             <div className="title sm:text-sm" data-swiper-parallax="-300">
               <p>봄, 심리상담센터</p>
@@ -72,7 +72,7 @@ const Section: NextPage = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <Image src={fixed3} layout="fill" objectFit="cover" className="sm:w-full" />
+          <Image src={fixed3} layout="fill" objectFit="cover" className="sm:w-full" priority />
           {/* <div className="parallax-bg">
             <div className="title" data-swiper-parallax="-300">
               <p>봄, 심리상담센터</p>

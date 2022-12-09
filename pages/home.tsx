@@ -1,4 +1,3 @@
-import ModalPopup from '@components/Modal';
 import useMap from '@libs/client/useMap';
 import { AddCircleOutline } from '@mui/icons-material';
 import { Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
@@ -165,7 +164,6 @@ const Home: NextPage = () => {
           주소 : 경기 용인시 기흥구 흥덕중앙로 55 (흥덕역 리써밋 타워) 711호
         </span>
       </div>
-      <ModalPopup />
     </div>
   );
 };

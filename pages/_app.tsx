@@ -55,6 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <SWRConfig value={{ fetcher: (url: string) => fetch(url).then((res) => res.json()) }}>
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{title}</title>
       </Head>
       <div className="mx-auto w-full overflow-y-auto overflow-x-scroll">

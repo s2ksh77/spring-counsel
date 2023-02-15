@@ -1,21 +1,18 @@
 import { NextPage } from 'next';
-import {
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  TableContainer,
-  Button,
-} from '@mui/material';
+import { Button } from '@mui/material';
 import { EditOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import { Review } from '@prisma/client';
+import { Review as ReviewResource, ReviewFile } from '@prisma/client';
+import Image from 'next/image';
+
+interface ReviewResponseWithFile extends ReviewResource {
+  files: ReviewFile[];
+}
 
 interface ReviewResponse {
   ok: boolean;
-  reviews: Review[];
+  reviews: ReviewResponseWithFile[];
   isLogin?: boolean;
 }
 
@@ -34,41 +31,50 @@ const Review: NextPage = () => {
   return (
     <div className="h-full p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담후기</div>
-      <TableContainer className="min-h-[85%]">
-        <Table stickyHeader>
-          <TableHead className="sticky">
-            <TableRow>
-              <TableCell className="w-16 text-center sm:w-4">번호</TableCell>
-              <TableCell className="w-40 sm:w-[50%]">제목</TableCell>
-              <TableCell className="w-[27rem] sm:w-[50%]">내용</TableCell>
-              <TableCell className="w-20 text-center sm:w-4">날짜</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data?.reviews?.map((review, index) => (
-              <TableRow
-                onClick={handleReview.bind(null, review.id)}
-                key={review.id}
-                className={'h-[30px] hover:cursor-pointer hover:bg-[#eeeeee]'}
-              >
-                <TableCell className="h-[30px] w-16 text-center sm:w-4">
-                  {data?.reviews.length - index}
-                </TableCell>
-                <TableCell className="h-[30px] sm:w-[50%]">{review.title}</TableCell>
-                <TableCell className="h-[30px] max-w-[27rem] overflow-hidden text-ellipsis whitespace-nowrap sm:w-[50%]">
-                  {review.content
-                    .replace(/[<][^>]*[>]|&nbsp;|&zwj;/gi, '')
-                    .replace(/&lt;/gi, '<')
-                    .replace(/&gt;/gi, '>')}
-                </TableCell>
-                <TableCell className="h-[30px] w-36 text-center sm:w-4">
-                  {review.updatedAt.toString().split('T')[0]?.replaceAll('-', '.')}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <div className="min-h-[85%]">
+        <div className="border-1 flex w-full flex-col">
+          {data?.reviews?.map((review, index) => (
+            <div
+              onClick={handleReview.bind(null, review.id)}
+              key={review.id}
+              className={'flex flex-row p-[20px] hover:cursor-pointer hover:bg-[#eeeeee]'}
+            >
+              <div className="w-[270px] min-w-[270px]">
+                {review.files.length > 0 && (
+                  <Image
+                    src={review.files[0]?.url}
+                    alt={review.files[0]?.name}
+                    width={270}
+                    height={270}
+                  />
+                )}
+              </div>
+              <div className="flex flex-col">
+                <div className="mx-[20px]">
+                  <span className="text-2xl font-semibold">{review.title}</span>
+                  <div
+                    className="my-[20px] h-[190px] overflow-hidden text-ellipsis whitespace-normal"
+                    style={{
+                      display: '-webkit-box',
+                      WebkitLineClamp: 8,
+                      wordBreak: 'break-all',
+                      WebkitBoxOrient: 'vertical',
+                    }}
+                  >
+                    {review.content
+                      .replace(/[<][^>]*[>]|&nbsp;|&zwj;/gi, '')
+                      .replace(/&lt;/gi, '<')
+                      .replace(/&gt;/gi, '>')}
+                  </div>
+                </div>
+                <div className="mx-[20px] flex text-[13px] text-[#a8a8a8]">
+                  {'[관리자]  : ' + review.updatedAt.toString().split('T')[0]?.replaceAll('-', '.')}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
       {data?.isLogin ? (
         <div className="float-right ml-auto flex">
           <Button onClick={onClick} style={{ color: 'black' }}>

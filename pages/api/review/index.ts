@@ -29,6 +29,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ResponseType>) 
           createdAt: 'desc',
         },
       ],
+      include: {
+        files: true,
+      },
     });
     res.json({ ok: true, reviews, isLogin: !!user?.id });
   }

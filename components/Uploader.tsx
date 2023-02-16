@@ -54,6 +54,7 @@ const Uploader: React.FC<UploaderProp> = ({ type, setType, editor, pushObj }) =>
               file.name +
               '"crossorigin="' +
               '*' +
+              '" style="max-width:100%;"' +
               '"/>'
           );
         } else {

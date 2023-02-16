@@ -37,15 +37,17 @@ const Review: NextPage = () => {
             <div
               onClick={handleReview.bind(null, review.id)}
               key={review.id}
-              className={'flex flex-row p-[20px] hover:cursor-pointer hover:bg-[#eeeeee]'}
+              className={
+                'flex flex-row p-[20px] hover:cursor-pointer hover:bg-[#eeeeee] sm:h-[270px]'
+              }
             >
-              <div className="w-[270px] min-w-[270px]">
+              <div className="flex w-[270px] min-w-[270px] items-center justify-center sm:w-[130px] sm:min-w-[130px] md:min-w-[250px]">
                 {review.files.length > 0 && (
                   <Image
                     src={review.files[0]?.url}
                     alt={review.files[0]?.name}
-                    width={270}
-                    height={270}
+                    width={250}
+                    height={250}
                   />
                 )}
               </div>
@@ -53,7 +55,7 @@ const Review: NextPage = () => {
                 <div className="mx-[20px]">
                   <span className="text-2xl font-semibold">{review.title}</span>
                   <div
-                    className="my-[20px] h-[190px] overflow-hidden text-ellipsis whitespace-normal"
+                    className="my-[20px] h-[190px] overflow-hidden text-ellipsis whitespace-normal sm:h-[100px] sm:[webkit-line-clamp:4]"
                     style={{
                       display: '-webkit-box',
                       WebkitLineClamp: 8,

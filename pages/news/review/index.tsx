@@ -31,6 +31,14 @@ const Review: NextPage = () => {
   return (
     <div className="h-full p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담후기</div>
+      {data?.isLogin ? (
+        <div className="float-right mt-4 ml-auto flex">
+          <Button onClick={onClick} style={{ color: 'black' }}>
+            <EditOutlined />
+            글쓰기
+          </Button>
+        </div>
+      ) : null}
       <div className="min-h-[85%]">
         <div className="border-1 flex w-full flex-col">
           {data?.reviews?.map((review, index) => (
@@ -77,14 +85,6 @@ const Review: NextPage = () => {
           ))}
         </div>
       </div>
-      {data?.isLogin ? (
-        <div className="float-right ml-auto flex">
-          <Button onClick={onClick} style={{ color: 'black' }}>
-            <EditOutlined />
-            글쓰기
-          </Button>
-        </div>
-      ) : null}
     </div>
   );
 };

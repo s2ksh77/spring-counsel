@@ -16,11 +16,9 @@ interface ReviewResponse {
   isLogin?: boolean;
 }
 
-const Review = ({ reviews }) => {
+const Review: NextPage = () => {
   const router = useRouter();
-  // const { data } = useSWR<ReviewResponse>('/api/review');
-
-  console.log(reviews);
+  const { data } = useSWR<ReviewResponse>('/api/review');
 
   const onClick = () => {
     router.push('/news/review/reviewForm');
@@ -33,7 +31,7 @@ const Review = ({ reviews }) => {
   return (
     <div className="h-full p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담후기</div>
-      {reviews?.isLogin ? (
+      {data?.isLogin ? (
         <div className="float-right mt-4 ml-auto flex">
           <Button onClick={onClick} style={{ color: 'black' }}>
             <EditOutlined />
@@ -43,7 +41,7 @@ const Review = ({ reviews }) => {
       ) : null}
       <div className="min-h-[85%]">
         <div className="border-1 flex w-full flex-col">
-          {reviews?.reviews?.map((review, index) => (
+          {data?.reviews?.map((review, index) => (
             <div
               onClick={handleReview.bind(null, review.id)}
               key={review.id}
@@ -80,7 +78,7 @@ const Review = ({ reviews }) => {
                   </div>
                 </div>
                 <div className="mx-[20px] flex text-[13px] text-[#a8a8a8]">
-                  {'[관리자]  : ' + review.updatedAt?.toString().split('T')[0]}
+                  {'[관리자]  : ' + review.updatedAt.toString().split('T')[0]?.replaceAll('-', '.')}
                 </div>
               </div>
             </div>
@@ -90,16 +88,5 @@ const Review = ({ reviews }) => {
     </div>
   );
 };
-
-export async function getStaticProps() {
-  const res = await fetch('https://www.bom-counseling.com/api/review');
-  const reviews = await res.json();
-
-  return {
-    props: {
-      reviews,
-    },
-  };
-}
 
 export default Review;

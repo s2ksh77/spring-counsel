@@ -1,12 +1,10 @@
-import { NextPage, NextPageContext } from 'next';
+import { NextPage } from 'next';
 import { Button } from '@mui/material';
 import { EditOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { Review as ReviewResource, ReviewFile } from '@prisma/client';
 import Image from 'next/image';
-import client from '@libs/server/client';
-import { withSsrSession } from '@libs/server/withSession';
 
 interface ReviewResponseWithFile extends ReviewResource {
   files: ReviewFile[];
@@ -18,9 +16,9 @@ interface ReviewResponse {
   isLogin?: boolean;
 }
 
-const Review = ({ reviews, isLogin }) => {
+const Review: NextPage = () => {
   const router = useRouter();
-  // const { data } = useSWR<ReviewResponse>('/api/review');
+  const { data } = useSWR<ReviewResponse>('/api/review');
 
   const onClick = () => {
     router.push('/news/review/reviewForm');
@@ -33,7 +31,7 @@ const Review = ({ reviews, isLogin }) => {
   return (
     <div className="h-full p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담후기</div>
-      {isLogin ? (
+      {data?.isLogin ? (
         <div className="float-right mt-4 ml-auto flex">
           <Button onClick={onClick} style={{ color: 'black' }}>
             <EditOutlined />
@@ -43,7 +41,7 @@ const Review = ({ reviews, isLogin }) => {
       ) : null}
       <div className="min-h-[85%]">
         <div className="border-1 flex w-full flex-col">
-          {reviews?.map((review, index) => (
+          {data?.reviews?.map((review, index) => (
             <div
               onClick={handleReview.bind(null, review.id)}
               key={review.id}
@@ -90,25 +88,5 @@ const Review = ({ reviews, isLogin }) => {
     </div>
   );
 };
-
-export const getServerSideProps = withSsrSession(async function ({ req }: NextPageContext) {
-  const reviews = await client.review.findMany({
-    orderBy: [
-      {
-        createdAt: 'desc',
-      },
-    ],
-    include: {
-      files: true,
-    },
-  });
-
-  return {
-    props: {
-      reviews: JSON.parse(JSON.stringify(reviews)),
-      isLogin: !!req?.session?.user?.id,
-    },
-  };
-});
 
 export default Review;

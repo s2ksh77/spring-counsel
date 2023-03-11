@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/neg: '{"ingress":true}'
+  creationTimestamp: "2023-03-09T08:03:44Z"
+  finalizers:
+  - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    app: spring-counsel
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:finalizers:
+          .: {}
+          v:"service.kubernetes.io/load-balancer-cleanup": {}
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: kube-controller-manager
+    operation: Update
+    subresource: status
+    time: "2023-03-09T08:04:21Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          .: {}
+          f:app: {}
+      f:spec:
+        f:allocateLoadBalancerNodePorts: {}
+        f:externalTrafficPolicy: {}
+        f:internalTrafficPolicy: {}
+        f:ports:
+          .: {}
+          k:{"port":80,"protocol":"TCP"}:
+            .: {}
+            f:nodePort: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: GoogleCloudConsole
+    operation: Update
+    time: "2023-03-10T02:18:22Z"
+  name: spring-counsel-service
+  namespace: default
+  resourceVersion: "654664"
+  uid: c61ea264-c863-4211-9e95-dfc675a41cb5
+spec:
+  containers:
+    - name: spring-counsel
+      image: gcr.io/spring-counsel/spring-counsel:v1
+      - env:
+        - name: DATABASE_URL
+          value: mysql://127.0.0.1:3306/spring-counsel
+        - name: COOKIE_PASSWORD
+          value: 424fbee8-76ad-40c6-8233-b84327a934ca
+        - name: S3_UPLOAD_KEY
+          value: AKIA4SVLFTVHAZEZYQWD
+        - name: S3_UPLOAD_SECRET
+          value: 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
+        - name: S3_UPLOAD_BUCKET
+          value: spring-counsel
+        - name: S3_UPLOAD_REGION
+          value: ap-northeast-2
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 10.16.5.227
+  clusterIPs:
+  - 10.16.5.227
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 31324
+    port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: spring-counsel
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 34.97.190.150

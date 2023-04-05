@@ -1,5 +1,4 @@
-import Layout from '@components/Layout';
-import { NextPage, NextPageContext } from 'next';
+import { NextPageContext } from 'next';
 import {
   Table,
   TableHead,
@@ -11,20 +10,12 @@ import {
 } from '@mui/material';
 import { EditOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
-import { Notice } from '@prisma/client';
 import { withSsrSession } from '@libs/server/withSession';
+import client from '@libs/server/client';
 import { useEffect, useState } from 'react';
 
-interface NoticeResponse {
-  ok: boolean;
-  notices: Notice[];
-  isLogin?: boolean;
-}
-
-const Notice: NextPage = () => {
+const Notice = ({ notices, isLogin }) => {
   const router = useRouter();
-  const { data } = useSWR<NoticeResponse>('/api/notice');
   const [sortedData, setSortedData] = useState<any | null>([
     {
       primary: [],
@@ -41,14 +32,14 @@ const Notice: NextPage = () => {
   };
 
   const sortNoticeData = () => {
-    const primary = data?.notices?.filter((notice) => notice.isPrimary === true);
-    const normal = data?.notices?.filter((notice) => notice.isPrimary === false);
+    const primary = notices?.filter((notice) => notice.isPrimary === true);
+    const normal = notices?.filter((notice) => notice.isPrimary === false);
     setSortedData({ primary, normal });
   };
 
   useEffect(() => {
     sortNoticeData();
-  }, [data]);
+  }, [notices]);
 
   return (
     <div className="h-full p-8">
@@ -97,7 +88,7 @@ const Notice: NextPage = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {data?.isLogin ? (
+      {isLogin ? (
         <div className="float-right ml-auto flex">
           <Button onClick={onClick} style={{ color: 'black' }}>
             <EditOutlined />
@@ -108,5 +99,22 @@ const Notice: NextPage = () => {
     </div>
   );
 };
+
+export const getServerSideProps = withSsrSession(async function ({ req }: NextPageContext) {
+  const notices = await client.notice.findMany({
+    orderBy: [
+      {
+        createdAt: 'desc',
+      },
+    ],
+  });
+
+  return {
+    props: {
+      notices: JSON.parse(JSON.stringify(notices)),
+      isLogin: !!req?.session?.user?.id,
+    },
+  };
+});
 
 export default Notice;

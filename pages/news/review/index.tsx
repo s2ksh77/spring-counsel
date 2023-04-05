@@ -1,24 +1,14 @@
-import { NextPage } from 'next';
+import { NextPage, NextPageContext } from 'next';
 import { Button } from '@mui/material';
 import { EditOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import { Review as ReviewResource, ReviewFile } from '@prisma/client';
 import Image from 'next/image';
+import client from '@libs/server/client';
+import { withSsrSession } from '@libs/server/withSession';
 
-interface ReviewResponseWithFile extends ReviewResource {
-  files: ReviewFile[];
-}
-
-interface ReviewResponse {
-  ok: boolean;
-  reviews: ReviewResponseWithFile[];
-  isLogin?: boolean;
-}
-
-const Review: NextPage = () => {
+const Review = ({ reviews, isLogin }) => {
   const router = useRouter();
-  const { data } = useSWR<ReviewResponse>('/api/review');
 
   const onClick = () => {
     router.push('/news/review/reviewForm');
@@ -31,7 +21,7 @@ const Review: NextPage = () => {
   return (
     <div className="h-full p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담후기</div>
-      {data?.isLogin ? (
+      {isLogin ? (
         <div className="float-right mt-4 ml-auto flex">
           <Button onClick={onClick} style={{ color: 'black' }}>
             <EditOutlined />
@@ -41,7 +31,7 @@ const Review: NextPage = () => {
       ) : null}
       <div className="min-h-[85%]">
         <div className="border-1 flex w-full flex-col">
-          {data?.reviews?.map((review, index) => (
+          {reviews?.map((review, index) => (
             <div
               onClick={handleReview.bind(null, review.id)}
               key={review.id}
@@ -88,5 +78,25 @@ const Review: NextPage = () => {
     </div>
   );
 };
+
+export const getServerSideProps = withSsrSession(async function ({ req }: NextPageContext) {
+  const reviews = await client.review.findMany({
+    orderBy: [
+      {
+        createdAt: 'desc',
+      },
+    ],
+    include: {
+      files: true,
+    },
+  });
+
+  return {
+    props: {
+      reviews: JSON.parse(JSON.stringify(reviews)),
+      isLogin: !!req?.session?.user?.id,
+    },
+  };
+});
 
 export default Review;

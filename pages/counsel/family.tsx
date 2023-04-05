@@ -19,7 +19,7 @@ const Family: NextPage = () => {
           <hr className="my-8" />
 
           <div className="relative mt-12">
-            <Image src={family} />
+            <Image src={family} alt="가족 사진" />
             <div className="absolute bottom-4 w-[50%] py-4 px-[4rem] text-xl text-white">
               <p>
                 가족체계는 움직이는 장난감 모빌과 같다. <br />

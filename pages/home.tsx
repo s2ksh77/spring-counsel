@@ -117,7 +117,13 @@ const Home: NextPage = () => {
               >
                 <div className="flex flex-row p-2 sm:items-center">
                   <div className="flex sm:hidden">
-                    <Image src={kakao} width={50} height={50} className="rounded-full" />
+                    <Image
+                      src={kakao}
+                      width={50}
+                      height={50}
+                      className="rounded-full"
+                      alt="카카오톡 채널 이미지"
+                    />
                   </div>
                   <span className="ml-2 flex items-center sm:ml-[1.4rem]">카카오톡 </span>
                   <span className="flex items-center sm:hidden">신청하기</span>
@@ -145,10 +151,10 @@ const Home: NextPage = () => {
             <div className="mb-4 flex w-[6.6rem] border-b-4 pb-4 text-2xl font-bold">센터 사진</div>
             <div className="flex flex-row pt-8">
               <div className="mr-auto w-[48%]">
-                <Image src={center1} />
+                <Image src={center1} alt="센터 내부 사진" />
               </div>
               <div className="w-[48%]">
-                <Image src={center2} />
+                <Image src={center2} alt="센터 내부 사진" />
               </div>
             </div>
           </div>

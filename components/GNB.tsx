@@ -74,10 +74,22 @@ const GNB: NextPage<{
                 className="flex h-[112px] min-w-[350px] cursor-pointer overflow-y-hidden sm:h-[75px] sm:w-[130px] sm:min-w-[230px] lg:h-[112px] lg:w-[225px] lg:min-w-[225px]"
               >
                 <div className="lg:hidden lg:h-[110px]">
-                  <Image src={logo} width={350} height={112} className="lg:h-[110px]" />
+                  <Image
+                    src={logo}
+                    width={350}
+                    height={112}
+                    className="lg:h-[110px]"
+                    alt="봄, 심리상담센터 로고"
+                  />
                 </div>
                 <div className="hidden lg:flex lg:h-[112px]">
-                  <Image src={logo} width={225} height={112} className="lg:h-[112px]" />
+                  <Image
+                    src={logo}
+                    width={225}
+                    height={112}
+                    className="lg:h-[112px]"
+                    alt="봄, 심리상담센터 로고"
+                  />
                 </div>
               </div>
             </a>

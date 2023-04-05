@@ -55,7 +55,12 @@ const ModalPopup: React.FC = () => {
     >
       <DialogContent className="w-[700px]">
         <DialogContentText className="w-[650px]">
-          <Image src={event} onClick={handleNotice} className="cursor-pointer" />
+          <Image
+            src={event}
+            onClick={handleNotice}
+            className="cursor-pointer"
+            alt="이벤트용 이미지"
+          />
         </DialogContentText>
       </DialogContent>
       <DialogActions>

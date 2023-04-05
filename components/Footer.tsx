@@ -15,7 +15,7 @@ const Footer: NextPage = () => {
         <div>
           <Link href="/home">
             <a>
-              <Image src={logo} width={250} height={250} />
+              <Image src={logo} width={250} height={250} alt="봄, 심리상담센터 로고" />
             </a>
           </Link>
         </div>
@@ -63,7 +63,13 @@ const Footer: NextPage = () => {
         }
       >
         <div className="z-101 fixed right-10 bottom-28 cursor-pointer">
-          <Image src={kakao} width={58} height={58} className="rounded-full" />
+          <Image
+            src={kakao}
+            width={58}
+            height={58}
+            className="rounded-full"
+            alt="카카오톡 채널 이미지"
+          />
         </div>
       </div>
       <div

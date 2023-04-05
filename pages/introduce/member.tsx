@@ -9,10 +9,10 @@ import member2 from '../../assets/member2.png';
 const Member: NextPage = () => {
   return (
     <div className="overflow-y-auto sm:w-full">
-      <Image src={member1} />
-      <Image src={member2} />
-      <Image src={member3} />
-      <Image src={member4} />
+      <Image src={member1} alt="상담사 프로필" />
+      <Image src={member2} alt="상담사 프로필" />
+      <Image src={member3} alt="상담사 프로필" />
+      <Image src={member4} alt="상담사 프로필" />
     </div>
   );
 };

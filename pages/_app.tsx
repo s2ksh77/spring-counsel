@@ -63,15 +63,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         {isHome() && !isLogin() ? <Section /> : null}
         {isCounsel() ? (
           <div className="menu-banner">
-            <Image src={fixed5} />
+            <Image src={fixed5} alt="메뉴별 배너 이미지" />
           </div>
         ) : isEducation() ? (
           <div className="menu-banner">
-            <Image src={fixed4} />
+            <Image src={fixed4} alt="메뉴별 배너 이미지" />
           </div>
         ) : isProposal() ? (
           <div className="menu-banner">
-            <Image src={fixed3} />
+            <Image src={fixed3} alt="메뉴별 배너 이미지" />
           </div>
         ) : null}
         <Layout isBanner={isCounsel() || isEducation() || isProposal()}>

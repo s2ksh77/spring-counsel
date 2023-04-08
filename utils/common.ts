@@ -20,7 +20,6 @@ export const getMenu = (key: string) => {
           { key: 'location', name: '찾아 오시는 길', value: '/location' },
         ],
       };
-      break;
     case 'counsel':
       return {
         title: '상담 및 심리검사 서비스',
@@ -31,7 +30,6 @@ export const getMenu = (key: string) => {
           { key: 'test', name: '심리검사', value: '/counseltest' },
         ],
       };
-      break;
     case 'education':
       return {
         title: '교육 서비스',
@@ -40,7 +38,6 @@ export const getMenu = (key: string) => {
           { key: 'analysis', name: '교육분석', value: '/analysis' },
         ],
       };
-      break;
     case 'proposal':
       return {
         title: '상담문의 및 신청',
@@ -49,7 +46,6 @@ export const getMenu = (key: string) => {
           { key: 'proposal', name: '상담신청', value: '/reservationForm' },
         ],
       };
-      break;
     case 'news':
       return {
         title: '센터 소식',
@@ -58,7 +54,6 @@ export const getMenu = (key: string) => {
           { key: 'review', name: '상담후기', value: '/review' },
         ],
       };
-      break;
   }
 };
 

@@ -21,7 +21,7 @@ const Footer: NextPage = () => {
         </div>
       </div>
       <div id="copyright" className="ml-4 flex flex-col p-4">
-        <ul className="flex last:mr-0 sm:hidden md:hidden [&>a>li]:mr-3 [&>a>li]:border-r-[2px] [&>a>li]:border-[#e1e1e1] [&>a>li]:pr-3 [&>a>li:hover]:cursor-pointer [&>a>li:hover]:underline">
+        <ul className="flex last:mr-0 sm:hidden md:hidden [&>a>li:hover]:cursor-pointer [&>a>li:hover]:underline [&>a>li]:mr-3 [&>a>li]:border-r-[2px] [&>a>li]:border-[#e1e1e1] [&>a>li]:pr-3">
           <Link href="/introduce">
             <a>
               <li>센터 소개</li>
@@ -62,19 +62,20 @@ const Footer: NextPage = () => {
           )
         }
       >
-        <div className="z-101 fixed right-10 bottom-28 cursor-pointer">
+        <div className="z-101 fixed bottom-28 right-10 cursor-pointer">
           <Image
             src={kakao}
             width={58}
             height={58}
             className="rounded-full"
+            priority
             alt="카카오톡 채널 이미지"
           />
         </div>
       </div>
       <div
         onClick={handleScrollTop}
-        className="fixed right-10 bottom-10 cursor-pointer rounded-full border-[1px] bg-[#a9ce8e] text-white"
+        className="fixed bottom-10 right-10 cursor-pointer rounded-full border-[1px] bg-[#a9ce8e] text-white"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

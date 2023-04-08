@@ -13,7 +13,7 @@ const Location: NextPage = () => {
       <div>
         <div id="map" style={{ width: '100%', height: '500px' }}></div>
       </div>
-      <div className="mt-12 flex flex-col">
+      <div className="banner-title mt-12 flex flex-col ">
         <span className="text-2xl font-bold sm:text-lg">
           주소 : 경기 용인시 기흥구 흥덕중앙로 55 (흥덕역 리써밋 타워) 711호
         </span>

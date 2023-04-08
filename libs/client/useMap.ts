@@ -1,12 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import img from '../../assets/marker.svg';
-import Image from 'next/image';
 
 function useMap() {
-  let HOME_PATH = '.';
   const mapRef = useRef<HTMLElement | null | any>(null);
   const markerRef = useRef<any | null>(null);
-  const selectedMarker = useRef<any | null>(null);
   const [myLocation, setMyLocation] = useState<{ latitude: number; longitude: number } | string>(
     ''
   );
@@ -55,8 +52,8 @@ function useMap() {
           content: [
             `
             <div style="display: flex; padding: 9px; border-radius: 35px; border: 1px solid #0475f4; background: #fff;">
-              <img alt="marker" src=${img.src} width="36px" height="36px" />
-              <div style="display: flex; background: white; align-items:center; margin-left:8px; border-radius: 23px; font-size:20px; font-weight:bold">봄, 심리상담센터</div>
+              <img alt="marker" src=${img.src} width="28px" height="28px" />
+              <div class="banner-title" style="display: flex; background: white; align-items:center; margin-left:8px; border-radius: 23px; font-size:20px; font-weight:normal">봄, 심리상담센터</div>
             </div>
           `,
           ].join(''),

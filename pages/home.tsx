@@ -2,23 +2,17 @@ import useMap from '@libs/client/useMap';
 import { AddCircleOutline } from '@mui/icons-material';
 import { Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 import { Notice } from '@prisma/client';
-import { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
 import center1 from '../assets/center1.jpg';
 import center2 from '../assets/center2.jpg';
 import kakao from '../assets/i_kakao.png';
+import client from '@libs/server/client';
+import { withSsrSession } from '@libs/server/withSession';
 
-interface NoticeResponse {
-  ok: boolean;
-  notices: Notice[];
-}
-
-const Home: NextPage = () => {
+const Home = ({ notices }: { notices: Notice[] }) => {
   useMap();
   const router = useRouter();
-  const { data } = useSWR<NoticeResponse>('/api/notice');
 
   const handleNotice = (id: string) => {
     router.push(`/news/notice/${id}`);
@@ -42,7 +36,7 @@ const Home: NextPage = () => {
             <TableContainer className="min-h-[85%]">
               <Table stickyHeader className="">
                 <TableBody className="">
-                  {data?.notices?.map((notice) => (
+                  {notices?.map((notice) => (
                     <TableRow
                       onClick={handleNotice.bind(null, notice.id)}
                       key={notice.id}
@@ -62,7 +56,7 @@ const Home: NextPage = () => {
       </div>
 
       <div className="flex w-full flex-col sm:w-full">
-        <div className="mt-8 mb-12 flex items-center justify-center text-3xl font-bold">
+        <div className="mb-12 mt-8 flex items-center justify-center text-3xl font-bold">
           상담신청 및 문의
         </div>
         <div className="mb-16 flex w-full flex-row justify-center">
@@ -142,7 +136,7 @@ const Home: NextPage = () => {
       </div>
 
       <div>
-        <div className="mt-8 mb-12 flex items-center justify-center text-3xl font-bold">
+        <div className="mb-12 mt-8 flex items-center justify-center text-3xl font-bold">
           센터 소개
         </div>
 
@@ -164,9 +158,9 @@ const Home: NextPage = () => {
       <div className="my-32 flex flex-col ">
         <div className="flex items-center justify-center text-3xl font-bold">찾아오시는 길</div>
         <div className="mx-auto mt-20 w-full">
-          <div id="map" style={{ width: '80%', height: '500px', margin: 'auto' }}></div>
+          <div id="map" style={{ width: '80%', height: '500px', margin: 'auto' }} />
         </div>
-        <span className="mt-8 text-xl font-bold sm:mr-4 sm:text-sm">
+        <span className="banner-title mt-8 text-xl font-normal sm:mr-4 sm:text-sm">
           주소 : 경기 용인시 기흥구 흥덕중앙로 55 (흥덕역 리써밋 타워) 711호
         </span>
       </div>
@@ -176,12 +170,18 @@ const Home: NextPage = () => {
 
 export default Home;
 
-// export const getServerSideProps = async ({ req }) => {
-//   const protocol = req.headers['x-forwarded-proto'] || 'http';
-//   const baseUrl = req ? `${protocol}://${req.headers.host}` : '';
+export const getServerSideProps = withSsrSession(async () => {
+  const notices = await client.notice.findMany({
+    orderBy: [
+      {
+        createdAt: 'desc',
+      },
+    ],
+  });
 
-//   const data = await fetch(baseUrl + '/api/notice').then((res) => res.json());
-//   return {
-//     props: { data },
-//   };
-// };
+  return {
+    props: {
+      notices: JSON.parse(JSON.stringify(notices)),
+    },
+  };
+});

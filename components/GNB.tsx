@@ -79,6 +79,7 @@ const GNB: NextPage<{
                     width={350}
                     height={112}
                     className="lg:h-[110px]"
+                    priority
                     alt="봄, 심리상담센터 로고"
                   />
                 </div>

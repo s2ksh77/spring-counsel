@@ -2,7 +2,6 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { SWRConfig } from 'swr';
-import Image from 'next/image';
 import GNB from '@components/GNB';
 import Layout from '@components/Layout';
 import Head from 'next/head';
@@ -13,9 +12,6 @@ import { useEffect, useState } from 'react';
 import Section from '@components/Section';
 import Content from '@components/Content';
 import Script from 'next/script';
-import fixed5 from '../assets/fixed5.png';
-import fixed4 from '../assets/fixed4.png';
-import fixed3 from '../assets/banner3.png';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -39,18 +35,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     return router.pathname === '/proposal/list' || router.pathname === '/proposal/[id]';
   };
 
-  const isCounsel = (): boolean => {
-    return router.pathname.split('/')[1] === 'counsel';
-  };
-
-  const isEducation = (): boolean => {
-    return router.pathname.split('/')[1] === 'education';
-  };
-
-  const isProposal = (): boolean => {
-    return router.pathname.split('/')[1] === 'proposal';
-  };
-
   return (
     <SWRConfig value={{ fetcher: (url: string) => fetch(url).then((res) => res.json()) }}>
       <Head>
@@ -61,20 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <div className="mx-auto w-full overflow-y-auto overflow-x-scroll">
         <GNB loginState={loginState} setLoginState={setLoginState} />
         {isHome() && !isLogin() ? <Section /> : null}
-        {isCounsel() ? (
-          <div className="menu-banner">
-            <Image src={fixed5} alt="메뉴별 배너 이미지" />
-          </div>
-        ) : isEducation() ? (
-          <div className="menu-banner">
-            <Image src={fixed4} alt="메뉴별 배너 이미지" />
-          </div>
-        ) : isProposal() ? (
-          <div className="menu-banner">
-            <Image src={fixed3} alt="메뉴별 배너 이미지" />
-          </div>
-        ) : null}
-        <Layout isBanner={isCounsel() || isEducation() || isProposal()}>
+        <Layout>
           {isHome() || isLogin() || isProposalList() ? null : <Menu menu={menu} />}
           {isHome() || isLogin() ? (
             <div className="sm:w-full">
@@ -89,7 +60,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </div>
       <Footer />
       <Script
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=r19hf0h6dl"
       />
     </SWRConfig>

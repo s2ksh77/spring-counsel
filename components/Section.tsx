@@ -39,7 +39,7 @@ const Section: NextPage = () => {
             priority
             alt="스와이프 이미지"
           />
-          <div className="parallax-bg sm:w-[100%] sm:py-[120px] sm:px-[40px]">
+          <div className="parallax-bg banner-title sm:w-[100%] sm:px-[40px] sm:py-[120px]">
             <div className="title sm:text-sm" data-swiper-parallax="-300">
               <p>봄, 심리상담센터</p>
             </div>

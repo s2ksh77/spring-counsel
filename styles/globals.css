@@ -196,3 +196,9 @@ body {
 #modal .MuiDialog-paper {
   max-width: 700px;
 }
+
+.md-content p::after {
+  content: '';
+  display: block;
+  height: 1em;
+}

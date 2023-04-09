@@ -10,7 +10,7 @@ import kakao from '../assets/i_kakao.png';
 import client from '@libs/server/client';
 import { withSsrSession } from '@libs/server/withSession';
 
-const Home = ({ notices }: { notices: Notice[] }) => {
+const Home = ({ notices }: { notices?: Notice[] }) => {
   useMap();
   const router = useRouter();
 

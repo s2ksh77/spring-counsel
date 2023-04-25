@@ -1,4 +1,0 @@
-node_modules
-!nodes_modules/.prisma
-npm-debug.log
-.next

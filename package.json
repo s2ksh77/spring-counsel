@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "cross-env ANALYZE=true NODE_ENV=production next build",
-    "deploy": "next build && deploy.yml",
+    "deploy": "yarn build && gcloud app deploy",
     "start": "next start",
     "lint": "next lint"
   },

@@ -177,6 +177,7 @@ export const getServerSideProps = withSsrSession(async () => {
         createdAt: 'desc',
       },
     ],
+    take: 5,
   });
 
   return {

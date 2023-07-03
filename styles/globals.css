@@ -202,3 +202,26 @@ body {
   display: block;
   height: 1em;
 }
+
+ul[role=navigation] {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 10px 0px;
+}
+
+ul[role=navigation] li {
+  padding: 0.3rem 0.7rem;
+  border-radius: 50px;
+  &:hover {
+    color: #fff;
+    background: #a9ce8e;
+    cursor:pointer;
+  }
+}
+
+.selected {
+  color: #fff;
+  background: #a9ce8e;
+  cursor:pointer;
+}

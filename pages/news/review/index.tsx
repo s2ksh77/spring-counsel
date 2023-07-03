@@ -1,14 +1,16 @@
-import { NextPage, NextPageContext } from 'next';
+import { NextApiRequest } from 'next';
 import { Button } from '@mui/material';
 import { EditOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
 import Image from 'next/image';
 import client from '@libs/server/client';
 import { withSsrSession } from '@libs/server/withSession';
+import ReactPaginate from 'react-paginate';
+import { useEffect } from 'react';
 
-const Review = ({ reviews, isLogin }) => {
+const Review = ({ reviews, isLogin, curPage, maxPage }) => {
   const router = useRouter();
+  const { pathname } = router;
 
   const onClick = () => {
     router.push('/news/review/reviewForm');
@@ -18,11 +20,20 @@ const Review = ({ reviews, isLogin }) => {
     router.push(`/news/review/${id}`);
   };
 
+  const handlePageClick = (page) => {
+    const count = page.selected + 1;
+    router.push(`${pathname}?page=${count}`);
+  };
+
+  useEffect(() => {
+    router.push(`${pathname}?page=${curPage}`);
+  }, []);
+
   return (
     <div className="h-full p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담후기</div>
       {isLogin ? (
-        <div className="float-right mt-4 ml-auto flex">
+        <div className="float-right ml-auto mt-4 flex">
           <Button onClick={onClick} style={{ color: 'black' }}>
             <EditOutlined />
             글쓰기
@@ -73,13 +84,24 @@ const Review = ({ reviews, isLogin }) => {
               </div>
             </div>
           ))}
+          <ReactPaginate
+            breakLabel="..."
+            previousLabel="<"
+            nextLabel=">"
+            pageRangeDisplayed={5}
+            pageCount={maxPage}
+            onPageChange={handlePageClick}
+            renderOnZeroPageCount={null}
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export const getServerSideProps = withSsrSession(async function ({ req }: NextPageContext) {
+export const getServerSideProps = withSsrSession(async function (req: NextApiRequest) {
+  const curPage = (req.query?.page as unknown as number) ?? 1;
+
   const reviews = await client.review.findMany({
     orderBy: [
       {
@@ -89,12 +111,18 @@ export const getServerSideProps = withSsrSession(async function ({ req }: NextPa
     include: {
       files: true,
     },
+    skip: (curPage - 1) * 5,
+    take: 5,
   });
+
+  const totalReviews = await client.review.count();
 
   return {
     props: {
       reviews: JSON.parse(JSON.stringify(reviews)),
       isLogin: !!req?.session?.user?.id,
+      curPage,
+      maxPage: Math.ceil(totalReviews / 5),
     },
   };
 });

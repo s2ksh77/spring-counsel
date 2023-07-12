@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "cross-env ANALYZE=true NODE_ENV=production next build",
+    "build": "next build",
     "deploy": "yarn build && gcloud app deploy",
     "start": "next start",
     "lint": "next lint",

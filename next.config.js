@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
-})
+});
 
 const nextConfig = {
   reactStrictMode: true,
@@ -23,6 +23,15 @@ const nextConfig = {
     return config;
   },
   output: 'standalone',
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/home',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

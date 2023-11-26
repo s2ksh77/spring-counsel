@@ -71,7 +71,7 @@ const Home = ({ notices }: { notices?: Notice[] }) => {
               </div>
             </div>
             <div className="px-4 sm:px-[0.5rem]">
-              <div className="text-3xl font-bold text-red-400 sm:text-xl">010-4829-3961</div>
+              <div className="text-3xl font-bold text-red-400 sm:text-xl">010-6220-1850</div>
               <div className="mt-4 text-xl sm:text-lg">상담은 사전 예약제로 진행 됩니다.</div>
               <div className="mt-[1.5rem] px-2 sm:mt-4">
                 <div className="text-2xl font-bold sm:text-xl">업무시간</div>

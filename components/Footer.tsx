@@ -50,7 +50,7 @@ const Footer: NextPage = () => {
         </ul>
         <p className="text-[#999]">주소 : 경기 용인시 기흥구 흥덕중앙로 55 711호 </p>
         <p className="text-[#999]">대표자: 김정희 </p>
-        <p className="text-[#999]">전화번호 : 010-4829-3961 </p>
+        <p className="text-[#999]">전화번호 : 010-6220-1850 </p>
         <p className="text-[#999]">Copyright © 봄, 심리상담센터 All Rights Reserved.</p>
       </div>
       <div

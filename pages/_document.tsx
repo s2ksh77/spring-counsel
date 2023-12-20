@@ -28,6 +28,7 @@ class CustomDocument extends Document {
           <script
             type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=r19hf0h6dl"
+            defer
           />
         </Head>
         <body>

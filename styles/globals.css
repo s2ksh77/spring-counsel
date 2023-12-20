@@ -34,7 +34,7 @@
   src: local('BMYEONSUNG'), url('../assets/fonts/BMYEONSUNG.woff2') format('woff2'),
     url('../assets/fonts/BMYEONSUNG.woff') format('woff'),
     url('../assets/fonts/BMYEONSUNG.ttf') format('truetype');
-  font-display: block;
+  font-display: swap;
 }
 
 body {

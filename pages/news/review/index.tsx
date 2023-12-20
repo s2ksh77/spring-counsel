@@ -1,4 +1,4 @@
-import { NextApiRequest } from 'next';
+import { NextPageContext } from 'next';
 import { Button } from '@mui/material';
 import { EditOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
@@ -99,8 +99,8 @@ const Review = ({ reviews, isLogin, curPage, maxPage }) => {
   );
 };
 
-export const getServerSideProps = withSsrSession(async function (req: NextApiRequest) {
-  const curPage = (req.query?.page as unknown as number) ?? 1;
+export const getServerSideProps = withSsrSession(async function ({ req, query }: NextPageContext) {
+  const curPage = (query?.page as unknown as number) ?? 1;
 
   const reviews = await client.review.findMany({
     orderBy: [

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "deploy": "yarn build && gcloud app deploy",
-    "start": "next start -p 8080",
+    "start": "next start",
     "lint": "next lint",
     "postbuild": "next-sitemap"
   },

@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import process from '../../assets/process_counselor.jpg';
+import process from '../../assets/counselor_process.jpg';
 
 const Introduce: NextPage = () => {
   const router = useRouter();

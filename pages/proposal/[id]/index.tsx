@@ -193,7 +193,7 @@ const ReservationDetail: NextPage = () => {
     <div className="flex h-full w-full flex-col p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">신청 내역</div>
       <>
-        <div className="float-right mt-4 ml-auto flex items-center">
+        <div className="float-right ml-auto mt-4 flex items-center">
           <div className="mr-2 border-[1px] p-4">
             <label className="mr-2">{getStatus(data?.reservation?.status)}</label>
           </div>

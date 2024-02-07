@@ -15,7 +15,7 @@ const Home = ({ notices }: { notices?: Notice[] }) => {
   const router = useRouter();
 
   const handleNotice = (id: string) => {
-    router.push(`/news/notice/${id}`);
+    router.push(`/news/notice/${id}`, undefined, { shallow: true });
   };
 
   return (
@@ -26,7 +26,7 @@ const Home = ({ notices }: { notices?: Notice[] }) => {
           <div className="flex justify-between">
             <div className="mb-4 border-b-4 pb-4 text-2xl font-bold">공지사항</div>
             <div
-              onClick={() => router.push(`/news/notice`)}
+              onClick={() => router.push(`/news/notice`, undefined, { shallow: true })}
               className="text-[#dddddd] hover:cursor-pointer"
             >
               <AddCircleOutline />
@@ -145,10 +145,10 @@ const Home = ({ notices }: { notices?: Notice[] }) => {
             <div className="mb-4 flex w-[6.6rem] border-b-4 pb-4 text-2xl font-bold">센터 사진</div>
             <div className="flex flex-row pt-8">
               <div className="mr-auto w-[48%]">
-                <Image src={center1} alt="센터 내부 사진" />
+                <Image src={center1} alt="센터 내부 사진" sizes="150px 256px 600px" />
               </div>
               <div className="w-[48%]">
-                <Image src={center2} alt="센터 내부 사진" />
+                <Image src={center2} alt="센터 내부 사진" sizes="150px 256px 600px" />
               </div>
             </div>
           </div>
@@ -170,7 +170,7 @@ const Home = ({ notices }: { notices?: Notice[] }) => {
 
 export default Home;
 
-export const getServerSideProps = withSsrSession(async () => {
+export const getStaticProps = async () => {
   const notices = await client.notice.findMany({
     orderBy: [
       {
@@ -185,4 +185,4 @@ export const getServerSideProps = withSsrSession(async () => {
       notices: JSON.parse(JSON.stringify(notices)),
     },
   };
-});
+};

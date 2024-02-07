@@ -6,13 +6,13 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import Image from 'next/image';
-import fixed from '../assets/fixed.png';
-import fixed2 from '../assets/fixed2.png';
-import fixed3 from '../assets/fixed3.png';
+import fixed from '../assets/fixed.webp';
+import fixed2 from '../assets/fixed2.webp';
+import fixed3 from '../assets/fixed3.webp';
 
 const Section: NextPage = () => {
   return (
-    <div className="h-[540px] pt-[112px] sm:w-full sm:pt-[0px]">
+    <div className="h-[540px] pt-[112px] sm:h-[300px] sm:w-full sm:pt-[0px]">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -28,18 +28,23 @@ const Section: NextPage = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <Image src={fixed} layout="fill" className="sm:w-full" priority alt="스와이프 이미지" />
+          <Image
+            src={fixed}
+            className="swipe-image sm:w-full"
+            priority
+            alt="스와이프 이미지"
+            sizes="320px 600px"
+          />
         </SwiperSlide>
         <SwiperSlide>
           <Image
             src={fixed2}
-            layout="fill"
-            objectFit="cover"
-            className="sm:w-full"
+            className="swipe-image sm:w-full"
             priority
             alt="스와이프 이미지"
+            sizes="320px 600px"
           />
-          <div className="parallax-bg banner-title sm:w-[100%] sm:px-[40px] sm:py-[120px]">
+          <div className="parallax-bg banner-title sm:w-[100%] ">
             <div className="title sm:text-sm" data-swiper-parallax="-300">
               <p>봄, 심리상담센터</p>
             </div>
@@ -62,11 +67,10 @@ const Section: NextPage = () => {
         <SwiperSlide>
           <Image
             src={fixed3}
-            layout="fill"
-            objectFit="cover"
-            className="sm:w-full"
+            className="swipe-image sm:w-full"
             priority
             alt="스와이프 이미지"
+            sizes="320px 600px"
           />
         </SwiperSlide>
       </Swiper>

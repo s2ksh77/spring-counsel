@@ -11,6 +11,7 @@ import {
 } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import useMutation from '@libs/client/useMutation';
+import client from '@libs/server/client';
 import useSWR from 'swr';
 import {
   Dialog,
@@ -35,7 +36,7 @@ interface FileResponse {
   ok: boolean;
 }
 
-const ReviewDetail: NextPage = () => {
+const ReviewDetail = ({ data }) => {
   const router = useRouter();
   const [editor, setEditor] = useState(null);
   const [editState, setEditState] = useState(false);
@@ -47,7 +48,7 @@ const ReviewDetail: NextPage = () => {
   const [fileData, setFileData] = useState<any[]>([]);
   const [uploadData, setUploadData] = useState<any[]>([]);
 
-  const { data, mutate } = useSWR<ReviewResponse>(
+  const { mutate } = useSWR<ReviewResponse>(
     router.query.id ? `/api/review/${router.query?.id}` : null
   );
 
@@ -412,3 +413,26 @@ const ReviewDetail: NextPage = () => {
 };
 
 export default ReviewDetail;
+
+export const getStaticPaths = async () => {
+  const reviews = await client.review.findMany({
+    select: { id: true },
+  });
+  const paths = reviews?.map((review) => ({
+    params: { id: review.id.toString() },
+  }));
+
+  return { paths, fallback: false };
+};
+
+export const getStaticProps = async ({ params }) => {
+  const review = await client?.review.findUnique({
+    where: { id: params.id },
+  });
+
+  return {
+    props: {
+      data: { review: JSON.parse(JSON.stringify(review)) },
+    },
+  };
+};

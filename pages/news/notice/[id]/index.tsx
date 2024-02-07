@@ -11,6 +11,7 @@ import {
 } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import useMutation from '@libs/client/useMutation';
+import client from '@libs/server/client';
 import useSWR from 'swr';
 import { Dialog } from '@mui/material';
 import { DialogTitle } from '@mui/material';
@@ -34,7 +35,7 @@ interface FileResponse {
   ok: boolean;
 }
 
-const NoticeDetail: NextPage = () => {
+const NoticeDetail = ({ data }) => {
   const router = useRouter();
   const [editor, setEditor] = useState(null);
   const [editState, setEditState] = useState(false);
@@ -47,7 +48,7 @@ const NoticeDetail: NextPage = () => {
   const [fileData, setFileData] = useState<any[]>([]);
   const [uploadData, setUploadData] = useState<any[]>([]);
 
-  const { data, mutate } = useSWR<NoticeResponse>(
+  const { mutate } = useSWR<NoticeResponse>(
     router.query.id ? `/api/notice/${router.query?.id}` : null
   );
 
@@ -436,3 +437,26 @@ const NoticeDetail: NextPage = () => {
 };
 
 export default NoticeDetail;
+
+export const getStaticPaths = async () => {
+  const notices = await client?.notice.findMany({
+    select: { id: true },
+  });
+  const paths = notices?.map((notice) => ({
+    params: { id: notice.id.toString() },
+  }));
+
+  return { paths, fallback: false };
+};
+
+export const getStaticProps = async ({ params }) => {
+  const notice = await client?.notice.findUnique({
+    where: { id: params.id },
+  });
+
+  return {
+    props: {
+      data: { notice: JSON.parse(JSON.stringify(notice)) },
+    },
+  };
+};

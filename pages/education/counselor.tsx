@@ -4,6 +4,7 @@ import remarkParse from 'remark-parse/lib';
 import { unified } from 'unified';
 import { GetStaticProps } from 'next';
 import { CounselorSubject } from 'static/education/counselor';
+import { Fragment } from 'react';
 
 const Counselor = ({ data, subject }) => {
   return (
@@ -36,15 +37,15 @@ const Counselor = ({ data, subject }) => {
           </div>
           <hr className="my-8" />
           <span className="text-xl font-bold">수퍼비전의 주제</span>
-          {subject?.map((sub) => (
-            <>
+          {subject?.map((sub, idx) => (
+            <Fragment key={`${sub}-${idx}`}>
               <div className="mb-4 mt-8 font-bold text-[#444]">{sub.title}</div>
               <div className="mb-4 ml-8 flex flex-row">
                 <div>
                   <div className="text-[#878787]">{sub.content}</div>
                 </div>
               </div>
-            </>
+            </Fragment>
           ))}
         </div>
       </span>

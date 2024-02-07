@@ -150,16 +150,35 @@ body {
 }
 
 @media (min-width: 360px) and (max-width: 599px) {
+  .swipe-image {
+    object-fit: fill !important;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 60% !important;
+  }
+
   .swiper-slide .title {
-    font-size: 28px;
-    line-height: 40px;
+    font-size: 21px !important;
+    margin-top: 10px !important;
   }
   .swiper-slide .subtitle {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 16px !important;
+    margin-top: 10px !important;
   }
+  .parallax-bg {
+    padding: 60px !important;
+  }
+
   .tox-sidebar-wrap {
     height: 500px !important;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1033px) {
+  .swipe-image {
+    object-fit: fill !important;
   }
 }
 
@@ -203,25 +222,25 @@ body {
   height: 1em;
 }
 
-ul[role=navigation] {
+ul[role='navigation'] {
   display: flex;
   gap: 15px;
   justify-content: center;
   margin: 10px 0px;
 }
 
-ul[role=navigation] li {
+ul[role='navigation'] li {
   padding: 0.3rem 0.7rem;
   border-radius: 50px;
   &:hover {
     color: #fff;
     background: #a9ce8e;
-    cursor:pointer;
+    cursor: pointer;
   }
 }
 
 .selected {
   color: #fff;
   background: #a9ce8e;
-  cursor:pointer;
+  cursor: pointer;
 }

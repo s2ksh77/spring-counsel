@@ -14,38 +14,28 @@ const Footer: NextPage = () => {
       <div id="logo" className="flex cursor-pointer items-center overflow-y-hidden px-6 sm:hidden">
         <div>
           <Link href="/home">
-            <a>
+            
               <Image src={logo} width={250} height={250} alt="봄, 심리상담센터 로고" />
-            </a>
           </Link>
         </div>
       </div>
       <div id="copyright" className="ml-4 flex flex-col p-4">
         <ul className="flex last:mr-0 sm:hidden md:hidden [&>a>li:hover]:cursor-pointer [&>a>li:hover]:underline [&>a>li]:mr-3 [&>a>li]:border-r-[2px] [&>a>li]:border-[#e1e1e1] [&>a>li]:pr-3">
           <Link href="/introduce">
-            <a>
+            
               <li>센터 소개</li>
-            </a>
           </Link>
           <Link href="/counsel/private">
-            <a>
               <li>상담 및 심리검사 서비스</li>
-            </a>
           </Link>
           <Link href="/education/counselor">
-            <a>
               <li>교육 서비스</li>
-            </a>
           </Link>
           <Link href="/proposal">
-            <a>
               <li>상담문의 및 신청</li>
-            </a>
           </Link>
           <Link href="/news/notice">
-            <a>
               <li>센터 소식</li>
-            </a>
           </Link>
         </ul>
         <p className="text-[#999]">주소 : 경기 용인시 기흥구 흥덕중앙로 55 711호 </p>

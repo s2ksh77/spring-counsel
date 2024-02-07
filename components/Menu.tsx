@@ -40,8 +40,8 @@ const Menu: NextPage<{ menu: string }> = ({ menu }) => {
         <ul className="flex max-h-[300px] w-[100%] flex-col text-gray-800">
           {data?.value?.map((arr) => (
             <Link key={arr?.key} href={`/${menu}${arr.value}`}>
-              <li className="block h-[60px] items-center justify-center border-[1px] py-[12px] px-[24px] hover:cursor-pointer hover:bg-[#a9ce8e] hover:text-white">
-                <a>{arr.name}</a>
+              <li className="block h-[60px] items-center justify-center border-[1px] px-[24px] py-[12px] hover:cursor-pointer hover:bg-[#a9ce8e] hover:text-white">
+                {arr.name}
               </li>
             </Link>
           ))}
@@ -54,8 +54,8 @@ const Menu: NextPage<{ menu: string }> = ({ menu }) => {
         <ul className="flex max-h-[300px] w-[100%] flex-row text-gray-800">
           {data?.value?.map((arr) => (
             <Link key={arr?.key} href={`/${menu}${arr.value}`}>
-              <li className="block h-[60px] items-center justify-center border-[1px] py-[12px] px-[36px] hover:cursor-pointer hover:bg-[#a9ce8e] hover:text-white sm:px-[18px]">
-                <a>{arr.name}</a>
+              <li className="block h-[60px] items-center justify-center border-[1px] px-[36px] py-[12px] hover:cursor-pointer hover:bg-[#a9ce8e] hover:text-white sm:px-[18px]">
+                {arr.name}
               </li>
             </Link>
           ))}

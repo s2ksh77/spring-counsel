@@ -1,7 +1,7 @@
 import { MenuOutlined } from '@mui/icons-material';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { cls } from 'utils/common';
 

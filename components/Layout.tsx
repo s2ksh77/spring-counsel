@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import { useRouter, usePathname } from 'next/navigation';
 import React from 'react';
 import { cls } from 'utils/common';
 import Image from 'next/image';
@@ -9,25 +9,26 @@ import fixed3 from '../assets/banner3.png';
 
 const Layout: NextPage<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const isIntroduce = () => {
-    return router.pathname === '/introduce';
+    return pathname === '/introduce';
   };
 
   const isLogin = () => {
-    return router.pathname === '/login';
+    return pathname === '/login';
   };
 
   const isCounsel = (): boolean => {
-    return router.pathname.split('/')[1] === 'counsel';
+    return pathname.split('/')[1] === 'counsel';
   };
 
   const isEducation = (): boolean => {
-    return router.pathname.split('/')[1] === 'education';
+    return pathname.split('/')[1] === 'education';
   };
 
   const isProposal = (): boolean => {
-    return router.pathname.split('/')[1] === 'proposal';
+    return pathname.split('/')[1] === 'proposal';
   };
 
   const getClass = () => {

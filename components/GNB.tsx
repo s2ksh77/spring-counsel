@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { SetStateAction, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import logo from '../public/logo-small.jpg';

@@ -9,7 +9,7 @@ import center1 from '../../assets/center1.jpg';
 import center2 from '../../assets/center2.jpg';
 import kakao from '../../assets/i_kakao.png';
 
-const HomeClient = ({ notices }: { notices: Notice[] }) => {
+const HomeClient = ({ notices }) => {
   useMap();
   const router = useRouter();
 

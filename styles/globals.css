@@ -30,19 +30,59 @@
 }
 
 @font-face {
-  font-family: BMYEONSUNG;
-  src: local('BMYEONSUNG'), url('../assets/fonts/BMYEONSUNG.woff2') format('woff2'),
-    url('../assets/fonts/BMYEONSUNG.woff') format('woff'),
-    url('../assets/fonts/BMYEONSUNG.ttf') format('truetype');
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 700;
+  src: url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Bold.woff2')
+      format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Bold.woff')
+      format('woff'),
+    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Bold.ttf')
+      format('truetype');
   font-display: swap;
 }
 
-body {
-  font-family: 'Noto Sans KR', sans-serif;
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 500;
+  src: url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Medium.woff2')
+      format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Medium.woff')
+      format('woff'),
+    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Medium.ttf')
+      format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 400;
+  src: url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.woff2')
+      format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.woff')
+      format('woff'),
+    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.ttf')
+      format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 200;
+  src: url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Light.woff2')
+      format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Light.woff')
+      format('woff'),
+    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Light.ttf')
+      format('truetype');
+  font-display: swap;
+}
+
+* {
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
 }
 
 .banner-title {
-  font-family: 'BMYEONSUNG', sans-serif;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -203,25 +243,25 @@ body {
   height: 1em;
 }
 
-ul[role=navigation] {
+ul[role='navigation'] {
   display: flex;
   gap: 15px;
   justify-content: center;
   margin: 10px 0px;
 }
 
-ul[role=navigation] li {
+ul[role='navigation'] li {
   padding: 0.3rem 0.7rem;
   border-radius: 50px;
   &:hover {
     color: #fff;
     background: #a9ce8e;
-    cursor:pointer;
+    cursor: pointer;
   }
 }
 
 .selected {
   color: #fff;
   background: #a9ce8e;
-  cursor:pointer;
+  cursor: pointer;
 }

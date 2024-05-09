@@ -12,7 +12,7 @@ const Home = async () => {
     take: 5,
   });
 
-  return <HomeClient notices={JSON.parse(JSON.stringify(notices))} />;
+  return <HomeClient notices={notices} />;
 };
 
 export default Home;

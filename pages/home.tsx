@@ -4,8 +4,12 @@ import { Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/mate
 import { Notice } from '@prisma/client';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import center1 from '../assets/center1.jpg';
-import center2 from '../assets/center2.jpg';
+import center1 from '../assets/bom_center.jpg';
+import center2 from '../assets/bom_center2.jpg';
+import center3 from '../assets/bom_center3.jpg';
+import center4 from '../assets/bom_center4.jpg';
+import center5 from '../assets/bom_center5.jpg';
+import center6 from '../assets/bom_center6.jpg';
 import kakao from '../assets/i_kakao.png';
 import client from '@libs/server/client';
 import { withSsrSession } from '@libs/server/withSession';
@@ -140,15 +144,29 @@ const Home = ({ notices }: { notices?: Notice[] }) => {
           센터 소개
         </div>
 
-        <div className="col mr-auto flex h-[630px] w-[100%] border-y-[1px] p-4 shadow-lg sm:h-[300px] md:max-h-[500px] md:min-h-[450px]">
+        <div className="col mr-auto flex h-[800px] w-[100%] border-y-[1px] p-4 shadow-lg sm:h-[450px] md:max-h-[650px] md:min-h-[450px]">
           <div className="flex flex-col">
             <div className="mb-4 flex w-[6.6rem] border-b-4 pb-4 text-2xl font-bold">센터 사진</div>
             <div className="flex flex-row pt-8">
-              <div className="mr-auto w-[48%]">
+              <div className="mr-auto w-[33%]">
                 <Image src={center1} alt="센터 내부 사진" />
               </div>
-              <div className="w-[48%]">
+              <div className="mr-auto w-[33%]">
                 <Image src={center2} alt="센터 내부 사진" />
+              </div>
+              <div className="mr-auto w-[33%]">
+                <Image src={center3} alt="센터 내부 사진" />
+              </div>
+            </div>
+            <div className="flex flex-row pt-8">
+              <div className="mr-auto w-[33%]">
+                <Image src={center4} alt="센터 내부 사진" />
+              </div>
+              <div className="mr-auto w-[33%]">
+                <Image src={center6} alt="센터 내부 사진" />
+              </div>
+              <div className="mr-auto w-[33%]">
+                <Image src={center5} alt="센터 내부 사진" />
               </div>
             </div>
           </div>

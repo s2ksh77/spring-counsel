@@ -48,9 +48,7 @@ const Footer: NextPage = () => {
             </a>
           </Link>
         </ul>
-        <p className="text-[#999]">
-          주소 : 경기 수원시 영통구 영통로 498, 황골마을주공 1단지 145동 101호{' '}
-        </p>
+        <p className="text-[#999]">주소 : 경기 수원시 영통구 영통로 498, 145동 101호 </p>
         <p className="text-[#999]">대표자: 김정희 </p>
         <p className="text-[#999]">전화번호 : 010-6220-1850 </p>
         <p className="text-[#999]">Copyright © 봄, 심리상담센터 All Rights Reserved.</p>

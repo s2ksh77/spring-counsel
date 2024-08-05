@@ -14,31 +14,31 @@ const Footer: NextPage = () => {
       <div id="logo" className="flex cursor-pointer items-center overflow-y-hidden px-6 sm:hidden">
         <div>
           <Link href="/home">
-            
-              <Image src={logo} width={250} height={250} alt="봄, 심리상담센터 로고" />
+            <Image src={logo} width={250} height={250} alt="봄, 심리상담센터 로고" />
           </Link>
         </div>
       </div>
       <div id="copyright" className="ml-4 flex flex-col p-4">
         <ul className="flex last:mr-0 sm:hidden md:hidden [&>a>li:hover]:cursor-pointer [&>a>li:hover]:underline [&>a>li]:mr-3 [&>a>li]:border-r-[2px] [&>a>li]:border-[#e1e1e1] [&>a>li]:pr-3">
           <Link href="/introduce">
-            
-              <li>센터 소개</li>
+            <li>센터 소개</li>
           </Link>
           <Link href="/counsel/private">
-              <li>상담 및 심리검사 서비스</li>
+            <li>상담 및 심리검사 서비스</li>
           </Link>
           <Link href="/education/counselor">
-              <li>교육 서비스</li>
+            <li>교육 서비스</li>
           </Link>
           <Link href="/proposal">
-              <li>상담문의 및 신청</li>
+            <li>상담문의 및 신청</li>
           </Link>
           <Link href="/news/notice">
-              <li>센터 소식</li>
+            <li>센터 소식</li>
           </Link>
         </ul>
-        <p className="text-[#999]">주소 : 경기 용인시 기흥구 흥덕중앙로 55 711호 </p>
+        <p className="text-[#999]">
+          주소 : 경기 수원시 영통구 영통로 498, 황골마을주공 1단지 145동 101호{' '}
+        </p>
         <p className="text-[#999]">대표자: 김정희 </p>
         <p className="text-[#999]">전화번호 : 010-6220-1850 </p>
         <p className="text-[#999]">Copyright © 봄, 심리상담센터 All Rights Reserved.</p>

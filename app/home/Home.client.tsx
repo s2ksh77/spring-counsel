@@ -159,8 +159,11 @@ const HomeClient = ({ notices }: { notices: Notice[] }) => {
         <div className="mx-auto mt-20 w-full">
           <div id="map" style={{ width: '80%', height: '500px', margin: 'auto' }} />
         </div>
-        <span className="banner-title mt-8 text-xl font-normal sm:mr-4 sm:text-sm">
-          주소 : 경기 용인시 기흥구 흥덕중앙로 55 (흥덕역 리써밋 타워) 711호
+        <span className="banner-title mx-auto mt-8 text-xl font-normal sm:mr-4 sm:text-sm">
+          주소 : 경기 수원시 영통구 영통로 498, 145동 101호
+        </span>
+        <span className="banner-title text-m mx-auto mt-2 sm:text-sm">
+          대중교통 이용: 분당선 청명역 6번출구 (도보 5분 이내)
         </span>
       </div>
     </div>

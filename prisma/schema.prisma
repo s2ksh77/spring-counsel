@@ -4,8 +4,9 @@ generator client {
 }
 
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
   referentialIntegrity = "prisma"
 }
 
@@ -25,8 +26,8 @@ model Notice {
   id        String       @id @default(uuid())
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
-  title     String       @db.MediumText
-  content   String       @db.LongText
+  title     String       @db.VarChar()
+  content   String       @db.VarChar()
   isPrimary Boolean?
   user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
@@ -42,7 +43,7 @@ model Reservation {
   name      String
   email     String?
   phone     Int
-  content   String            @db.LongText
+  content   String            @db.VarChar()
   status    String
   files     ReservationFile[]
 }
@@ -51,8 +52,8 @@ model Review {
   id        String       @id @default(uuid())
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
-  title     String       @db.MediumText
-  content   String       @db.LongText
+  title     String       @db.VarChar()
+  content   String       @db.VarChar()
   user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   files     ReviewFile[]
@@ -64,8 +65,8 @@ model ReviewFile {
   id        String   @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  name      String   @db.MediumText
-  url       String   @db.MediumText
+  name      String   @db.VarChar()
+  url       String   @db.VarChar()
   review    Review?  @relation(fields: [reviewId], references: [id], onDelete: Cascade)
   reviewId  String?
 
@@ -76,8 +77,8 @@ model NoticeFile {
   id        String   @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  name      String   @db.MediumText
-  url       String   @db.MediumText
+  name      String   @db.VarChar()
+  url       String   @db.VarChar()
   notice    Notice?  @relation(fields: [noticeId], references: [id], onDelete: Cascade)
   noticeId  String?
 
@@ -88,8 +89,8 @@ model ReservationFile {
   id            String       @id
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
-  name          String       @db.MediumText
-  url           String       @db.MediumText
+  name          String       @db.VarChar()
+  url           String       @db.VarChar()
   reservation   Reservation? @relation(fields: [reservationId], references: [id], onDelete: Cascade)
   reservationId String?
 

@@ -5,15 +5,15 @@ declare module 'iron-session' {
     user?: {
       id: string;
     };
-  } 
+  }
 }
 
-const cookieOptions = {
+export const cookieOptions = {
   cookieName: 'spring-counsel',
   password: process.env.COOKIE_PASSWORD!,
   cookieOptions: {
-    maxAge: undefined
-  }
+    maxAge: undefined,
+  },
 };
 
 export function withApiSession(fn: any) {

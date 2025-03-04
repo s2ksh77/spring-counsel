@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { SetStateAction, useEffect, useState } from 'react';
-import useSWR from 'swr';
 import logo from '../public/logo-small.jpg';
 import logoLarge from '../public/logo-main.jpg';
 import {
@@ -19,49 +18,30 @@ import {
 import useMutation from '@libs/client/useMutation';
 import { MenuOutlined } from '@mui/icons-material';
 import ContextMenu from './ContextMenu';
+import { fetchAPI } from '@libs/client/fetcher';
+import useSWR from 'swr';
+import { useSession } from 'hooks/useSession';
 
-const GNB: NextPage<{
-  loginState: boolean;
-  setLoginState: React.Dispatch<SetStateAction<boolean>>;
-}> = ({ loginState, setLoginState }) => {
-  const { data } = useSWR('/api/login');
-  const [isLogin, setIsLogin] = useState(false);
+const GNB: NextPage = () => {
+  const { isLogin, refreshSession } = useSession();
   const [dialogVisible, setDialogVisible] = useState(false);
   const [logout, { data: logoutData }] = useMutation('/api/login/logout');
   const router = useRouter();
 
-  const goLogIn = () => {
-    router.push('/login');
-  };
-
-  const openDialog = () => {
-    setDialogVisible(true);
-  };
+  const goLogIn = () => router.push('/login');
+  const openDialog = () => setDialogVisible(true);
+  const handleClose = () => setDialogVisible(false);
 
   const handleLogout = () => {
     logout('');
     setDialogVisible(false);
-    setLoginState(false);
   };
 
-  const handleClose = () => setDialogVisible(false);
-
   useEffect(() => {
-    setIsLogin(loginState);
-  }, [loginState]);
-
-  useEffect(() => {
-    if (logoutData && logoutData?.ok) {
-      setIsLogin(false);
+    if (logoutData?.ok) {
+      refreshSession();
     }
   }, [logoutData]);
-
-  const removeCache = async (e: any) => {
-    if (e.isTrusted) {
-      await logout('');
-      setIsLogin(false);
-    }
-  };
 
   return (
     <div id="gnb" className="gnb bg-black-400 border-#f5f5f5">

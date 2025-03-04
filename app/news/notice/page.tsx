@@ -1,16 +1,16 @@
+import { fetchAPI } from '@libs/client/fetcher';
 import NoticeClient from './Notice.client';
 import client from '@libs/server/client';
 
-const Notice = async () => {
-  const notices = await client.notice.findMany({
-    orderBy: [
-      {
-        createdAt: 'desc',
-      },
-    ],
-  });
+async function getNotices() {
+  const notices = await fetchAPI('/api/notice', 'force-cache');
+  return notices;
+}
 
-  return <NoticeClient notices={JSON.parse(JSON.stringify(notices))} isLogin={false} />;
+const Notice = async () => {
+  const notices = await getNotices();
+
+  return <NoticeClient notices={notices} />;
 };
 
 export default Notice;

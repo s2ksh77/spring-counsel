@@ -1,9 +1,11 @@
 'use client';
 import useMutation from '@libs/client/useMutation';
+import { useSession } from 'hooks/useSession';
 import { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
 import React, { SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { mutate } from 'swr';
 
 interface LoginForm {
   userId: string;
@@ -15,10 +17,9 @@ interface LoginResponse {
   message?: string;
 }
 
-const Login: NextPage<{ setLoginState: React.Dispatch<SetStateAction<boolean>> }> = ({
-  setLoginState,
-}) => {
+const Login: NextPage = () => {
   const router = useRouter();
+  const { refreshSession } = useSession();
   const { register, handleSubmit, watch } = useForm<LoginForm>();
   const [login, { data, loading }] = useMutation<LoginResponse>('/api/login');
   const [error, setError] = useState(false);
@@ -32,8 +33,8 @@ const Login: NextPage<{ setLoginState: React.Dispatch<SetStateAction<boolean>> }
 
   useEffect(() => {
     if (data?.ok) {
+      refreshSession();
       router.push('/home');
-      setLoginState(true);
     } else if (data?.message) setError(true);
   }, [data]);
 

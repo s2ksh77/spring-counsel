@@ -19,20 +19,27 @@ function MyApp({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const [menu, setMenu] = useState('');
-  const [loginState, setLoginState] = useState(false);
   const title = '봄, 심리상담센터';
+  const { isHome, isLogin, isProposalList } = getPageState(pathname);
+  const showSection = isHome && !isLogin;
+  const showMenu = !(isHome || isLogin || isProposalList);
+  const withContent = !(isHome || isLogin);
 
-  const isHome = (): boolean => {
-    return pathname === '/' || pathname === '/home';
-  };
+  function getPageState(pathname: string) {
+    switch (true) {
+      case pathname === '/' || pathname === '/home':
+        return { isHome: true, isLogin: false, isProposalList: false };
 
-  const isLogin = (): boolean => {
-    return pathname === '/login';
-  };
+      case pathname === '/login':
+        return { isHome: false, isLogin: true, isProposalList: false };
 
-  const isProposalList = (): boolean => {
-    return pathname === '/proposal/list' || pathname === '/proposal/[id]';
-  };
+      case pathname.startsWith('/proposal/'):
+        return { isHome: false, isLogin: false, isProposalList: true };
+
+      default:
+        return { isHome: false, isLogin: false, isProposalList: false };
+    }
+  }
 
   useEffect(() => {
     setMenu(pathname.split('/')[1]);
@@ -65,31 +72,19 @@ function MyApp({ children }: { children: ReactNode }) {
         />
       </Head>
       <body>
-        <SWRConfig
-          value={{
-            fetcher: (url: string) => {
-              console.log('url', url);
-              return fetch(url).then((res) => {
-                console.log('res', res);
-                return res.json();
-              });
-            },
-          }}
-        >
-          <div className="mx-auto w-full overflow-y-auto overflow-x-scroll">
-            <GNB loginState={loginState} setLoginState={setLoginState} />
-            {isHome() && !isLogin() ? <Section /> : null}
-            <Layout>
-              {isHome() || isLogin() || isProposalList() ? null : <Menu menu={menu} />}
-              {isHome() || isLogin() ? (
-                <div className="sm:w-full">{children}</div>
-              ) : (
-                <Content>{children}</Content>
-              )}
-            </Layout>
-          </div>
-          <Footer />
-        </SWRConfig>
+        <div className="mx-auto w-full overflow-y-auto overflow-x-scroll">
+          <GNB />
+          {showSection && <Section />}
+          <Layout>
+            {showMenu && <Menu menu={menu} />}
+            {withContent ? (
+              <Content>{children}</Content>
+            ) : (
+              <div className="sm:w-full">{children}</div>
+            )}
+          </Layout>
+        </div>
+        <Footer />
       </body>
       <Script
         strategy="afterInteractive"

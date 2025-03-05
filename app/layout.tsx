@@ -43,7 +43,7 @@ function MyApp({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setMenu(pathname.split('/')[1]);
-  }, [router, menu]);
+  }, [pathname]);
 
   return (
     <html lang="ko">

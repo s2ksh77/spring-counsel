@@ -7,28 +7,29 @@ import useSWR from 'swr';
 import Uploader from '@components/Uploader';
 import { useSession } from 'hooks/useSession';
 
-interface NoticeEditorProps {
-  notice: {
+interface ContentEditorProps {
+  data: {
     id: string;
     title: string;
     content: string;
     isPrimary: boolean;
     files?: { id: string; name: string }[];
   };
+  type?: 'notice' | 'review';
   onCancel: () => void;
 }
 
-const NoticeEditor = ({ notice, onCancel }: NoticeEditorProps) => {
+const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
   const { isLogin } = useSession();
-  let [title, setTitle] = useState<any | null>(notice.title || '');
-  let [content, setContent] = useState<any | null>(notice.content || '');
-  const [checked, setChecked] = useState<any | false>(notice.isPrimary || false);
+  let [title, setTitle] = useState<any | null>(data.title || '');
+  let [content, setContent] = useState<any | null>(data.content || '');
+  const [checked, setChecked] = useState<any | false>(data.isPrimary || false);
   const editorRef = useRef<HTMLInputElement | null | any>(null);
   const [fileData, setFileData] = useState<any[]>([]);
   const [uploadData, setUploadData] = useState<any[]>([]);
   const [uploadType, setUploadType] = useState('');
 
-  const [editNotice, { data: editData, loading }] = useMutation(`/api/notice/${notice.id}/edit`);
+  const [editContent, { data: editData, loading }] = useMutation(`/api/${type}/${data.id}/edit`);
   const [createUpload] = useMutation<FileResponse>('/api/upload');
 
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,9 +47,9 @@ const NoticeEditor = ({ notice, onCancel }: NoticeEditorProps) => {
 
   const handleSave = async () => {
     if (loading) return;
-    if (title === '') title = notice?.title;
-    if (content === '') content = notice?.content;
-    await editNotice({
+    if (title === '') title = data?.title;
+    if (content === '') content = data?.content;
+    await editContent({
       title,
       content,
       isPrimary: checked,
@@ -58,8 +59,8 @@ const NoticeEditor = ({ notice, onCancel }: NoticeEditorProps) => {
         createUpload({
           url: '',
           name: el.name,
-          form: 'notice',
-          id: notice.id,
+          form: type,
+          id: data.id,
           fileId: el.id[0],
         });
       });
@@ -79,10 +80,10 @@ const NoticeEditor = ({ notice, onCancel }: NoticeEditorProps) => {
   };
 
   useEffect(() => {
-    if (notice) {
-      setFileData(notice.files);
+    if (data) {
+      setFileData(data.files);
     }
-  }, [notice]);
+  }, [data]);
 
   return (
     <>
@@ -197,4 +198,4 @@ const NoticeEditor = ({ notice, onCancel }: NoticeEditorProps) => {
   );
 };
 
-export default NoticeEditor;
+export default ContentEditor;

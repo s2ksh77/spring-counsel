@@ -5,8 +5,8 @@ import { useSession } from 'hooks/useSession';
 import { useEffect, useState } from 'react';
 import AWS from 'aws-sdk';
 
-interface NoticeContentProps {
-  notice: {
+interface ContentProps {
+  data: {
     content: string;
     updatedAt?: string;
     files?: { id: string; name: string }[];
@@ -15,7 +15,7 @@ interface NoticeContentProps {
   handleDialogOpen: () => void;
 }
 
-const NoticeContent = ({ notice, onEdit, handleDialogOpen }: NoticeContentProps) => {
+const Content = ({ data, onEdit, handleDialogOpen }: ContentProps) => {
   const { isLogin } = useSession();
   const [fileData, setFileData] = useState<any[]>([]);
 
@@ -45,10 +45,10 @@ const NoticeContent = ({ notice, onEdit, handleDialogOpen }: NoticeContentProps)
   };
 
   useEffect(() => {
-    if (notice) {
-      setFileData(notice.files);
+    if (data) {
+      setFileData(data.files);
     }
-  }, [notice]);
+  }, [data]);
 
   return (
     <>
@@ -58,7 +58,7 @@ const NoticeContent = ({ notice, onEdit, handleDialogOpen }: NoticeContentProps)
             <label className="flex">제목</label>
           </div>
           <div className="w-full">
-            <label className="text-lg font-bold">{notice?.title}</label>
+            <label className="text-lg font-bold">{data?.title}</label>
           </div>
           {isLogin && (
             <div className="flex flex-row">
@@ -97,10 +97,10 @@ const NoticeContent = ({ notice, onEdit, handleDialogOpen }: NoticeContentProps)
           </div>
           <div className="w-full">
             <label>
-              {notice?.updatedAt !== undefined
-                ? notice?.updatedAt.toString().split('T')[0] +
+              {data?.updatedAt !== undefined
+                ? data?.updatedAt.toString().split('T')[0] +
                   ' ' +
-                  notice?.updatedAt.toString().split('T')[1].slice(0, 5)
+                  data?.updatedAt.toString().split('T')[1].slice(0, 5)
                 : ''}
             </label>
           </div>
@@ -109,7 +109,7 @@ const NoticeContent = ({ notice, onEdit, handleDialogOpen }: NoticeContentProps)
       <div className="no-toolbar h-fit min-h-[500px] pt-8">
         <Editor
           id="readEditor"
-          value={notice?.content}
+          value={data?.content}
           apiKey="8p9h7icidtp8v7ebuiyjo96ymstju4oy95g1xi68gdhvejph"
           init={{
             height: '100%',
@@ -131,7 +131,7 @@ const NoticeContent = ({ notice, onEdit, handleDialogOpen }: NoticeContentProps)
                 }, 500);
               });
             },
-            content_style: '.tinymce .mce-preview-object .mce-shim { display: none !important;}',
+            content_style: `.tinymce .mce-preview-object .mce-shim { display: none !important;} .timymce { overflow-y: scroll }`,
           }}
         />
       </div>
@@ -157,4 +157,4 @@ const NoticeContent = ({ notice, onEdit, handleDialogOpen }: NoticeContentProps)
   );
 };
 
-export default NoticeContent;
+export default Content;

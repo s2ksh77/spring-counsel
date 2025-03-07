@@ -1,14 +1,14 @@
 import { Button } from '@mui/material';
 import { EditOutlined, DeleteOutlineOutlined } from '@mui/icons-material';
 
-interface NoticeHeaderProps {
+interface ContentHeaderProps {
   notice: { title: string };
   isLogin: boolean;
   onEdit: () => void;
   onDelete: () => void;
 }
 
-const NoticeHeader = ({ notice, isLogin, onEdit, onDelete }: NoticeHeaderProps) => (
+const ContentHeader = ({ notice, isLogin, onEdit, onDelete }: ContentHeaderProps) => (
   <div className="border-b-2 pb-8 text-3xl font-bold">
     공지사항
     <div className="flex items-center justify-between pt-4">
@@ -27,4 +27,4 @@ const NoticeHeader = ({ notice, isLogin, onEdit, onDelete }: NoticeHeaderProps) 
   </div>
 );
 
-export default NoticeHeader;
+export default ContentHeader;

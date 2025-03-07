@@ -1,5 +1,5 @@
 import {
-  Dialog,
+  Dialog as DialogCompo,
   DialogTitle,
   DialogContent,
   DialogContentText,
@@ -8,14 +8,14 @@ import {
 } from '@mui/material';
 import useMutation from '@libs/client/useMutation';
 
-interface NoticeDialogProps {
+interface DialogProps {
   open: boolean;
   onClose: () => void;
   id: string;
   router: { push: (path: string) => void };
 }
 
-const NoticeDialog = ({ open, onClose, id, router }: NoticeDialogProps) => {
+const Dialog = ({ open, onClose, id, router }: DialogProps) => {
   const [deleteNotice, { loading }] = useMutation(`/api/notice/${id}/delete`);
 
   const handleDelete = async () => {
@@ -25,7 +25,7 @@ const NoticeDialog = ({ open, onClose, id, router }: NoticeDialogProps) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <DialogCompo open={open} onClose={onClose}>
       <DialogTitle>공지사항 삭제</DialogTitle>
       <DialogContent>
         <DialogContentText>게시글을 삭제 하시겠습니까?</DialogContentText>
@@ -34,8 +34,8 @@ const NoticeDialog = ({ open, onClose, id, router }: NoticeDialogProps) => {
         <Button onClick={onClose}>취소</Button>
         <Button onClick={handleDelete}>확인</Button>
       </DialogActions>
-    </Dialog>
+    </DialogCompo>
   );
 };
 
-export default NoticeDialog;
+export default Dialog;

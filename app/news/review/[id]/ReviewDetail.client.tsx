@@ -6,9 +6,9 @@ import { MenuOutlined } from '@mui/icons-material';
 import { useSession } from 'hooks/useSession';
 import { Header, Content, Editor, Dialog } from '@components/Content/index';
 
-interface NoticeDetailClientProps {
+interface ReviewDetailClientProps {
   id: string;
-  notice: {
+  review: {
     id: string;
     title: string;
     content: string;
@@ -18,13 +18,15 @@ interface NoticeDetailClientProps {
   };
 }
 
-const NoticeDetailClient = ({ id, notice }: NoticeDetailClientProps) => {
+const ReviewDetailClient = ({ id, review }: ReviewDetailClientProps) => {
   const router = useRouter();
   const { isLogin } = useSession();
   const [editState, setEditState] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
 
-  const goBack = () => router.push('/news/notice');
+  console.log(review);
+
+  const goBack = () => router.push('/news/review');
   const handleEdit = () => setEditState(true);
   const handleCancel = () => setEditState(false);
   const handleDeleteOpen = () => setDialogVisible(true);
@@ -33,9 +35,9 @@ const NoticeDetailClient = ({ id, notice }: NoticeDetailClientProps) => {
   return (
     <div className="flex h-full w-full flex-col overflow-y-auto p-8">
       {editState ? (
-        <Editor type={'notice'} data={notice} onCancel={handleCancel} />
+        <Editor type={'review'} data={review} onCancel={handleCancel} />
       ) : (
-        <Content data={notice} onEdit={handleEdit} handleDialogOpen={handleDeleteOpen} />
+        <Content data={review} onEdit={handleEdit} handleDialogOpen={handleDeleteOpen} />
       )}
 
       <div className="flex justify-end pt-2">
@@ -49,4 +51,4 @@ const NoticeDetailClient = ({ id, notice }: NoticeDetailClientProps) => {
   );
 };
 
-export default NoticeDetailClient;
+export default ReviewDetailClient;

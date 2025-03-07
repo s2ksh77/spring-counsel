@@ -9,8 +9,10 @@ import { withSsrSession } from '@libs/server/withSession';
 import ReactPaginate from 'react-paginate';
 import { useEffect } from 'react';
 import useSWR from 'swr';
+import { useSession } from 'hooks/useSession';
 
-const ReviewClient = ({ data: { curPage, isLogin, reviews, maxPage } }) => {
+const ReviewClient = ({ data: { curPage, reviews, maxPage } }) => {
+  const { isLogin } = useSession();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -34,14 +36,14 @@ const ReviewClient = ({ data: { curPage, isLogin, reviews, maxPage } }) => {
   return (
     <div className="h-full p-8">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담후기</div>
-      {isLogin ? (
+      {isLogin && (
         <div className="float-right ml-auto mt-4 flex">
           <Button onClick={onClick} style={{ color: 'black' }}>
             <EditOutlined />
             글쓰기
           </Button>
         </div>
-      ) : null}
+      )}
       <div className="min-h-[85%]">
         <div className="border-1 flex w-full flex-col">
           {reviews?.map((review, index) => (
@@ -100,33 +102,5 @@ const ReviewClient = ({ data: { curPage, isLogin, reviews, maxPage } }) => {
     </div>
   );
 };
-
-// export const getServerSideProps = withSsrSession(async function ({ req, query }: NextPageContext) {
-//   const curPage = (query?.page as unknown as number) ?? 1;
-
-//   const reviews = await client.review.findMany({
-//     orderBy: [
-//       {
-//         createdAt: 'desc',
-//       },
-//     ],
-//     include: {
-//       files: true,
-//     },
-//     skip: (curPage - 1) * 5,
-//     take: 5,
-//   });
-
-//   const totalReviews = await client.review.count();
-
-//   return {
-//     props: {
-//       reviews: JSON.parse(JSON.stringify(reviews)),
-//       isLogin: !!req?.session?.user?.id,
-//       curPage,
-//       maxPage: Math.ceil(totalReviews / 5),
-//     },
-//   };
-// });
 
 export default ReviewClient;

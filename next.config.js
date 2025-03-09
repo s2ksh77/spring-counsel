@@ -4,9 +4,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   reactStrictMode: true,
   swcMinify: false,
   images: {

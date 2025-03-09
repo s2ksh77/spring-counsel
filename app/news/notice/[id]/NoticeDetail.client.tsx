@@ -44,7 +44,13 @@ const NoticeDetailClient = ({ id, notice }: NoticeDetailClientProps) => {
         </Button>
       </div>
 
-      <Dialog open={dialogVisible} onClose={handleDeleteClose} id={id} router={router} />
+      <Dialog
+        open={dialogVisible}
+        type={'notice'}
+        onClose={handleDeleteClose}
+        id={id}
+        router={router}
+      />
     </div>
   );
 };

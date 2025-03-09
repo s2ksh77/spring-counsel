@@ -11,23 +11,24 @@ import useMutation from '@libs/client/useMutation';
 interface DialogProps {
   open: boolean;
   onClose: () => void;
+  type: 'notice' | 'review';
   id: string;
   router: { push: (path: string) => void };
 }
 
-const Dialog = ({ open, onClose, id, router }: DialogProps) => {
-  const [deleteNotice, { loading }] = useMutation(`/api/notice/${id}/delete`, 'DELETE');
+const Dialog = ({ open, onClose, type, id, router }: DialogProps) => {
+  const [deleteContent, { loading }] = useMutation(`/api/${type}/${id}/delete`, 'DELETE');
 
   const handleDelete = async () => {
     if (loading) return;
-    await deleteNotice();
-    router.push('/news/notice');
+    await deleteContent();
+    router.push(`/news/${type}`);
     router.refresh();
   };
 
   return (
     <DialogCompo open={open} onClose={onClose}>
-      <DialogTitle>공지사항 삭제</DialogTitle>
+      <DialogTitle>{type === 'notice' ? '공지사항' : '상담후기'} 삭제</DialogTitle>
       <DialogContent>
         <DialogContentText>게시글을 삭제 하시겠습니까?</DialogContentText>
       </DialogContent>

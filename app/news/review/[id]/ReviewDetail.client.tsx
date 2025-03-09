@@ -24,8 +24,6 @@ const ReviewDetailClient = ({ id, review }: ReviewDetailClientProps) => {
   const [editState, setEditState] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
 
-  console.log(review);
-
   const goBack = () => router.push('/news/review');
   const handleEdit = () => setEditState(true);
   const handleCancel = () => setEditState(false);
@@ -46,7 +44,13 @@ const ReviewDetailClient = ({ id, review }: ReviewDetailClientProps) => {
         </Button>
       </div>
 
-      <Dialog open={dialogVisible} onClose={handleDeleteClose} id={id} router={router} />
+      <Dialog
+        open={dialogVisible}
+        type={'review'}
+        onClose={handleDeleteClose}
+        id={id}
+        router={router}
+      />
     </div>
   );
 };

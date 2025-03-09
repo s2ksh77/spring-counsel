@@ -59,19 +59,8 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
       content,
       isPrimary: checked,
     });
-    if (uploadData.length > 0) {
-      uploadData?.map((el: any) => {
-        createUpload({
-          url: '',
-          name: el.name,
-          form: type,
-          id: data.id,
-          fileId: el.id[0],
-        });
-      });
-      setUploadData([]);
-    }
-    router.push('/news/notice');
+    await uploadFileMeta();
+    router.push(`/news/${type}`);
     router.refresh();
   };
 
@@ -86,6 +75,29 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
     setFileData([...fileData, obj]);
   };
 
+  const uploadFileMeta = () => {
+    const imageList = editorRef?.current?.editor?.getBody()?.querySelectorAll('img');
+
+    const newImageList = [...imageList].filter(
+      (image) => !fileData?.some((uploaded) => uploaded.id === image.getAttribute('id'))
+    );
+
+    if (newImageList && newImageList.length > 0) {
+      [...newImageList].map((el) => {
+        const fileId = el.getAttribute('id');
+        const url = el.getAttribute('src');
+        const name = el.getAttribute('data-name');
+        createUpload({
+          url,
+          name,
+          form: type,
+          id: data.id,
+          fileId,
+        });
+      });
+    }
+  };
+
   useEffect(() => {
     if (data) {
       setFileData(data.files);
@@ -95,17 +107,19 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
   return (
     <div className="flex h-full w-full flex-col overflow-y-auto p-8">
       <div className="w-full pt-8">
-        <div className="float-right ml-auto flex">
-          <div>
-            공지로 등록
-            <Checkbox
-              checked={checked}
-              onChange={handleCheckBoxChange}
-              inputProps={{ 'aria-label': 'controlled' }}
-              className="transition-none"
-            />
+        {type === 'notice' && (
+          <div className="float-right ml-auto flex">
+            <div>
+              공지로 등록
+              <Checkbox
+                checked={checked}
+                onChange={handleCheckBoxChange}
+                inputProps={{ 'aria-label': 'controlled' }}
+                className="transition-none"
+              />
+            </div>
           </div>
-        </div>
+        )}
         <div className="flex w-full flex-row items-center">
           <div className="w-[50px] items-center">
             <label>제목</label>

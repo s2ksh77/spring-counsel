@@ -11,11 +11,6 @@ const svcObjecct = {
 export async function POST(req: NextRequest) {
   try {
     const user = await getUser(req);
-
-    if (!user) {
-      return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
-    }
-
     const { name, url, form, id, fileId } = await req.json();
 
     await client[svcObjecct[form]].create({

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import client from '@libs/server/client';
-import { cookieOptions } from '@libs/server/withSession';
-import { getIronSession } from 'iron-session';
+import { getUser } from '@libs/server/session';
 
 export async function GET(req: Request) {
   try {

@@ -22,11 +22,7 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const session = await getIronSession(req, new Response(), cookieOptions);
-    if (!session?.user) {
-      return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
-    }
-
+    const user = await getUser(req);
     const { title, content, isPrimary } = await req.json();
 
     const notice = await client.notice.create({
@@ -36,7 +32,7 @@ export async function POST(req: Request) {
         isPrimary,
         user: {
           connect: {
-            id: session.user.id,
+            id: user.id,
           },
         },
       },

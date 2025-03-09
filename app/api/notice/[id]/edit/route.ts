@@ -4,10 +4,6 @@ import { getUser } from '@libs/server/session';
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   const user = await getUser(req);
-  if (!user) {
-    return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
-  }
-
   const { title, content, isPrimary } = await req.json();
   try {
     const notice = await client.notice.update({

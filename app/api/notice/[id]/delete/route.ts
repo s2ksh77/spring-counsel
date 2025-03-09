@@ -5,16 +5,13 @@ import { getUser } from '@libs/server/session';
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     const user = await getUser(req);
-    if (!user) {
-      return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
+    if (user) {
+      await client.notice.delete({
+        where: {
+          id: params.id,
+        },
+      });
     }
-
-    await client.notice.delete({
-      where: {
-        id: params.id,
-      },
-    });
-
     return NextResponse.json({ ok: true });
   } catch (error) {
     return NextResponse.json({ ok: false, error: 'Failed to delete notice' }, { status: 500 });

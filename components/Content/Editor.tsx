@@ -6,6 +6,7 @@ import useMutation from '@libs/client/useMutation';
 import useSWR from 'swr';
 import Uploader from '@components/Uploader';
 import { useSession } from 'hooks/useSession';
+import { useRouter } from 'next/navigation';
 
 interface ContentEditorProps {
   data: {
@@ -21,6 +22,7 @@ interface ContentEditorProps {
 
 const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
   const { isLogin } = useSession();
+  const router = useRouter();
   let [title, setTitle] = useState<any | null>(data.title || '');
   let [content, setContent] = useState<any | null>(data.content || '');
   const [checked, setChecked] = useState<any | false>(data.isPrimary || false);
@@ -29,7 +31,10 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
   const [uploadData, setUploadData] = useState<any[]>([]);
   const [uploadType, setUploadType] = useState('');
 
-  const [editContent, { data: editData, loading }] = useMutation(`/api/${type}/${data.id}/edit`);
+  const [editContent, { data: editData, loading }] = useMutation(
+    `/api/${type}/${data.id}/edit`,
+    'PUT'
+  );
   const [createUpload] = useMutation<FileResponse>('/api/upload');
 
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +71,8 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
       });
       setUploadData([]);
     }
+    router.push('/news/notice');
+    router.refresh();
   };
 
   const handleCancel = () => {

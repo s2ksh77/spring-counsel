@@ -7,7 +7,7 @@ interface UseMutationState<T> {
 }
 type UseMutationResult<T> = [(data: any) => void, UseMutationState<T>];
 
-export default function useMutation<T = any>(url: string): UseMutationResult<T> {
+export default function useMutation<T = any>(url: string, method = 'POST'): UseMutationResult<T> {
   const [state, setState] = useState<UseMutationState<T>>({
     loading: false,
     data: undefined,
@@ -16,7 +16,7 @@ export default function useMutation<T = any>(url: string): UseMutationResult<T> 
   function mutation(data: any) {
     setState((prev) => ({ ...prev, loading: true }));
     fetch(url, {
-      method: 'POST',
+      method,
       headers: {
         'Content-Type': 'application/json',
       },

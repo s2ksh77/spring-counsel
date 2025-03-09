@@ -16,12 +16,13 @@ interface DialogProps {
 }
 
 const Dialog = ({ open, onClose, id, router }: DialogProps) => {
-  const [deleteNotice, { loading }] = useMutation(`/api/notice/${id}/delete`);
+  const [deleteNotice, { loading }] = useMutation(`/api/notice/${id}/delete`, 'DELETE');
 
   const handleDelete = async () => {
     if (loading) return;
     await deleteNotice();
     router.push('/news/notice');
+    router.refresh();
   };
 
   return (

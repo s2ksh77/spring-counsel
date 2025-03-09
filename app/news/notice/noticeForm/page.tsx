@@ -52,7 +52,7 @@ const NoticeForm: NextPage = () => {
     router.push('/news/notice');
   };
 
-  const submitForm = () => {
+  const submitForm = async () => {
     if (loading) return;
     if (title === '') {
       alert('제목을 입력하세요.');
@@ -62,11 +62,13 @@ const NoticeForm: NextPage = () => {
       alert('내용을 입력하세요.');
       return;
     }
-    createNotice({
+    await createNotice({
       title,
       content,
       isPrimary: checked,
     });
+    router.push('/news/notice');
+    router.refresh();
   };
 
   const onUploadClick = (type: string) => setUploadType(type);

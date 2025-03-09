@@ -51,7 +51,7 @@ const Content = ({ data, onEdit, handleDialogOpen }: ContentProps) => {
   }, [data]);
 
   return (
-    <>
+    <div className="flex h-full w-full flex-col overflow-y-auto p-8">
       <div className="w-full pt-8">
         <div className="flex w-full flex-row items-center">
           <div className="w-[50px] items-center">
@@ -153,7 +153,7 @@ const Content = ({ data, onEdit, handleDialogOpen }: ContentProps) => {
           </div>
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 

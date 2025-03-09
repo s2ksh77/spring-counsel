@@ -86,7 +86,7 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
   }, [data]);
 
   return (
-    <>
+    <div className="flex h-full w-full flex-col overflow-y-auto p-8">
       <div className="w-full pt-8">
         <div className="float-right ml-auto flex">
           <div>
@@ -194,7 +194,7 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
           </div>
         ) : null}
       </div>
-    </>
+    </div>
   );
 };
 

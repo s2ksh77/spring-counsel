@@ -1,5 +1,7 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import client from '@libs/server/client';
+import { cookieOptions } from '@libs/server/withSession';
+import { getIronSession } from 'iron-session';
 
 export async function GET(req: Request) {
   try {
@@ -15,5 +17,33 @@ export async function GET(req: Request) {
     return NextResponse.json({ ok: true, status: 200, data });
   } catch (error) {
     return NextResponse.json({ message: 'Failed to fetch notices' }, { status: 500 });
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    const session = await getIronSession(req, new Response(), cookieOptions);
+    if (!session?.user) {
+      return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { title, content, isPrimary } = await req.json();
+
+    const notice = await client.notice.create({
+      data: {
+        title,
+        content,
+        isPrimary,
+        user: {
+          connect: {
+            id: session.user.id,
+          },
+        },
+      },
+    });
+
+    return NextResponse.json({ ok: true, notice });
+  } catch (error) {
+    return NextResponse.json({ ok: false, error: 'Failed to create notice' }, { status: 500 });
   }
 }

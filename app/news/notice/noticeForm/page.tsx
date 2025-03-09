@@ -4,7 +4,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useEffect, useRef, useState } from 'react';
 import { Button, Checkbox } from '@mui/material';
 import { MenuOutlined, EditOutlined } from '@mui/icons-material';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import useMutation from '@libs/client/useMutation';
 import { Notice } from '@prisma/client';
 import Uploader from '@components/Uploader';

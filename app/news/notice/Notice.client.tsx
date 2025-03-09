@@ -13,14 +13,16 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { Notice } from '@prisma/client';
+import { useSession } from 'hooks/useSession';
 
 interface NoticeResponse {
   ok: boolean;
   notices: Notice[];
 }
 
-const NoticeClient = ({ notices, isLogin }) => {
+const NoticeClient = ({ notices }) => {
   const router = useRouter();
+  const { isLogin } = useSession();
 
   const [sortedData, setSortedData] = useState<any | null>([
     {

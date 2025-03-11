@@ -22,7 +22,6 @@ function MyApp({ children }: { children: ReactNode }) {
   const title = '봄, 심리상담센터';
   const { isHome, isLogin, isProposalList } = getPageState(pathname);
   const showSection = isHome && !isLogin;
-  const showMenu = !(isHome || isLogin || isProposalList);
   const withContent = !(isHome || isLogin);
 
   function getPageState(pathname: string) {
@@ -76,7 +75,6 @@ function MyApp({ children }: { children: ReactNode }) {
           <GNB />
           {showSection && <Section />}
           <Layout>
-            {showMenu && <Menu menu={menu} />}
             {withContent ? (
               <Content>{children}</Content>
             ) : (

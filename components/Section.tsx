@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { NextPage } from 'next';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from 'swiper';
+import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -12,7 +12,7 @@ import fixed3 from '../assets/fixed3.webp';
 
 const Section: NextPage = () => {
   return (
-    <div className="h-[540px] pt-[112px] sm:h-[300px] sm:w-full sm:pt-[0px]">
+    <div className="h-[540px] pt-[202px] sm:h-[300px] sm:w-full sm:pt-[0px]">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -23,8 +23,9 @@ const Section: NextPage = () => {
         pagination={{
           clickable: true,
         }}
+        effect="fade"
         navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
+        modules={[Autoplay, EffectFade, Pagination, Navigation]}
         className="mySwiper"
       >
         <SwiperSlide>

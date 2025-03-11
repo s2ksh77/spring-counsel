@@ -84,9 +84,37 @@
   font-family: 'Spoqa Han Sans Neo', sans-serif;
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
+
+#menu {
+  position: relative;
+  display: inline-block;
 }
+
+.menu-ul {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease, max-height 0.4s ease;
+}
+
+.menu-item:hover {
+  color: white;
+  background-color:#a9ce8e;
+}
+
+#menu:hover .menu-ul {
+  opacity: 1;
+  max-height: 500px; 
+  height: 100%;
+
+}
+/** 여기부터 */
+/* #menu:hover .menu-item {
+  height: 375px; 
+} */
+
 
 .PrivateSwitchBase-input {
   top: 10px;

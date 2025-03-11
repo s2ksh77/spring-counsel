@@ -132,7 +132,7 @@ const GNB: NextPage = () => {
         <div className="flex bg-white">
           <div className="flex flex-1">
             <div id="menu" className="flex w-full flex-col justify-around sm:!hidden md:!hidden">
-              <div id="menu-title" className="flex justify-center">
+              <div id="menu-title" className="flex justify-center border-b-[1px]">
                 <div className="menu-item flex flex-col">
                   <div className="w-full py-[2rem] text-center">
                     <Link href="/introduce">
@@ -148,11 +148,6 @@ const GNB: NextPage = () => {
                     <li>
                       <Link href="/introduce/member" className="menu-dropdown-item text-base">
                         센터 구성원 소개
-                      </Link>
-                    </li>
-                    <li className="">
-                      <Link href="/introduce/location" className="menu-dropdown-item text-base">
-                        찾아 오시는 길
                       </Link>
                     </li>
                   </ul>

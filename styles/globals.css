@@ -1,7 +1,7 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 
 @layer base {
   .menu-item {
@@ -22,9 +22,6 @@
   .login-btn {
     @apply w-20 hover:text-gray-400;
   }
-  .menu-banner {
-    @apply sm:pt-[74px] md:pt-[112px] lg:pt-[112px];
-  }
   .regist-form {
     @apply w-full appearance-none rounded-md border px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e];
   }
@@ -39,7 +36,6 @@
 .banner-title {
   font-family: 'Pretendard Variable';
 }
-
 
 #menu {
   position: relative;

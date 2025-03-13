@@ -26,10 +26,10 @@ const MemberDetail: NextPage = ({ params }: { params: { id: number } }) => {
 
   return (
     <div className="overflow-y-auto overflow-x-hidden focus-visible:outline-none sm:w-full">
-      <div className="mb-[50px] flex flex-row justify-center gap-4">
+      <div className="mb-[50px] flex flex-row justify-center gap-4 pt-4">
         <div
           onClick={handleBack}
-          className="rounded-full border-[3px] border-[#454545] p-4 text-[#222] hover:cursor-pointer hover:border-[#fff] hover:bg-[#a9ce8e] hover:text-white"
+          className="flex cursor-pointer items-center gap-2 rounded-full bg-[#a9ce8e] px-4 py-3 text-white"
         >
           <span className="font-semibold">뒤로가기</span>
         </div>
@@ -37,7 +37,7 @@ const MemberDetail: NextPage = ({ params }: { params: { id: number } }) => {
           <div
             key={`${counselor.name}-${idx}`}
             onClick={() => handleClick(idx)}
-            className="rounded-full border-[3px] border-[#454545] p-4 text-[#222] hover:cursor-pointer hover:border-[#fff] hover:bg-[#a9ce8e] hover:text-white"
+            className="flex cursor-pointer items-center gap-2 rounded-full bg-[#a9ce8e] px-4 py-3 text-white"
           >
             <span className="font-semibold">{counselor.name}</span>
           </div>

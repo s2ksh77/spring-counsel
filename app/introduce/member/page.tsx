@@ -33,7 +33,7 @@ const Member: NextPage = () => {
 
   return (
     <div className="overflow-y-auto focus-visible:outline-none sm:w-full">
-      <div className="mb-[50px] flex flex-row justify-center gap-4">
+      <div className="mb-[50px] flex flex-row justify-center gap-4 pt-4">
         {COUNSELOR_LIST.map((counselor, idx) => (
           <div
             key={`${counselor.name}-${idx}`}

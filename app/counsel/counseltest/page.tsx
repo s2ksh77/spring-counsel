@@ -1,13 +1,22 @@
 'use client';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { NextPage } from 'next';
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const CounselTest: NextPage = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+    window.scrollTo(0, 0);
+  }, []);
   return (
-    <div className="flex h-full w-full flex-col p-8">
-      <div className="border-b-2 pb-8 text-3xl font-bold">심리검사</div>
+    <div className="flex h-full w-full flex-col px-8">
+      <div className="border-b-2 pb-8 text-3xl font-bold" data-aos="fade-left">
+        심리검사
+      </div>
       <span>
-        <div className=" w-[100%] bg-white p-4 ">
+        <div className=" w-[100%] bg-white p-4 " data-aos="fade-right">
           <div className="text-lg text-[#5f727f]">
             자신과 유사한 관심사를 가진 여러 사람이 모여 함께 이야기를 공유하고 상호작용 하는 과정
             속에서 나와 타인의 성장을 도모합니다. 대략 10명 내외의 참가자들이 1~2명의 전문상담자의
@@ -16,10 +25,10 @@ const CounselTest: NextPage = () => {
         </div>
         <hr className="my-8" />
         <div className="mb-20">
-          <div className="mb-8">
+          <div className="mb-8" data-aos="fade-left">
             <span className="text-xl font-bold">정서</span>
           </div>
-          <TableContainer className="min-h-[85%]">
+          <TableContainer className="min-h-[85%]" data-aos="fade-right">
             <Table stickyHeader className="">
               <TableHead className="sticky">
                 <TableRow>
@@ -54,10 +63,10 @@ const CounselTest: NextPage = () => {
         </div>
 
         <div className="mb-20">
-          <div className="mb-8">
+          <div className="mb-8" data-aos="fade-left">
             <span className="text-xl font-bold">성격</span>
           </div>
-          <TableContainer className="min-h-[85%]">
+          <TableContainer className="min-h-[85%]" data-aos="fade-right">
             <Table stickyHeader className="">
               <TableHead className="sticky">
                 <TableRow>
@@ -100,10 +109,10 @@ const CounselTest: NextPage = () => {
         </div>
 
         <div>
-          <div className="mb-8">
+          <div className="mb-8" data-aos="fade-left">
             <span className="text-xl font-bold">진로</span>
           </div>
-          <TableContainer className="min-h-[85%]">
+          <TableContainer className="min-h-[85%]" data-aos="fade-right">
             <Table stickyHeader className="">
               <TableHead className="sticky">
                 <TableRow>

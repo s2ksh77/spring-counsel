@@ -4,7 +4,7 @@ import React from 'react';
 import { cls } from 'utils/common';
 import Image from 'next/image';
 import cover1 from '../assets/cover1.webp';
-import fixed4 from '../assets/fixed4.png';
+import cover2 from '../assets/cover2.webp';
 import fixed3 from '../assets/banner3.png';
 
 const bannerImages: Record<string, any> = {
@@ -17,7 +17,24 @@ const bannerImages: Record<string, any> = {
       },
     },
   },
-  member: fixed4,
+  counsel: {
+    image: cover2,
+    submenu: {
+      private: {
+        title: '개인상담',
+      },
+      family: {
+        title: '부부 · 가족상담',
+      },
+      group: {
+        title: '집단상담',
+      },
+      counseltest: {
+        title: '심리검사',
+      },
+    },
+  },
+  member: cover1,
   proposal: fixed3,
 };
 

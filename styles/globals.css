@@ -14,7 +14,7 @@
     @apply mt-[1px] hidden min-w-[250px] bg-white py-1 text-sm text-[#777777] shadow-[0_6px_12px_rgb(0,0,0,0.3)] dark:text-gray-200;
   }
   .menu-dropdown-item {
-    @apply  hover:text-white hover:underline;
+    @apply  hover:text-white hover:underline text-sm font-light;
   }
   .gnb {
     @apply fixed z-[2] flex h-28 w-[100%] flex-col border-b-2 bg-white sm:h-[4.6rem];
@@ -54,7 +54,7 @@
 
 .menu-item {
   width: 200px;
-  height: 90px;
+  height: 60px;
   justify-content: start;
   transition: height 0.3s ease
 }
@@ -66,13 +66,13 @@
 
 #menu:hover .menu-ul {
   opacity: 1;
-  max-height: 500px; 
+  max-height: 250px; 
   height: 100%;
 
 }
 
 #menu:hover .menu-item {
-  height: 310px;
+  height: 250px;
   transition: height 0.3s ease
 }
 

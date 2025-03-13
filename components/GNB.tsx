@@ -27,7 +27,7 @@ import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 
 const KakaoSVG = () => {
   return (
-    <svg width={32} height={32} viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg">
+    <svg width={24} height={24} viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg">
       <g id="SVGRepo_iconCarrier">
         <path
           fill="#454545"
@@ -66,7 +66,7 @@ const GNB: NextPage = () => {
   return (
     <div id="gnb" className="gnb bg-black-400 border-#f5f5f5">
       <div className="flex flex-col sm:w-full sm:justify-between md:w-full md:justify-between lg:w-full xl:w-full">
-        <div className="flex items-center justify-between px-16">
+        <div className="flex items-center justify-between border-b-[1px] px-16">
           <div className="flex cursor-default gap-2 rounded-full bg-[#a9ce8e] p-4 text-white">
             <PhoneInTalkOutlined />
             010-6220-1850
@@ -74,32 +74,32 @@ const GNB: NextPage = () => {
           <Link href="/home">
             <div
               id="logo"
-              className="flex h-[112px] min-w-[350px] cursor-pointer overflow-y-hidden sm:h-[75px] sm:w-[130px] sm:min-w-[230px] lg:h-[112px] lg:w-[225px] lg:min-w-[225px]"
+              className="flex h-[88px] min-w-[225px] cursor-pointer overflow-y-hidden sm:h-[75px] sm:w-[130px] sm:min-w-[230px] lg:h-[88px] lg:w-[225px] lg:min-w-[225px]"
             >
-              <div className="lg:hidden lg:h-[110px]">
+              <div className="lg:hidden lg:h-[88px]">
                 <Image
                   src={logo}
-                  width={350}
-                  height={112}
-                  className="lg:h-[110px]"
+                  width={225}
+                  height={80}
+                  className="lg:h-[88px]"
                   priority
                   alt="봄, 심리상담센터 로고"
                 />
               </div>
-              <div className="hidden lg:flex lg:h-[112px]">
+              <div className="hidden lg:flex lg:h-[88px]">
                 <Image
                   src={logo}
                   width={225}
-                  height={112}
-                  className="lg:h-[112px]"
+                  height={80}
+                  className="lg:h-[88px]"
                   alt="봄, 심리상담센터 로고"
                 />
               </div>
             </div>
           </Link>
-          <div className="flex gap-4">
-            <div className="flex min-w-[90px] cursor-pointer flex-col items-center p-4">
-              <AssignmentOutlinedIcon className="h-8 w-8 text-[#454545]" />
+          <div className="flex gap-1">
+            <div className="flex min-w-[60px] cursor-pointer flex-col items-center py-4">
+              <AssignmentOutlinedIcon className="h-6 w-6 text-[#454545]" />
               <Link href="/proposal/reservationForm">
                 <span className="text-[#454545]">상담신청</span>
               </Link>
@@ -113,16 +113,16 @@ const GNB: NextPage = () => {
                 )
               }
             >
-              <div className="flex min-w-[90px] cursor-pointer flex-col items-center p-4 ">
+              <div className="flex min-w-[60px] cursor-pointer flex-col items-center py-4 ">
                 <KakaoSVG />
                 <span className="text-[#454545]">카카오톡</span>
               </div>
             </div>
             <div
               onClick={handleLogin}
-              className="flex min-w-[90px] cursor-pointer flex-col items-center p-4"
+              className="flex min-w-[60px] cursor-pointer flex-col items-center py-4"
             >
-              <VpnKeyOutlinedIcon className="h-8 w-8 text-[#454545]" />
+              <VpnKeyOutlinedIcon className="h-6 w-6 text-[#454545]" />
               <button>
                 <span className="text-[#454545]">{isLogin ? '로그아웃' : '로그인'}</span>
               </button>
@@ -134,108 +134,105 @@ const GNB: NextPage = () => {
             <div id="menu" className="flex w-full flex-col justify-around sm:!hidden md:!hidden">
               <div id="menu-title" className="flex justify-center border-b-[1px]">
                 <div className="menu-item flex flex-col">
-                  <div className="w-full py-[2rem] text-center">
+                  <div className="w-full py-4 text-center">
                     <Link href="/introduce">
-                      <span className="text-xl font-medium">센터 소개</span>
+                      <span className="text-base font-medium">센터 소개</span>
                     </Link>
                   </div>
                   <ul className="menu-ul">
                     <li>
-                      <Link href="/introduce" className="menu-dropdown-item text-base">
+                      <Link href="/introduce" className="menu-dropdown-item">
                         센터 소개
                       </Link>
                     </li>
                     <li>
-                      <Link href="/introduce/member" className="menu-dropdown-item text-base">
+                      <Link href="/introduce/member" className="menu-dropdown-item">
                         센터 구성원 소개
                       </Link>
                     </li>
                   </ul>
                 </div>
                 <div className="menu-item flex flex-col">
-                  <div className="w-full py-[2rem] text-center">
+                  <div className="w-full py-4 text-center">
                     <Link href="/counsel/private">
-                      <span className="text-xl font-medium">상담 및 심리검사</span>
+                      <span className="text-base font-medium">상담 및 심리검사</span>
                     </Link>
                   </div>
                   <ul className="menu-ul ">
                     <li className="">
-                      <Link href="/counsel/private" className="menu-dropdown-item text-base">
+                      <Link href="/counsel/private" className="menu-dropdown-item">
                         개인상담
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/counsel/family" className="menu-dropdown-item text-base">
+                      <Link href="/counsel/family" className="menu-dropdown-item">
                         부부 · 가족상담
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/counsel/group" className="menu-dropdown-item text-base">
+                      <Link href="/counsel/group" className="menu-dropdown-item">
                         집단상담
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/counsel/counseltest" className="menu-dropdown-item text-base">
+                      <Link href="/counsel/counseltest" className="menu-dropdown-item">
                         심리검사
                       </Link>
                     </li>
                   </ul>
                 </div>
                 <div className="menu-item flex flex-col">
-                  <div className="w-full py-[2rem] text-center">
+                  <div className="w-full py-4 text-center">
                     <Link href="/education/counselor">
-                      <span className="text-xl font-medium">교육 서비스</span>
+                      <span className="text-base font-medium">교육 서비스</span>
                     </Link>
                   </div>
                   <ul className="menu-ul">
                     <li className="">
-                      <Link href="/education/counselor" className="menu-dropdown-item text-base">
+                      <Link href="/education/counselor" className="menu-dropdown-item">
                         상담자 교육
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/education/analysis" className="menu-dropdown-item text-base">
+                      <Link href="/education/analysis" className="menu-dropdown-item">
                         교육분석
                       </Link>
                     </li>
                   </ul>
                 </div>
                 <div className="menu-item flex flex-col">
-                  <div className="w-full py-[2rem] text-center">
+                  <div className="w-full py-4 text-center">
                     <Link href="/proposal">
-                      <span className="text-xl font-medium">상담문의 및 신청</span>
+                      <span className="text-base font-medium">상담문의 및 신청</span>
                     </Link>
                   </div>
                   <ul className="menu-ul">
                     <li className="">
-                      <Link href="/proposal" className="menu-dropdown-item text-base">
+                      <Link href="/proposal" className="menu-dropdown-item">
                         상담신청 안내
                       </Link>
                     </li>
                     <li className="">
-                      <Link
-                        href="/proposal/reservationForm"
-                        className="menu-dropdown-item text-base"
-                      >
+                      <Link href="/proposal/reservationForm" className="menu-dropdown-item">
                         상담신청
                       </Link>
                     </li>
                   </ul>
                 </div>
                 <div className="menu-item flex flex-col">
-                  <div className="w-full py-[2rem] text-center">
+                  <div className="w-full py-4 text-center">
                     <Link href="/news/notice">
-                      <span className="text-xl font-medium">센터 소식</span>
+                      <span className="text-base font-medium">센터 소식</span>
                     </Link>
                   </div>
                   <ul className="menu-ul">
                     <li className="">
-                      <Link href="/news/notice" className="menu-dropdown-item text-base">
+                      <Link href="/news/notice" className="menu-dropdown-item">
                         공지사항
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/news/review" className="menu-dropdown-item text-base">
+                      <Link href="/news/review" className="menu-dropdown-item">
                         상담후기
                       </Link>
                     </li>
@@ -243,9 +240,9 @@ const GNB: NextPage = () => {
                 </div>
                 {isLogin ? (
                   <div className="menu-item flex flex-col">
-                    <div className="w-full py-[2rem] text-center">
+                    <div className="w-full py-4 text-center">
                       <Link href="/proposal/list">
-                        <span className="text-xl font-medium">상담 신청 내역</span>
+                        <span className="text-base font-medium">상담 신청 내역</span>
                       </Link>
                     </div>
                   </div>

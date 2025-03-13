@@ -1,19 +1,31 @@
 'use client';
 import { NextPage } from 'next';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import { COUNSELOR_LIST } from 'static/member';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/navigation';
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 
 const Member: NextPage = () => {
   const router = useRouter();
+  const refs = useRef([]);
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
     window.scrollTo(0, 0);
   }, []);
+
+  const handleCounselorClick = (idx) => {
+    const element = refs.current[idx];
+    const top = element.getBoundingClientRect().top + window.scrollY - 150;
+
+    window.scrollTo({
+      top,
+      behavior: 'smooth',
+    });
+  };
 
   const handleClick = (id: number) => {
     router.push(`/introduce/member/${id}`);
@@ -25,15 +37,20 @@ const Member: NextPage = () => {
         {COUNSELOR_LIST.map((counselor, idx) => (
           <div
             key={`${counselor.name}-${idx}`}
-            className="rounded-full border-[3px] border-[#454545] p-4 text-[#222] hover:cursor-pointer hover:border-[#fff] hover:bg-[#a9ce8e] hover:text-white"
+            className="flex cursor-pointer items-center gap-2 rounded-full bg-[#a9ce8e] px-4 py-3 text-white"
+            onClick={() => handleCounselorClick(idx)}
           >
-            <span className="font-semibold">{counselor.name}</span>
+            <span className="font-medium">{counselor.name}</span>
           </div>
         ))}
       </div>
       {COUNSELOR_LIST.map((counselor, idx) => {
         return (
-          <div key={`${counselor.image}-${idx}`} className="mb-[50px] flex flex-row">
+          <div
+            key={`${counselor.image}-${idx}`}
+            className="mb-[50px] flex flex-row"
+            ref={(el) => (refs.current[idx] = el)}
+          >
             <div
               className="flex min-w-[500px] flex-col items-center rounded-2xl rounded-r-none border-[1px] border-r-0 py-12"
               data-aos="fade-right"
@@ -48,8 +65,9 @@ const Member: NextPage = () => {
               <div
                 onClick={() => handleClick(idx)}
                 key={`${counselor.name}-${idx}`}
-                className="flex w-[120px] justify-center rounded-full border-[3px] border-[#454545] p-4 text-[#222] hover:cursor-pointer hover:border-[#fff] hover:bg-[#a9ce8e] hover:text-white"
+                className="flex cursor-pointer items-center gap-2 rounded-full bg-[#a9ce8e] px-4 py-3 text-white"
               >
+                <ChatOutlinedIcon width={18} height={18} />
                 <span className="text-sm font-semibold">상담사 인터뷰</span>
               </div>
             </div>
@@ -61,13 +79,24 @@ const Member: NextPage = () => {
               <div className="my-4 h-[1px] w-full bg-[#ddd]"></div>
               <div className="flex flex-col gap-4">
                 <span className="text-xl font-bold">학력</span>
-                <span className="text-base text-[#454545]">- {counselor.degree}</span>
+                {counselor.degree.length > 1 ? (
+                  counselor.degree.map((deg, index) => (
+                    <span className="text-base text-[#454545]" key={index}>
+                      - {deg}
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-base text-[#454545]">- {counselor.degree}</span>
+                )}
               </div>
               <div className="my-4 h-[1px] w-full bg-[#ddd]"></div>
               <div className="flex flex-col gap-[3px]">
                 <span className="pb-4 text-xl font-bold">경력사항</span>
                 {counselor['experience'].map((experience, idx) => (
-                  <span key={`${experience}-${idx}`} className="text-base text-[#454545]">
+                  <span
+                    key={`${experience}-${idx}`}
+                    className="whitespace-pre-line text-base text-[#454545]"
+                  >
                     <span className="mr-[6px]">-</span>
                     <span>{experience}</span>
                   </span>

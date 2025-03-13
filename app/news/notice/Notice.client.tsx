@@ -50,7 +50,7 @@ const NoticeClient = ({ notices }) => {
   }, [notices]);
 
   return (
-    <div className="h-full p-8">
+    <div className="h-full p-8 pt-4">
       <div className="border-b-2 pb-8 text-3xl font-bold">공지사항</div>
       <TableContainer className="min-h-[85%]">
         <Table stickyHeader>

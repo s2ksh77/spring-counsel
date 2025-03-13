@@ -5,6 +5,9 @@ import { cls } from 'utils/common';
 import Image from 'next/image';
 import cover1 from '../assets/cover1.webp';
 import cover2 from '../assets/cover2.webp';
+import cover3 from '../assets/cover3.webp';
+import cover4 from '../assets/cover4.webp';
+import cover5 from '../assets/cover5.webp';
 import fixed3 from '../assets/banner3.png';
 
 const bannerImages: Record<string, any> = {
@@ -34,8 +37,40 @@ const bannerImages: Record<string, any> = {
       },
     },
   },
-  member: cover1,
-  proposal: fixed3,
+  education: {
+    image: cover3,
+    submenu: {
+      counselor: {
+        title: '상담자 교육',
+      },
+      analysis: {
+        title: '교육분석',
+      },
+    },
+  },
+  proposal: {
+    image: cover4,
+    title: '상담신청 안내',
+    submenu: {
+      reservationForm: {
+        title: '상담신청',
+      },
+      list: {
+        title: '상담신청 내역',
+      },
+    },
+  },
+  news: {
+    image: cover5,
+    submenu: {
+      notice: {
+        title: '공지사항',
+      },
+      review: {
+        title: '상담후기',
+      },
+    },
+  },
 };
 
 function getBannerData(path): { image: StaticImageData; title: string } {
@@ -44,7 +79,7 @@ function getBannerData(path): { image: StaticImageData; title: string } {
   if (subPath && submenu)
     return {
       image,
-      title: submenu[subPath].title,
+      title: submenu[subPath] ? submenu[subPath].title : '상담신청 내역',
     };
   return { image, title };
 }

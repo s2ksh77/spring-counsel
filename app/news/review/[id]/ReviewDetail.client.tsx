@@ -31,7 +31,7 @@ const ReviewDetailClient = ({ id, review }: ReviewDetailClientProps) => {
   const handleDeleteClose = () => setDialogVisible(false);
 
   return (
-    <div className="flex h-full w-full flex-col overflow-y-auto p-8">
+    <div className="flex h-full w-full flex-col overflow-y-auto p-8 pt-4">
       {editState ? (
         <Editor type={'review'} data={review} onCancel={handleCancel} />
       ) : (

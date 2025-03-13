@@ -54,7 +54,7 @@ const ProposalListClient: NextPage = ({ data }) => {
   };
 
   return (
-    <div className="h-full p-8">
+    <div className="h-full p-8 pt-4">
       <div className="border-b-2 pb-8 text-3xl font-bold">상담 신청 내역</div>
       <TableContainer className="min-h-[85%]">
         <Table stickyHeader>

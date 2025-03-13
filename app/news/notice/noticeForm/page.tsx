@@ -114,7 +114,7 @@ const NoticeForm: NextPage = () => {
   }, [data]);
 
   return (
-    <div className="flex h-full w-full flex-col p-8">
+    <div className="flex h-full w-full flex-col p-8 pt-4">
       <div className="border-b-2 pb-8 text-3xl font-bold">공지사항</div>
 
       <>

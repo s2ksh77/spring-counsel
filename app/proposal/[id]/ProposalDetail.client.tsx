@@ -133,7 +133,7 @@ const ProposalDetail: NextPage = ({ data, id }) => {
   }, [editData, mutate]);
 
   return (
-    <div className="flex h-full w-full flex-col p-8">
+    <div className="flex h-full w-full flex-col p-8 pt-4">
       <div className="border-b-2 pb-8 text-3xl font-bold">신청 내역</div>
       <>
         <div className="float-right ml-auto mt-4 flex items-center">

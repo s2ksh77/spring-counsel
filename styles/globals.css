@@ -84,6 +84,9 @@
 .MuiTableCell-root {
   padding: 5px;
 }
+.tox-editor-header {
+  z-index: -1 !important;
+}
 
 .no-toolbar .tox-editor-header {
   display: none !important;

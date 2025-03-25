@@ -10,6 +10,7 @@ import counselor2 from './counselor2.png';
 import counselor3 from './counselor3.png';
 import counselor4 from './counselor4.png';
 import counselor5 from './counselor5.png';
+import counselor6 from './counselor6.png';
 
 export {
   center1,
@@ -23,4 +24,5 @@ export {
   counselor3,
   counselor4,
   counselor5,
+  counselor6,
 };

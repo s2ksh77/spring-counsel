@@ -11,7 +11,7 @@ export async function getSession() {
 export async function getUser(req: Request) {
   const session = await getIronSession(req, new Response(), cookieOptions);
   if (!session?.user) {
-    return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
+    throw new Error('Unauthorized');
   }
 
   return session.user;

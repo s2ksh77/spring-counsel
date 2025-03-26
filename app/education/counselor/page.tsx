@@ -1,10 +1,6 @@
-import matter from 'gray-matter';
-import remarkHtml from 'remark-html';
-import remarkParse from 'remark-parse/lib';
-import { unified } from 'unified';
-import { GetStaticProps } from 'next';
 import { CounselorSubject } from 'static/education/counselor';
 import { Fragment } from 'react';
+import getEducationCounselor from './getEducationCounselor';
 
 const Counselor = async () => {
   const data = (await getEducationCounselor()) as string;
@@ -25,15 +21,18 @@ const Counselor = async () => {
           <div className="mb-4 ml-12 flex flex-row">
             <div className="mt-8">
               <div className="text-[#878787]">
-                수퍼비전을 통하여 상담자로서의 자질, 인격을 닦아 나가면서 구체적인 상담기술이 함께
-                습득된다.
+                수퍼비전을 통하여 상담자로서의 자질, 인격을 닦아 나가면서
+                구체적인 상담기술이 함께 습득된다.
               </div>
               <div className="text-[#878787]">
                 상담시간에 깨닫지 못한 내다자의 전이감정을 깨닫는데 도움이 된다.
               </div>
-              <div className="text-[#878787]">구체적인 교정을 받을 수 있게 된다.</div>
               <div className="text-[#878787]">
-                수퍼비전을 통해 자신의 문제를 깨닫게 되어 상담을 더욱 촉진시킨다.
+                구체적인 교정을 받을 수 있게 된다.
+              </div>
+              <div className="text-[#878787]">
+                수퍼비전을 통해 자신의 문제를 깨닫게 되어 상담을 더욱
+                촉진시킨다.
               </div>
             </div>
           </div>
@@ -53,14 +52,6 @@ const Counselor = async () => {
       </span>
     </div>
   );
-};
-
-export const getEducationCounselor = async () => {
-  const { content } = matter.read(`./static/education/counselor.md`);
-
-  const { value } = await unified().use(remarkParse).use(remarkHtml).process(content);
-
-  return value;
 };
 
 export default Counselor;

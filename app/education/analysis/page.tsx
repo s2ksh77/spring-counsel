@@ -1,7 +1,4 @@
-import matter from 'gray-matter';
-import remarkHtml from 'remark-html';
-import remarkParse from 'remark-parse/lib';
-import { unified } from 'unified';
+import { getAnalySis } from './getAnalySis';
 
 const Analysis = async () => {
   const data = (await getAnalySis()) as string;
@@ -18,14 +15,6 @@ const Analysis = async () => {
       </span>
     </div>
   );
-};
-
-export const getAnalySis = async () => {
-  const { content } = matter.read(`./static/education/analysis.md`);
-
-  const { value } = await unified().use(remarkParse).use(remarkHtml).process(content);
-
-  return value;
 };
 
 export default Analysis;

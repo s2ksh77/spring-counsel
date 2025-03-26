@@ -5,7 +5,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: false,
+  swcMinify: true,
   images: {
     domains: [
       `${process.env.S3_UPLOAD_BUCKET}.s3.amazonaws.com`,

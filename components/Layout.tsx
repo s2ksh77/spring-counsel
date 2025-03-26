@@ -91,7 +91,7 @@ const Layout: NextPage<{ children: React.ReactNode }> = ({ children }) => {
           <Image
             src={getBannerData(pathname).image}
             alt="메뉴별 배너 이미지"
-            className="h-full sm:h-[80%] md:h-[80%]"
+            className="h-full w-full sm:h-[80%] md:h-[80%]"
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
             <div className="title text-base tracking-[0.2rem] sm:text-sm">

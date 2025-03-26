@@ -10,8 +10,19 @@ import ReactPaginate from 'react-paginate';
 import { useEffect } from 'react';
 import useSWR from 'swr';
 import { useSession } from 'hooks/useSession';
+import { Review, ReviewFile } from '@prisma/client';
 
-const ReviewClient = ({ data: { curPage, reviews, maxPage } }) => {
+type ReviewClientProps = {
+  data: {
+    reviews: (Review & { files: ReviewFile[] })[];
+    curPage: number;
+    maxPage: number;
+  };
+};
+
+const ReviewClient = ({
+  data: { curPage, reviews, maxPage },
+}: ReviewClientProps) => {
   const { isLogin } = useSession();
   const router = useRouter();
   const pathname = usePathname();
@@ -56,7 +67,7 @@ const ReviewClient = ({ data: { curPage, reviews, maxPage } }) => {
                 }
               >
                 <div className="flex w-[270px] min-w-[270px] items-center justify-center sm:w-[130px] sm:min-w-[130px] md:min-w-[250px]">
-                  {review.files.length > 0 && (
+                  {review.files?.length > 0 && (
                     <Image
                       src={review.files[0]?.url}
                       alt={review.files[0]?.name}

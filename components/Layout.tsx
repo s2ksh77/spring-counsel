@@ -2,8 +2,9 @@ import { NextPage } from 'next';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { cls } from 'utils/common';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { cover1, cover2, cover3, cover4, cover5 } from '../assets';
+import Menu from './Menu';
 
 const bannerImages: Record<string, any> = {
   introduce: {
@@ -102,6 +103,7 @@ const Layout: NextPage<{ children: React.ReactNode }> = ({ children }) => {
           </div>
         </div>
       )}
+      <Menu menu={pathSegment} />
       <div
         className={cls(
           'mx-auto h-auto w-full max-w-7xl sm:w-full ',

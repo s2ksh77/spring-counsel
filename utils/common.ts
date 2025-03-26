@@ -17,7 +17,6 @@ export const getMenu = (key: string) => {
         value: [
           { key: 'center', name: '센터 소개', value: '' },
           { key: 'member', name: '센터 구성원 소개', value: '/member' },
-          { key: 'location', name: '찾아 오시는 길', value: '/location' },
         ],
       };
     case 'counsel':

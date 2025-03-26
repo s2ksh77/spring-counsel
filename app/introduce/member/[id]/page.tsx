@@ -26,7 +26,7 @@ const MemberDetail: NextPage = ({ params }: { params: { id: number } }) => {
 
   return (
     <div className="overflow-y-auto overflow-x-hidden focus-visible:outline-none sm:w-full">
-      <div className="mb-[50px] flex flex-row justify-center gap-4 pt-4">
+      <div className="mb-[50px] flex flex-row flex-wrap justify-center gap-4 pt-4">
         <div
           onClick={handleBack}
           className="flex cursor-pointer items-center gap-2 rounded-full bg-[#a9ce8e] px-4 py-3 text-white"
@@ -43,9 +43,9 @@ const MemberDetail: NextPage = ({ params }: { params: { id: number } }) => {
           </div>
         ))}
       </div>
-      <div className="mb-[50px] flex flex-row">
+      <div className="mb-[50px] flex flex-row sm:flex-col md:flex-col">
         <div
-          className="flex min-w-[500px] flex-col items-center rounded-2xl rounded-r-none border-[1px] border-r-0 py-12"
+          className="flex min-w-[500px] flex-col items-center rounded-2xl rounded-r-none border-[1px] border-r-0 py-12 sm:min-w-[300px] sm:rounded-b-none sm:rounded-r-2xl sm:border-b-0 md:rounded-b-none md:rounded-r-2xl md:border-b-0"
           data-aos="fade-right"
         >
           <Image
@@ -57,16 +57,20 @@ const MemberDetail: NextPage = ({ params }: { params: { id: number } }) => {
           />
         </div>
         <div
-          className="w-[calc(100% - 600px)] flex max-w-[600px] flex-col rounded-2xl rounded-l-none border-[1px] border-l-0 p-12"
+          className="w-[calc(100% - 600px)] flex max-w-[600px] flex-col rounded-2xl rounded-l-none border-[1px] border-l-0 p-12 sm:rounded-l-2xl sm:rounded-t-none sm:border-r-0 sm:border-t-0 md:w-[100%] md:max-w-full md:rounded-l-2xl md:rounded-t-none md:border-r-0 md:border-t-0"
           data-aos="fade-left"
         >
           <span className="text-2xl font-bold">{COUNSELOR_LIST[id].name}</span>
           <div className="my-4 h-[1px] w-full bg-[#ddd]"></div>
           <div className="markdown flex flex-col gap-4">
-            <span className="text-xl font-bold">선생님은 어떤 상담자인가요?</span>
+            <span className="text-xl font-bold">
+              선생님은 어떤 상담자인가요?
+            </span>
             <span
               className="leading-[1.7] text-[#454545]"
-              dangerouslySetInnerHTML={{ __html: COUNSELOR_LIST[id].interview[0] }}
+              dangerouslySetInnerHTML={{
+                __html: COUNSELOR_LIST[id].interview[0],
+              }}
             />
           </div>
           <div className="my-4 h-[1px] w-full bg-[#ddd]"></div>
@@ -76,15 +80,21 @@ const MemberDetail: NextPage = ({ params }: { params: { id: number } }) => {
             </span>
             <span
               className="leading-[1.7] text-[#454545]"
-              dangerouslySetInnerHTML={{ __html: COUNSELOR_LIST[id].interview[1] }}
+              dangerouslySetInnerHTML={{
+                __html: COUNSELOR_LIST[id].interview[1],
+              }}
             />
           </div>
           <div className="my-4 h-[1px] w-full bg-[#ddd]"></div>
           <div className="flex flex-col gap-[3px]">
-            <span className="pb-4 text-xl font-bold">선생님은 어떤 상담을 지향하시나요? </span>
+            <span className="pb-4 text-xl font-bold">
+              선생님은 어떤 상담을 지향하시나요?{' '}
+            </span>
             <span
               className="leading-[1.7] text-[#454545]"
-              dangerouslySetInnerHTML={{ __html: COUNSELOR_LIST[id].interview[2] }}
+              dangerouslySetInnerHTML={{
+                __html: COUNSELOR_LIST[id].interview[2],
+              }}
             />
           </div>
         </div>

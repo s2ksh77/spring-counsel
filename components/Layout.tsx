@@ -3,12 +3,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import { cls } from 'utils/common';
 import Image from 'next/image';
-import cover1 from '../assets/cover1.webp';
-import cover2 from '../assets/cover2.webp';
-import cover3 from '../assets/cover3.webp';
-import cover4 from '../assets/cover4.webp';
-import cover5 from '../assets/cover5.webp';
-import fixed3 from '../assets/banner3.png';
+import { cover1, cover2, cover3, cover4, cover5 } from '../assets';
 
 const bannerImages: Record<string, any> = {
   introduce: {
@@ -105,14 +100,14 @@ const Layout: NextPage<{ children: React.ReactNode }> = ({ children }) => {
       )}
       <div
         className={cls(
-          'mx-auto h-auto w-full max-w-7xl sm:w-full sm:pt-[40px]',
-          pathname === '/introduce' && 'max-w-[100rem]'
+          'mx-auto h-auto w-full max-w-7xl sm:w-full ',
+          pathname === '/introduce' ? 'max-w-[100rem]' : '',
         )}
       >
         <div
           className={cls(
             'flex min-h-[795px] flex-row sm:w-full sm:flex-col md:flex-col',
-            pathname === '/login' && 'items-center justify-center'
+            pathname === '/login' ? 'items-center justify-center' : '',
           )}
         >
           {children}

@@ -2,10 +2,8 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from '../public/logo-small.jpg';
-import logoLarge from '../public/logo-main.jpg';
-import kakao from '../assets/kakaotalk.svg';
 import {
   Dialog,
   DialogTitle,
@@ -13,21 +11,24 @@ import {
   DialogContentText,
   DialogActions,
   Button,
-  IconButton,
-  Menu,
 } from '@mui/material';
 import useMutation from '@libs/client/useMutation';
 import ContextMenu from './ContextMenu';
-import { fetchAPI } from '@libs/client/fetcher';
-import useSWR from 'swr';
 import { useSession } from 'hooks/useSession';
-import { PhoneInTalkOutlined, MenuOutlined } from '@mui/icons-material';
+import { PhoneInTalkOutlined } from '@mui/icons-material';
 import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 
 const KakaoSVG = () => {
   return (
-    <svg width={24} height={24} viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      role="img"
+      xmlns="http://www.w3.org/2000/svg"
+      className="sm:h-4 sm:w-4 md:h-5 md:w-5"
+    >
       <g id="SVGRepo_iconCarrier">
         <path
           fill="#454545"
@@ -66,22 +67,22 @@ const GNB: NextPage = () => {
   return (
     <div id="gnb" className="gnb bg-black-400 border-#f5f5f5">
       <div className="flex flex-col sm:w-full sm:justify-between md:w-full md:justify-between lg:w-full xl:w-full">
-        <div className="flex items-center justify-between border-b-[1px] px-16">
-          <div className="flex cursor-default gap-2 rounded-full bg-[#a9ce8e] p-4 text-white">
-            <PhoneInTalkOutlined />
-            010-6220-1850
+        <div className="flex items-center justify-between border-b-[1px] px-16 sm:px-8 md:px-12">
+          <div className="flex min-w-[160px] cursor-default items-center gap-2 rounded-full bg-[#a9ce8e] p-4 text-white sm:hidden md:min-w-[140px] md:p-2">
+            <PhoneInTalkOutlined className="w-[24px] sm:w-[18px] md:w-[20px]" />
+            <span className="text-base md:text-xs">010-6220-1850</span>
           </div>
           <Link href="/home">
             <div
               id="logo"
-              className="flex h-[88px] min-w-[225px] cursor-pointer overflow-y-hidden sm:h-[75px] sm:w-[130px] sm:min-w-[230px] lg:h-[88px] lg:w-[225px] lg:min-w-[225px]"
+              className="flex h-[88px] min-w-[225px] cursor-pointer overflow-y-hidden sm:h-[72px] sm:w-[130px] sm:min-w-[230px] lg:h-[88px] lg:w-[225px] lg:min-w-[225px]"
             >
-              <div className="lg:hidden lg:h-[88px]">
+              <div className="sm:h-[72px] md:h-[88px] lg:hidden lg:h-[88px]">
                 <Image
                   src={logo}
-                  width={225}
-                  height={80}
-                  className="lg:h-[88px]"
+                  width={236}
+                  height={88}
+                  className="sm:h-[72px] md:h-[88px] lg:h-[88px]"
                   priority
                   alt="봄, 심리상담센터 로고"
                 />
@@ -89,8 +90,8 @@ const GNB: NextPage = () => {
               <div className="hidden lg:flex lg:h-[88px]">
                 <Image
                   src={logo}
-                  width={225}
-                  height={80}
+                  width={236}
+                  height={88}
                   className="lg:h-[88px]"
                   alt="봄, 심리상담센터 로고"
                 />
@@ -99,7 +100,7 @@ const GNB: NextPage = () => {
           </Link>
           <div className="flex gap-1">
             <div className="flex min-w-[60px] cursor-pointer flex-col items-center py-4">
-              <AssignmentOutlinedIcon className="h-6 w-6 text-[#454545]" />
+              <AssignmentOutlinedIcon className="h-6 w-6 text-[#454545] sm:h-4 sm:w-4 md:h-5 md:w-5" />
               <Link href="/proposal/reservationForm">
                 <span className="text-[#454545]">상담신청</span>
               </Link>
@@ -109,30 +110,38 @@ const GNB: NextPage = () => {
                 window.open(
                   'http://pf.kakao.com/_jxggLb/friend',
                   '_blank',
-                  'width=480, height=500, left=600, top=300'
+                  'width=480, height=500, left=600, top=300',
                 )
               }
             >
-              <div className="flex min-w-[60px] cursor-pointer flex-col items-center py-4 ">
+              <div className="flex min-w-[60px] cursor-pointer flex-col items-center gap-[1px] py-4">
                 <KakaoSVG />
-                <span className="text-[#454545]">카카오톡</span>
+                <span className="h-[19px] text-[#454545]">카카오톡</span>
               </div>
             </div>
             <div
               onClick={handleLogin}
               className="flex min-w-[60px] cursor-pointer flex-col items-center py-4"
             >
-              <VpnKeyOutlinedIcon className="h-6 w-6 text-[#454545]" />
+              <VpnKeyOutlinedIcon className="h-6 w-6 text-[#454545] sm:h-4 sm:w-4 md:h-5 md:w-5" />
               <button>
-                <span className="text-[#454545]">{isLogin ? '로그아웃' : '로그인'}</span>
+                <span className="text-[#454545]">
+                  {isLogin ? '로그아웃' : '로그인'}
+                </span>
               </button>
             </div>
           </div>
         </div>
         <div className="flex bg-white">
           <div className="flex flex-1">
-            <div id="menu" className="flex w-full flex-col justify-around sm:!hidden md:!hidden">
-              <div id="menu-title" className="flex justify-center border-b-[1px]">
+            <div
+              id="menu"
+              className="flex w-full flex-col justify-around sm:!hidden md:!hidden"
+            >
+              <div
+                id="menu-title"
+                className="flex justify-center border-b-[1px]"
+              >
                 <div className="menu-item flex flex-col">
                   <div className="w-full py-4 text-center">
                     <Link href="/introduce">
@@ -146,7 +155,10 @@ const GNB: NextPage = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/introduce/member" className="menu-dropdown-item">
+                      <Link
+                        href="/introduce/member"
+                        className="menu-dropdown-item"
+                      >
                         센터 구성원 소개
                       </Link>
                     </li>
@@ -155,27 +167,41 @@ const GNB: NextPage = () => {
                 <div className="menu-item flex flex-col">
                   <div className="w-full py-4 text-center">
                     <Link href="/counsel/private">
-                      <span className="text-base font-medium">상담 및 심리검사</span>
+                      <span className="text-base font-medium">
+                        상담 및 심리검사
+                      </span>
                     </Link>
                   </div>
                   <ul className="menu-ul ">
                     <li className="">
-                      <Link href="/counsel/private" className="menu-dropdown-item">
+                      <Link
+                        href="/counsel/private"
+                        className="menu-dropdown-item"
+                      >
                         개인상담
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/counsel/family" className="menu-dropdown-item">
+                      <Link
+                        href="/counsel/family"
+                        className="menu-dropdown-item"
+                      >
                         부부 · 가족상담
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/counsel/group" className="menu-dropdown-item">
+                      <Link
+                        href="/counsel/group"
+                        className="menu-dropdown-item"
+                      >
                         집단상담
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/counsel/counseltest" className="menu-dropdown-item">
+                      <Link
+                        href="/counsel/counseltest"
+                        className="menu-dropdown-item"
+                      >
                         심리검사
                       </Link>
                     </li>
@@ -189,12 +215,18 @@ const GNB: NextPage = () => {
                   </div>
                   <ul className="menu-ul">
                     <li className="">
-                      <Link href="/education/counselor" className="menu-dropdown-item">
+                      <Link
+                        href="/education/counselor"
+                        className="menu-dropdown-item"
+                      >
                         상담자 교육
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/education/analysis" className="menu-dropdown-item">
+                      <Link
+                        href="/education/analysis"
+                        className="menu-dropdown-item"
+                      >
                         교육분석
                       </Link>
                     </li>
@@ -203,7 +235,9 @@ const GNB: NextPage = () => {
                 <div className="menu-item flex flex-col">
                   <div className="w-full py-4 text-center">
                     <Link href="/proposal">
-                      <span className="text-base font-medium">상담문의 및 신청</span>
+                      <span className="text-base font-medium">
+                        상담문의 및 신청
+                      </span>
                     </Link>
                   </div>
                   <ul className="menu-ul">
@@ -213,7 +247,10 @@ const GNB: NextPage = () => {
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/proposal/reservationForm" className="menu-dropdown-item">
+                      <Link
+                        href="/proposal/reservationForm"
+                        className="menu-dropdown-item"
+                      >
                         상담신청
                       </Link>
                     </li>
@@ -242,7 +279,9 @@ const GNB: NextPage = () => {
                   <div className="menu-item flex flex-col">
                     <div className="w-full py-4 text-center">
                       <Link href="/proposal/list">
-                        <span className="text-base font-medium">상담 신청 내역</span>
+                        <span className="text-base font-medium">
+                          상담 신청 내역
+                        </span>
                       </Link>
                     </div>
                   </div>
@@ -264,7 +303,11 @@ const GNB: NextPage = () => {
                   <Button onClick={handleClose} style={{ color: 'black' }}>
                     취소
                   </Button>
-                  <Button onClick={handleLogout} autoFocus style={{ color: 'black' }}>
+                  <Button
+                    onClick={handleLogout}
+                    autoFocus
+                    style={{ color: 'black' }}
+                  >
                     확인
                   </Button>
                 </DialogActions>

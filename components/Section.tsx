@@ -12,7 +12,7 @@ import fixed3 from '../assets/fixed3.webp';
 
 const Section: NextPage = () => {
   return (
-    <div className="h-[540px] pt-[202px] sm:h-[300px] sm:w-full sm:pt-[0px]">
+    <div className="h-[540px] pt-[150px] sm:h-[450px] sm:w-full sm:pt-[120px]">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -60,7 +60,8 @@ const Section: NextPage = () => {
             </div>
             <div className="subtitle" data-swiper-parallax="-100">
               <p>
-                봄, 은 이름에서 상담에서 다루어야 하는 과정이 그대로 표현되는 따뜻한 공간입니다.
+                봄, 은 이름에서 상담에서 다루어야 하는 과정이 그대로 표현되는
+                따뜻한 공간입니다.
               </p>
             </div>
           </div>

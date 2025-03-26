@@ -1,4 +1,3 @@
-import Layout from '@components/Layout';
 import { NextPage } from 'next';
 
 const Content: NextPage<{ children: React.ReactNode }> = ({ children }) => {

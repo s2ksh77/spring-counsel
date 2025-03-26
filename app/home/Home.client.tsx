@@ -262,7 +262,6 @@ const HomeClient = ({ notices }: { notices: Notice[] }) => {
             <div
               id="map"
               className="h-[500px] w-[100%] sm:h-[350px] sm:w-[350px] sm:items-center md:w-[500px] md:items-center"
-              // style={{ width: '100%', height: '500px' }}
             ></div>
           </div>
           <div

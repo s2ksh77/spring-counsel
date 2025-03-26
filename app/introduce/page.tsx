@@ -1,7 +1,14 @@
 'use client';
 import { NextPage } from 'next';
 import centerIntroduce from '../../assets/center_introduce.webp';
-import { center1, center2, center3, center4, center5, center6 } from '../../assets';
+import {
+  center1,
+  center2,
+  center3,
+  center4,
+  center5,
+  center6,
+} from '../../assets';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import AOS from 'aos';
@@ -19,7 +26,7 @@ const Introduce: NextPage = () => {
   }, []);
 
   return (
-    <div className="flex h-full flex-col gap-[12rem] overflow-y-auto">
+    <div className="flex h-full flex-col gap-[12rem] overflow-y-auto sm:gap-[5rem] md:gap-[5rem]">
       <div className="flex flex-col gap-6">
         <div className="flex justify-center" data-aos="fade-right">
           <p className="w-full border-b-[3px] border-t-[3px] py-4 text-center text-2xl font-semibold">
@@ -43,24 +50,56 @@ const Introduce: NextPage = () => {
         </div>
         <div className="flex flex-col">
           <div className="flex flex-row pt-8">
-            <div className="mr-auto w-[33%]" data-aos="fade-left" data-aos-delay="0">
-              <Image src={center1} alt="센터 내부 사진" sizes="150px 256px 600px" />
+            <div
+              className="mr-auto w-[33%]"
+              data-aos="fade-left"
+              data-aos-delay="0"
+            >
+              <Image
+                src={center1}
+                alt="센터 내부 사진"
+                sizes="150px 256px 600px"
+              />
             </div>
-            <div className="mr-auto w-[33%]" data-aos="fade-left" data-aos-delay="200">
-              <Image src={center2} alt="센터 내부 사진" sizes="150px 256px 600px" />
+            <div
+              className="mr-auto w-[33%]"
+              data-aos="fade-left"
+              data-aos-delay="200"
+            >
+              <Image
+                src={center2}
+                alt="센터 내부 사진"
+                sizes="150px 256px 600px"
+              />
             </div>
-            <div className="mr-auto w-[33%]" data-aos="fade-left" data-aos-delay="400">
+            <div
+              className="mr-auto w-[33%]"
+              data-aos="fade-left"
+              data-aos-delay="400"
+            >
               <Image src={center3} alt="센터 내부 사진" />
             </div>
           </div>
           <div className="flex flex-row pt-8">
-            <div className="mr-auto w-[33%]" data-aos="fade-right" data-aos-delay="0">
+            <div
+              className="mr-auto w-[33%]"
+              data-aos="fade-right"
+              data-aos-delay="0"
+            >
               <Image src={center4} alt="센터 내부 사진" />
             </div>
-            <div className="mr-auto w-[33%]" data-aos="fade-right" data-aos-delay="200">
+            <div
+              className="mr-auto w-[33%]"
+              data-aos="fade-right"
+              data-aos-delay="200"
+            >
               <Image src={center6} alt="센터 내부 사진" />
             </div>
-            <div className="mr-auto w-[33%]" data-aos="fade-right" data-aos-delay="400">
+            <div
+              className="mr-auto w-[33%]"
+              data-aos="fade-right"
+              data-aos-delay="400"
+            >
               <Image src={center5} alt="센터 내부 사진" />
             </div>
           </div>
@@ -72,11 +111,20 @@ const Introduce: NextPage = () => {
             찾아 오시는 길
           </p>
         </div>
-        <div className="flex flex-row gap-8">
-          <div className="w-[50%]" data-aos="fade-right">
-            <div id="map" style={{ width: '100%', height: '500px' }}></div>
+        <div className="flex flex-row gap-8 sm:flex-col md:flex-col">
+          <div
+            className="flex w-[50%] flex-1 sm:w-[100%] sm:items-center sm:justify-center md:w-[100%] md:items-center md:justify-center "
+            data-aos="fade-right"
+          >
+            <div
+              id="map"
+              className="h-[500px] w-[100%] sm:h-[350px] sm:w-[350px] sm:items-center md:w-[500px] md:items-center"
+            ></div>
           </div>
-          <div className="banner-title ml-10 flex flex-col justify-center" data-aos="fade-left">
+          <div
+            className="banner-title ml-10 flex flex-col justify-center"
+            data-aos="fade-left"
+          >
             <span className="mb-5 text-lg font-bold text-[#a9ce8e] sm:text-lg">
               봄, 심리상담센터
             </span>

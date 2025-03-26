@@ -64,10 +64,10 @@ const ContextMenu: NextPage = () => {
 
   return (
     <>
-      <div className="mt-4 hidden items-center justify-end sm:flex md:flex md:h-full">
+      <div className="hidden items-center justify-end sm:flex md:flex md:h-full">
         <IconButton
           onClick={handleContextMenu}
-          className="h-[30px] w-[30px] text-black md:h-[50px] md:w-[50px]"
+          className="h-[50px] w-[50px] text-black md:h-[50px] md:w-[50px]"
           color="primary"
         >
           <MenuOutlined className="text-black md:h-[36px] md:w-[36px]" />

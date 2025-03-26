@@ -86,8 +86,12 @@ const Layout: NextPage<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div>
       {bannerImages[pathSegment] && (
-        <div className="relative h-[550px] overflow-hidden pt-4">
-          <Image src={getBannerData(pathname).image} alt="메뉴별 배너 이미지" />
+        <div className="relative h-[550px] overflow-hidden pt-4 sm:h-[350px] md:h-[450px]">
+          <Image
+            src={getBannerData(pathname).image}
+            alt="메뉴별 배너 이미지"
+            className="h-full sm:h-[80%] md:h-[80%]"
+          />
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
             <div className="title text-base tracking-[0.2rem] sm:text-sm">
               <p>봄, 심리상담센터</p>

@@ -11,54 +11,54 @@ const Footer: NextPage = () => {
 
   return (
     <div className="flex h-[150px] w-[100%] flex-row border-t-[1px]">
-      <div id="logo" className="flex cursor-pointer items-center overflow-y-hidden px-6 sm:hidden">
+      <div
+        id="logo"
+        className="flex cursor-pointer items-center overflow-y-hidden px-6 sm:hidden"
+      >
         <div>
           <Link href="/home">
-            <a>
-              <Image src={logo} width={250} height={250} alt="봄, 심리상담센터 로고" />
-            </a>
+            <Image
+              src={logo}
+              width={250}
+              height={250}
+              alt="봄, 심리상담센터 로고"
+            />
           </Link>
         </div>
       </div>
       <div id="copyright" className="ml-4 flex flex-col p-4">
         <ul className="flex last:mr-0 sm:hidden md:hidden [&>a>li:hover]:cursor-pointer [&>a>li:hover]:underline [&>a>li]:mr-3 [&>a>li]:border-r-[2px] [&>a>li]:border-[#e1e1e1] [&>a>li]:pr-3">
           <Link href="/introduce">
-            <a>
-              <li>센터 소개</li>
-            </a>
+            <li>센터 소개</li>
           </Link>
           <Link href="/counsel/private">
-            <a>
-              <li>상담 및 심리검사 서비스</li>
-            </a>
+            <li>상담 및 심리검사 서비스</li>
           </Link>
           <Link href="/education/counselor">
-            <a>
-              <li>교육 서비스</li>
-            </a>
+            <li>교육 서비스</li>
           </Link>
           <Link href="/proposal">
-            <a>
-              <li>상담문의 및 신청</li>
-            </a>
+            <li>상담문의 및 신청</li>
           </Link>
           <Link href="/news/notice">
-            <a>
-              <li>센터 소식</li>
-            </a>
+            <li>센터 소식</li>
           </Link>
         </ul>
-        <p className="text-[#999]">주소 : 경기 수원시 영통구 영통로 498, 145동 101호 </p>
+        <p className="text-[#999]">
+          주소 : 경기 수원시 영통구 영통로 498, 황골마을주공 1단지 145동 101호{' '}
+        </p>
         <p className="text-[#999]">대표자: 김정희 </p>
         <p className="text-[#999]">전화번호 : 010-6220-1850 </p>
-        <p className="text-[#999]">Copyright © 봄, 심리상담센터 All Rights Reserved.</p>
+        <p className="text-[#999]">
+          Copyright © 봄, 심리상담센터 All Rights Reserved.
+        </p>
       </div>
       <div
         onClick={() =>
           window.open(
             'http://pf.kakao.com/_jxggLb/friend',
             '_blank',
-            'width=480, height=500, left=600, top=300'
+            'width=480, height=500, left=600, top=300',
           )
         }
       >
@@ -85,7 +85,11 @@ const Footer: NextPage = () => {
           stroke="currentColor"
           strokeWidth={2}
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8 7l4-4m0 0l4 4m-4-4v18" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M8 7l4-4m0 0l4 4m-4-4v18"
+          />
         </svg>
       </div>
     </div>

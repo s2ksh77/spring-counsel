@@ -1,11 +1,9 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { SetStateAction, useEffect, useState } from 'react';
-import useSWR from 'swr';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import logo from '../public/logo-small.jpg';
-import logoLarge from '../public/logo-main.jpg';
 import {
   Dialog,
   DialogTitle,
@@ -13,304 +11,310 @@ import {
   DialogContentText,
   DialogActions,
   Button,
-  IconButton,
-  Menu,
 } from '@mui/material';
 import useMutation from '@libs/client/useMutation';
-import { MenuOutlined } from '@mui/icons-material';
 import ContextMenu from './ContextMenu';
+import { useSession } from 'hooks/useSession';
+import { PhoneInTalkOutlined } from '@mui/icons-material';
+import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
+import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 
-const GNB: NextPage<{
-  loginState: boolean;
-  setLoginState: React.Dispatch<SetStateAction<boolean>>;
-}> = ({ loginState, setLoginState }) => {
-  const { data } = useSWR('/api/login');
-  const [isLogin, setIsLogin] = useState(false);
+const KakaoSVG = () => {
+  return (
+    <svg
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      role="img"
+      xmlns="http://www.w3.org/2000/svg"
+      className="sm:h-4 sm:w-4 md:h-5 md:w-5"
+    >
+      <g id="SVGRepo_iconCarrier">
+        <path
+          fill="#454545"
+          d="M22.125 0H1.875C.839 0 0 .84 0 1.875v20.25C0 23.161.84 24 1.875 24h20.25C23.161 24 24 23.16 24 22.125V1.875C24 .839 23.16 0 22.125 0zM12 18.75c-.591 0-1.17-.041-1.732-.12-.562.396-3.813 2.679-4.12 2.722 0 0-.125.049-.232-.014s-.088-.229-.088-.229c.032-.22.843-3.018.992-3.533-2.745-1.36-4.57-3.769-4.57-6.513 0-4.246 4.365-7.688 9.75-7.688s9.75 3.442 9.75 7.688c0 4.245-4.365 7.687-9.75 7.687zM8.05 9.867h-.878v3.342c0 .296-.252.537-.563.537s-.562-.24-.562-.537V9.867h-.878a.552.552 0 0 1 0-1.101h2.88a.552.552 0 0 1 0 1.101zm10.987 2.957a.558.558 0 0 1 .109.417.559.559 0 0 1-.219.37.557.557 0 0 1-.338.114.558.558 0 0 1-.45-.224l-1.319-1.747-.195.195v1.227a.564.564 0 0 1-.562.563.563.563 0 0 1-.563-.563V9.328a.563.563 0 0 1 1.125 0v1.21l1.57-1.57a.437.437 0 0 1 .311-.126c.14 0 .282.061.388.167a.555.555 0 0 1 .165.356.438.438 0 0 1-.124.343l-1.282 1.281 1.385 1.835zm-8.35-3.502c-.095-.27-.383-.548-.75-.556-.366.008-.654.286-.749.555l-1.345 3.541c-.171.53-.022.728.133.8a.857.857 0 0 0 .357.077c.235 0 .414-.095.468-.248l.279-.73h1.715l.279.73c.054.153.233.248.468.248a.86.86 0 0 0 .357-.078c.155-.071.304-.268.133-.8l-1.345-3.54zm-1.311 2.443.562-1.596.561 1.596H9.376zm5.905 1.383a.528.528 0 0 1-.539.516h-1.804a.528.528 0 0 1-.54-.516v-3.82c0-.31.258-.562.575-.562s.574.252.574.562v3.305h1.195c.297 0 .54.231.54.515z"
+        ></path>
+      </g>
+    </svg>
+  );
+};
+
+const GNB: NextPage = () => {
+  const { isLogin, refreshSession } = useSession();
   const [dialogVisible, setDialogVisible] = useState(false);
   const [logout, { data: logoutData }] = useMutation('/api/login/logout');
   const router = useRouter();
 
-  const goLogIn = () => {
-    router.push('/login');
-  };
+  const goLogIn = () => router.push('/login');
+  const openDialog = () => setDialogVisible(true);
+  const handleClose = () => setDialogVisible(false);
 
-  const openDialog = () => {
-    setDialogVisible(true);
+  const handleLogin = () => {
+    !isLogin ? router.push('/login') : openDialog();
   };
 
   const handleLogout = () => {
     logout('');
     setDialogVisible(false);
-    setLoginState(false);
   };
 
-  const handleClose = () => setDialogVisible(false);
-
   useEffect(() => {
-    setIsLogin(loginState);
-  }, [loginState]);
-
-  useEffect(() => {
-    if (logoutData && logoutData?.ok) {
-      setIsLogin(false);
+    if (logoutData?.ok) {
+      refreshSession();
     }
   }, [logoutData]);
 
-  const removeCache = async (e: any) => {
-    if (e.isTrusted) {
-      await logout('');
-      setIsLogin(false);
-    }
-  };
-
   return (
     <div id="gnb" className="gnb bg-black-400 border-#f5f5f5">
-      <div className="flex sm:w-full sm:justify-between md:w-full md:justify-between lg:w-full xl:w-full">
-        <div className="flex-1-auto flex">
-          <Link href="/home">
-            <a>
-              <div
-                id="logo"
-                className="flex h-[112px] min-w-[350px] cursor-pointer overflow-y-hidden sm:h-[75px] sm:w-[130px] sm:min-w-[230px] lg:h-[112px] lg:w-[225px] lg:min-w-[225px]"
-              >
-                <div className="lg:hidden lg:h-[110px]">
-                  <Image
-                    src={logo}
-                    width={350}
-                    height={112}
-                    className="lg:h-[110px]"
-                    priority
-                    alt="봄, 심리상담센터 로고"
-                  />
-                </div>
-                <div className="hidden lg:flex lg:h-[112px]">
-                  <Image
-                    src={logo}
-                    width={225}
-                    height={112}
-                    className="lg:h-[112px]"
-                    alt="봄, 심리상담센터 로고"
-                  />
-                </div>
-              </div>
-            </a>
-          </Link>
-        </div>
-        <div className="flex flex-1 flex-col">
-          <div className="flex justify-end">
-            {!isLogin ? (
-              <div id="login" className="padding-[0.5rem]">
-                <button onClick={goLogIn} className="login-btn text-black-300">
-                  로그인
-                </button>
-              </div>
-            ) : (
-              <div className="padding-[0.5rem]">
-                <button onClick={openDialog} className="login-btn text-black-300">
-                  로그아웃
-                </button>
-              </div>
-            )}
+      <div className="flex flex-col sm:w-full sm:justify-between md:w-full md:justify-between lg:w-full xl:w-full">
+        <div className="flex items-center justify-between border-b-[1px] px-16 sm:px-8 md:px-12">
+          <div className="flex min-w-[160px] cursor-default items-center gap-2 rounded-full bg-[#a9ce8e] p-4 text-white sm:hidden md:min-w-[140px] md:p-2">
+            <PhoneInTalkOutlined className="w-[24px] sm:w-[18px] md:w-[20px]" />
+            <span className="text-base md:text-xs">010-6220-1850</span>
           </div>
-          <div id="menu" className="flex w-full justify-around sm:!hidden md:!hidden">
-            <div className="menu-item">
-              <div className="menu-dropdown dropdown">
-                <div>
-                  <div className="py-[2rem] text-center">
+          <Link href="/home">
+            <div
+              id="logo"
+              className="flex h-[88px] min-w-[225px] cursor-pointer overflow-y-hidden sm:h-[72px] sm:w-[130px] sm:min-w-[230px] lg:h-[88px] lg:w-[225px] lg:min-w-[225px]"
+            >
+              <div className="sm:h-[72px] md:h-[88px] lg:hidden lg:h-[88px]">
+                <Image
+                  src={logo}
+                  width={236}
+                  height={88}
+                  className="sm:h-[72px] md:h-[88px] lg:h-[88px]"
+                  priority
+                  alt="봄, 심리상담센터 로고"
+                />
+              </div>
+              <div className="hidden lg:flex lg:h-[88px]">
+                <Image
+                  src={logo}
+                  width={236}
+                  height={88}
+                  className="lg:h-[88px]"
+                  alt="봄, 심리상담센터 로고"
+                />
+              </div>
+            </div>
+          </Link>
+          <div className="flex gap-1">
+            <div className="flex min-w-[60px] cursor-pointer flex-col items-center py-4">
+              <AssignmentOutlinedIcon className="h-6 w-6 text-[#454545] sm:h-4 sm:w-4 md:h-5 md:w-5" />
+              <Link href="/proposal/reservationForm">
+                <span className="text-[#454545]">상담신청</span>
+              </Link>
+            </div>
+            <div
+              onClick={() =>
+                window.open(
+                  'http://pf.kakao.com/_jxggLb/friend',
+                  '_blank',
+                  'width=480, height=500, left=600, top=300',
+                )
+              }
+            >
+              <div className="flex min-w-[60px] cursor-pointer flex-col items-center gap-[1px] py-4">
+                <KakaoSVG />
+                <span className="h-[19px] text-[#454545]">카카오톡</span>
+              </div>
+            </div>
+            <div
+              onClick={handleLogin}
+              className="flex min-w-[60px] cursor-pointer flex-col items-center py-4"
+            >
+              <VpnKeyOutlinedIcon className="h-6 w-6 text-[#454545] sm:h-4 sm:w-4 md:h-5 md:w-5" />
+              <button>
+                <span className="text-[#454545]">
+                  {isLogin ? '로그아웃' : '로그인'}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="flex bg-white">
+          <div className="flex flex-1">
+            <div
+              id="menu"
+              className="flex w-full flex-col justify-around sm:!hidden md:!hidden"
+            >
+              <div
+                id="menu-title"
+                className="flex justify-center border-b-[1px]"
+              >
+                <div className="menu-item flex flex-col">
+                  <div className="w-full py-4 text-center">
                     <Link href="/introduce">
-                      <a>
-                        <span className="font-bold">센터 소개</span>
-                      </a>
+                      <span className="text-base font-medium">센터 소개</span>
                     </Link>
                   </div>
-                  <ul className="dropdown-menu menu-dropdown-ul absolute">
+                  <ul className="menu-ul">
                     <li>
-                      <Link href="/introduce">
-                        <a className="menu-dropdown-item" href="#">
-                          센터 소개
-                        </a>
+                      <Link href="/introduce" className="menu-dropdown-item">
+                        센터 소개
                       </Link>
                     </li>
                     <li>
-                      <Link href="/introduce/member">
-                        <a className="menu-dropdown-item">센터 구성원 소개</a>
-                      </Link>
-                    </li>
-                    <li className="">
-                      <Link href="/introduce/location">
-                        <a className="menu-dropdown-item" href="#">
-                          찾아 오시는 길
-                        </a>
+                      <Link
+                        href="/introduce/member"
+                        className="menu-dropdown-item"
+                      >
+                        센터 구성원 소개
                       </Link>
                     </li>
                   </ul>
                 </div>
-              </div>
-            </div>
-            <div className="menu-item">
-              <div className="menu-dropdown dropdown">
-                <div>
-                  <div className="py-[2rem] text-center">
+                <div className="menu-item flex flex-col">
+                  <div className="w-full py-4 text-center">
                     <Link href="/counsel/private">
-                      <a>
-                        <span className="font-bold">상담 및 심리검사 서비스</span>
-                      </a>
+                      <span className="text-base font-medium">
+                        상담 및 심리검사
+                      </span>
                     </Link>
                   </div>
-                  <ul className="dropdown-menu menu-dropdown-ul absolute">
+                  <ul className="menu-ul ">
                     <li className="">
-                      <Link href="/counsel/private">
-                        <a className="menu-dropdown-item">개인상담</a>
+                      <Link
+                        href="/counsel/private"
+                        className="menu-dropdown-item"
+                      >
+                        개인상담
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/counsel/family">
-                        <a className="menu-dropdown-item">부부 · 가족상담</a>
+                      <Link
+                        href="/counsel/family"
+                        className="menu-dropdown-item"
+                      >
+                        부부 · 가족상담
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/counsel/group">
-                        <a className="menu-dropdown-item" href="#">
-                          집단상담
-                        </a>
+                      <Link
+                        href="/counsel/group"
+                        className="menu-dropdown-item"
+                      >
+                        집단상담
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/counsel/counseltest">
-                        <a className="menu-dropdown-item" href="#">
-                          심리검사
-                        </a>
+                      <Link
+                        href="/counsel/counseltest"
+                        className="menu-dropdown-item"
+                      >
+                        심리검사
                       </Link>
                     </li>
                   </ul>
                 </div>
-              </div>
-            </div>
-            <div className="menu-item">
-              <div className="menu-dropdown dropdown">
-                <div>
-                  <div className="py-[2rem] text-center">
+                <div className="menu-item flex flex-col">
+                  <div className="w-full py-4 text-center">
                     <Link href="/education/counselor">
-                      <a>
-                        <span className="font-bold">교육 서비스</span>
-                      </a>
+                      <span className="text-base font-medium">교육 서비스</span>
                     </Link>
                   </div>
-                  <ul className="dropdown-menu menu-dropdown-ul absolute">
+                  <ul className="menu-ul">
                     <li className="">
-                      <Link href="/education/counselor">
-                        <a className="menu-dropdown-item" href="#">
-                          상담자 교육
-                        </a>
+                      <Link
+                        href="/education/counselor"
+                        className="menu-dropdown-item"
+                      >
+                        상담자 교육
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/education/analysis">
-                        <a className="menu-dropdown-item" href="#">
-                          교육분석
-                        </a>
+                      <Link
+                        href="/education/analysis"
+                        className="menu-dropdown-item"
+                      >
+                        교육분석
                       </Link>
                     </li>
                   </ul>
                 </div>
-              </div>
-            </div>
-            <div className="menu-item">
-              <div className="menu-dropdown dropdown">
-                <div>
-                  <div className="py-[2rem] text-center">
+                <div className="menu-item flex flex-col">
+                  <div className="w-full py-4 text-center">
                     <Link href="/proposal">
-                      <a>
-                        <span className="font-bold">상담문의 및 신청</span>
-                      </a>
+                      <span className="text-base font-medium">
+                        상담문의 및 신청
+                      </span>
                     </Link>
                   </div>
-                  <ul className="dropdown-menu menu-dropdown-ul absolute">
+                  <ul className="menu-ul">
                     <li className="">
-                      <Link href="/proposal">
-                        <a className="menu-dropdown-item" href="#">
-                          상담신청 안내
-                        </a>
+                      <Link href="/proposal" className="menu-dropdown-item">
+                        상담신청 안내
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/proposal/reservationForm">
-                        <a className="menu-dropdown-item" href="#">
-                          상담신청
-                        </a>
+                      <Link
+                        href="/proposal/reservationForm"
+                        className="menu-dropdown-item"
+                      >
+                        상담신청
                       </Link>
                     </li>
                   </ul>
                 </div>
-              </div>
-            </div>
-            <div className="menu-item">
-              <div className="dropdown relative mx-2 inline-block h-[5.3rem] w-40 lg:w-24">
-                <div>
-                  <div className="py-[2rem] text-center">
+                <div className="menu-item flex flex-col">
+                  <div className="w-full py-4 text-center">
                     <Link href="/news/notice">
-                      <a>
-                        <span className="font-bold">센터 소식</span>
-                      </a>
+                      <span className="text-base font-medium">센터 소식</span>
                     </Link>
                   </div>
-                  <ul className="dropdown-menu menu-dropdown-ul absolute">
+                  <ul className="menu-ul">
                     <li className="">
-                      <Link href="/news/notice">
-                        <a className="menu-dropdown-item" href="#">
-                          공지사항
-                        </a>
+                      <Link href="/news/notice" className="menu-dropdown-item">
+                        공지사항
                       </Link>
                     </li>
                     <li className="">
-                      <Link href="/news/review">
-                        <a className="menu-dropdown-item" href="#">
-                          상담후기
-                        </a>
+                      <Link href="/news/review" className="menu-dropdown-item">
+                        상담후기
                       </Link>
                     </li>
                   </ul>
                 </div>
-              </div>
-            </div>
-            {isLogin ? (
-              <div className="menu-item">
-                <div className="menu-dropdown dropdown">
-                  <div>
-                    <div className="py-[2rem] text-center">
+                {isLogin ? (
+                  <div className="menu-item flex flex-col">
+                    <div className="w-full py-4 text-center">
                       <Link href="/proposal/list">
-                        <a>
-                          <span className="font-bold">상담 신청 내역</span>
-                        </a>
+                        <span className="text-base font-medium">
+                          상담 신청 내역
+                        </span>
                       </Link>
                     </div>
                   </div>
-                </div>
+                ) : null}
               </div>
-            ) : null}
-            <Dialog
-              open={dialogVisible}
-              onClose={handleClose}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              <DialogTitle id="alert-dialog-title">{'로그아웃'}</DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  로그아웃 하시겠습니까?
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose} style={{ color: 'black' }}>
-                  취소
-                </Button>
-                <Button onClick={handleLogout} autoFocus style={{ color: 'black' }}>
-                  확인
-                </Button>
-              </DialogActions>
-            </Dialog>
+              <Dialog
+                open={dialogVisible}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">{'로그아웃'}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    로그아웃 하시겠습니까?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} style={{ color: 'black' }}>
+                    취소
+                  </Button>
+                  <Button
+                    onClick={handleLogout}
+                    autoFocus
+                    style={{ color: 'black' }}
+                  >
+                    확인
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+            <ContextMenu />
           </div>
-          <ContextMenu />
         </div>
       </div>
     </div>

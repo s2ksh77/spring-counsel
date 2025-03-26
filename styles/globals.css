@@ -1,3 +1,4 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +14,7 @@
     @apply mt-[1px] hidden min-w-[250px] bg-white py-1 text-sm text-[#777777] shadow-[0_6px_12px_rgb(0,0,0,0.3)] dark:text-gray-200;
   }
   .menu-dropdown-item {
-    @apply block px-4 py-6 hover:bg-[#a9ce8e] hover:text-white;
+    @apply text-sm font-light hover:text-white hover:underline;
   }
   .gnb {
     @apply fixed z-[2] flex h-28 w-[100%] flex-col border-b-2 bg-white sm:h-[4.6rem];
@@ -21,72 +22,55 @@
   .login-btn {
     @apply w-20 hover:text-gray-400;
   }
-  .menu-banner {
-    @apply sm:pt-[74px] md:pt-[112px] lg:pt-[112px];
-  }
   .regist-form {
     @apply w-full appearance-none rounded-md border px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e];
   }
 }
 
-@font-face {
-  font-family: 'Spoqa Han Sans Neo';
-  font-weight: 700;
-  src: url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Bold.woff2')
-      format('woff2'),
-    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Bold.woff')
-      format('woff'),
-    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Bold.ttf')
-      format('truetype');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Spoqa Han Sans Neo';
-  font-weight: 500;
-  src: url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Medium.woff2')
-      format('woff2'),
-    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Medium.woff')
-      format('woff'),
-    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Medium.ttf')
-      format('truetype');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Spoqa Han Sans Neo';
-  font-weight: 400;
-  src: url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.woff2')
-      format('woff2'),
-    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.woff')
-      format('woff'),
-    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.ttf')
-      format('truetype');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Spoqa Han Sans Neo';
-  font-weight: 200;
-  src: url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Light.woff2')
-      format('woff2'),
-    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Light.woff')
-      format('woff'),
-    url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Light.ttf')
-      format('truetype');
-  font-display: swap;
-}
-
 * {
-  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-family: 'Pretendard Variable';
 }
 
 .banner-title {
-  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-family: 'Pretendard Variable';
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
+#menu {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+.menu-item {
+  width: 200px;
+  height: 60px;
+  justify-content: start;
+  transition: height 0.3s ease;
+}
+
+.menu-item:hover {
+  color: white;
+  background-color: #a9ce8e;
+}
+
+#menu:hover .menu-ul {
+  opacity: 1;
+  max-height: 250px;
+  height: 100%;
+}
+
+#menu:hover .menu-item {
+  height: 250px;
+  transition: height 0.3s ease;
 }
 
 .PrivateSwitchBase-input {
@@ -95,6 +79,9 @@
 }
 .MuiTableCell-root {
   padding: 5px;
+}
+.tox-editor-header {
+  z-index: -1 !important;
 }
 
 .no-toolbar .tox-editor-header {
@@ -190,16 +177,35 @@
 }
 
 @media (min-width: 360px) and (max-width: 599px) {
+  .swipe-image {
+    object-fit: fill !important;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 60% !important;
+  }
+
   .swiper-slide .title {
-    font-size: 28px;
-    line-height: 40px;
+    font-size: 21px !important;
+    margin-top: 10px !important;
   }
   .swiper-slide .subtitle {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 16px !important;
+    margin-top: 10px !important;
   }
+  .parallax-bg {
+    padding: 60px !important;
+  }
+
   .tox-sidebar-wrap {
     height: 500px !important;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1033px) {
+  .swipe-image {
+    object-fit: fill !important;
   }
 }
 

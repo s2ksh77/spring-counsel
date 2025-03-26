@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { fetchAPI } from '@libs/client/fetcher';
 import ProposalListClient from './ProposalList.client';
 import { Reservation } from '@prisma/client';

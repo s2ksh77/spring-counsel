@@ -11,14 +11,13 @@ const nextConfig = {
       `${process.env.S3_UPLOAD_BUCKET}.s3.amazonaws.com`,
       `${process.env.S3_UPLOAD_BUCKET}.s3.${process.env.S3_UPLOAD_REGION}.amazonaws.com`,
     ],
-    sizes: '250px',
+    imageSizes: [250],
   },
   env: {
     S3_UPLOAD_KEY: process.env.S3_UPLOAD_KEY,
     S3_UPLOAD_SECRET: process.env.S3_UPLOAD_SECRET,
   },
-  webpack5: true,
-  webpack: (config) => {
+  webpack: config => {
     config.resolve.fallback = { fs: false };
 
     return config;

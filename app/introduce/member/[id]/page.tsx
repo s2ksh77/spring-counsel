@@ -1,14 +1,12 @@
 'use client';
-import { NextPage } from 'next';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { COUNSELOR_LIST } from 'static/member';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
 
-const MemberDetail: NextPage = ({ params }: { params: { id: number } }) => {
+const MemberDetail = ({ params }: { params: { id: number } }) => {
   const { id } = params;
   const router = useRouter();
   useEffect(() => {

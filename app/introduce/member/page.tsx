@@ -10,7 +10,7 @@ import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 
 const Member: NextPage = () => {
   const router = useRouter();
-  const refs = useRef([]);
+  const refs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -18,7 +18,7 @@ const Member: NextPage = () => {
   }, []);
 
   const handleCounselorClick = idx => {
-    const element = refs.current[idx];
+    const element = refs.current[idx] as HTMLElement;
     const top = element.getBoundingClientRect().top + window.scrollY - 150;
 
     window.scrollTo({

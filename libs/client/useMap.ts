@@ -5,9 +5,9 @@ import img from '../../assets/marker.svg';
 function useMap() {
   const mapRef = useRef<HTMLElement | null | any>(null);
   const markerRef = useRef<any | null>(null);
-  const [myLocation, setMyLocation] = useState<{ latitude: number; longitude: number } | string>(
-    ''
-  );
+  const [myLocation, setMyLocation] = useState<
+    { latitude: number; longitude: number } | string
+  >('');
 
   const markerClickEvent = (marker: any) => {
     naver.maps.Event.addListener(marker, 'click', (e: any) => {
@@ -23,7 +23,7 @@ function useMap() {
   useEffect(() => {
     // geolocation 이용 현재 위치 확인, 위치 미동의 시 기본 위치로 지정
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition(position => {
         setMyLocation({ latitude: 37.2626177, longitude: 127.0797463 });
       });
     }
@@ -37,7 +37,10 @@ function useMap() {
 
       // Naver Map 생성
       mapRef.current = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(myLocation.latitude, myLocation.longitude),
+        center: new naver.maps.LatLng(
+          myLocation.latitude,
+          myLocation.longitude,
+        ),
         zoom: 19,
         zoomControl: true,
         zoomControlOptions: {

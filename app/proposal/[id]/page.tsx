@@ -1,8 +1,11 @@
 import { fetchAPI } from '@libs/client/fetcher';
 import ProposalDetailClient from './ProposalDetail.client';
+import { Reservation, ReservationFile } from '@prisma/client';
 
 async function getProposalDetail(id: string) {
-  const proposal = await fetchAPI(`/api/proposal/${id}`);
+  const proposal = await fetchAPI<Reservation & { files: ReservationFile[] }>(
+    `/api/proposal/${id}`,
+  );
   return proposal;
 }
 

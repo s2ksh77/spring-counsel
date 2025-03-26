@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import client from '@libs/server/client';
 import { getUser } from '@libs/server/session';
+import { PrismaClient } from '@prisma/client';
 
 const svcObjecct = {
   reservation: 'reservationFile',
@@ -12,8 +13,9 @@ export async function POST(req: NextRequest) {
   try {
     const user = await getUser(req);
     const { name, url, form, id, fileId } = await req.json();
+    const model = svcObjecct[form] as keyof PrismaClient;
 
-    await client[svcObjecct[form]].create({
+    await (client[model] as any).create({
       data: {
         id: fileId,
         name,
@@ -27,6 +29,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error('Upload Error:', error);
-    return NextResponse.json({ ok: false, error: 'Failed to upload file' }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, error: 'Failed to upload file' },
+      { status: 500 },
+    );
   }
 }

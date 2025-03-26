@@ -12,8 +12,8 @@ interface NoticeDetailClientProps {
     id: string;
     title: string;
     content: string;
-    isPrimary: boolean;
-    updatedAt?: string;
+    isPrimary: boolean | null;
+    updatedAt?: any;
     files?: { id: string; name: string }[];
   };
 }
@@ -35,7 +35,11 @@ const NoticeDetailClient = ({ id, notice }: NoticeDetailClientProps) => {
       {editState ? (
         <Editor type={'notice'} data={notice} onCancel={handleCancel} />
       ) : (
-        <Content data={notice} onEdit={handleEdit} handleDialogOpen={handleDeleteOpen} />
+        <Content
+          data={notice}
+          onEdit={handleEdit}
+          handleDialogOpen={handleDeleteOpen}
+        />
       )}
 
       <div className="flex justify-end pt-2">
@@ -49,7 +53,6 @@ const NoticeDetailClient = ({ id, notice }: NoticeDetailClientProps) => {
         type={'notice'}
         onClose={handleDeleteClose}
         id={id}
-        router={router}
       />
     </div>
   );

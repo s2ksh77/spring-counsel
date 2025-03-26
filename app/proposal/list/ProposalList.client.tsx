@@ -14,7 +14,11 @@ import { Reservation } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import useSWR from 'swr';
 import React from 'react';
-import { AccessTime, CheckCircleOutline, PendingActions } from '@mui/icons-material';
+import {
+  AccessTime,
+  CheckCircleOutline,
+  PendingActions,
+} from '@mui/icons-material';
 import { phoneFomatter } from 'utils/common';
 
 export const statusIcons = {
@@ -31,8 +35,11 @@ export const statusIcons = {
     label: '예약완료',
   },
 };
+interface ProposalListProps {
+  data: Reservation[];
+}
 
-const ProposalListClient: NextPage = ({ data }) => {
+const ProposalListClient = ({ data }: ProposalListProps) => {
   const router = useRouter();
 
   const onClick = () => {
@@ -43,7 +50,7 @@ const ProposalListClient: NextPage = ({ data }) => {
     router.push(`/proposal/${id}`);
   };
 
-  const getStatusIcon = (status: keyof typeof statusIcons) => {
+  const getStatusIcon = (status: string) => {
     const statusData = statusIcons[status];
     return statusData ? (
       <span>
@@ -75,16 +82,24 @@ const ProposalListClient: NextPage = ({ data }) => {
                 key={reservation.id}
                 className={'h-[30px] hover:cursor-pointer hover:bg-[#eeeeee]'}
               >
-                <TableCell className="h-[30px] w-16 text-center">{data?.length - index}</TableCell>
+                <TableCell className="h-[30px] w-16 text-center">
+                  {data?.length - index}
+                </TableCell>
                 <TableCell className="h-[30px]">{reservation.name}</TableCell>
                 <TableCell className="h-[30px]">
                   {phoneFomatter('0' + reservation.phone, '')}
                 </TableCell>
                 <TableCell className="h-[30px] w-36">
-                  {reservation.createdAt.toString().split('T')[0]?.replaceAll('-', '.')}
+                  {reservation.createdAt
+                    .toString()
+                    .split('T')[0]
+                    ?.replaceAll('-', '.')}
                 </TableCell>
                 <TableCell className="h-[30px] w-36">
-                  {reservation.updatedAt.toString().split('T')[0]?.replaceAll('-', '.')}
+                  {reservation.updatedAt
+                    .toString()
+                    .split('T')[0]
+                    ?.replaceAll('-', '.')}
                 </TableCell>
                 <TableCell className="h-[30px] w-40 text-center">
                   {getStatusIcon(reservation.status)}

@@ -1,6 +1,6 @@
 import matter from 'gray-matter';
 import remarkHtml from 'remark-html';
-import remarkParse from 'remark-parse/lib';
+import remarkParse from 'remark-parse';
 import { unified } from 'unified';
 
 const getEducationCounselor = async () => {

@@ -1,8 +1,9 @@
 import { fetchAPI } from '@libs/client/fetcher';
 import ProposalListClient from './ProposalList.client';
+import { Reservation } from '@prisma/client';
 
-async function getProposalList(id: string) {
-  const proposalList = await fetchAPI(`/api/proposal`);
+async function getProposalList() {
+  const proposalList = await fetchAPI<Reservation[]>(`/api/proposal`);
   return proposalList;
 }
 

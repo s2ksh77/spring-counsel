@@ -2,9 +2,10 @@ import React from 'react';
 import HomeClient from './Home.client';
 import client from '@libs/server/client';
 import { fetchAPI } from '@libs/client/fetcher';
+import { Notice } from '@prisma/client';
 
 async function getNotices() {
-  const notices = await fetchAPI('/api/notice?take=5', 'force-cache');
+  const notices = await fetchAPI<Notice[]>('/api/notice?take=5', 'force-cache');
   return notices;
 }
 

@@ -7,6 +7,7 @@ import AWS from 'aws-sdk';
 
 interface ContentProps {
   data: {
+    title: string;
     content: string;
     updatedAt?: string;
     files?: { id: string; name: string }[];
@@ -46,7 +47,7 @@ const Content = ({ data, onEdit, handleDialogOpen }: ContentProps) => {
 
   useEffect(() => {
     if (data) {
-      setFileData(data.files);
+      setFileData(data.files ?? []);
     }
   }, [data]);
 
@@ -54,34 +55,40 @@ const Content = ({ data, onEdit, handleDialogOpen }: ContentProps) => {
     <div className="flex h-full w-full flex-col overflow-y-auto p-8">
       <div className="w-full pt-8">
         <div className="flex w-full flex-row items-center">
-          <div className="w-[50px] items-center">
-            <label className="flex">제목</label>
-          </div>
-          <div className="w-full">
-            <label className="text-lg font-bold">{data?.title}</label>
-          </div>
-          {isLogin && (
-            <div className="flex flex-row">
-              <>
-                <div className="flex">
-                  <Button onClick={handleEdit} style={{ color: 'black' }} className="mr-2 w-[73px]">
-                    <EditOutlined className="mr-1" />
-                    수정
-                  </Button>
-                </div>
-                <div className="flex">
-                  <Button
-                    onClick={handleDialogOpen}
-                    style={{ color: 'black' }}
-                    className="mr-2 w-[73px]"
-                  >
-                    <DeleteOutlineOutlined className="mr-1" />
-                    삭제
-                  </Button>
-                </div>
-              </>
+          <>
+            <div className="w-[50px] items-center">
+              <label className="flex">제목</label>
             </div>
-          )}
+            <div className="w-full">
+              <label className="text-lg font-bold">{data?.title}</label>
+            </div>
+            {isLogin && (
+              <div className="flex flex-row">
+                <>
+                  <div className="flex">
+                    <Button
+                      onClick={handleEdit}
+                      style={{ color: 'black' }}
+                      className="mr-2 w-[73px]"
+                    >
+                      <EditOutlined className="mr-1" />
+                      수정
+                    </Button>
+                  </div>
+                  <div className="flex">
+                    <Button
+                      onClick={handleDialogOpen}
+                      style={{ color: 'black' }}
+                      className="mr-2 w-[73px]"
+                    >
+                      <DeleteOutlineOutlined className="mr-1" />
+                      삭제
+                    </Button>
+                  </div>
+                </>
+              </div>
+            )}
+          </>
         </div>
       </div>
       <div className="w-full pt-8">
@@ -139,7 +146,7 @@ const Content = ({ data, onEdit, handleDialogOpen }: ContentProps) => {
         <div className="my-4 flex w-full flex-row">
           <div className="flex min-w-[70px]">첨부파일 : </div>
           <div className="flex max-h-20 w-full flex-col overflow-y-auto">
-            {fileData?.map((file) => (
+            {fileData?.map(file => (
               <>
                 <a
                   key={file.id}

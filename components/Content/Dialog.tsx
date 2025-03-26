@@ -1,3 +1,4 @@
+'use client';
 import {
   Dialog as DialogCompo,
   DialogTitle,
@@ -7,13 +8,13 @@ import {
   Button,
 } from '@mui/material';
 import useMutation from '@libs/client/useMutation';
+import { useRouter } from 'next/navigation';
 
 interface DialogProps {
   open: boolean;
   onClose: () => void;
   type: 'notice' | 'review' | 'proposal';
   id: string;
-  router: { push: (path: string) => void };
 }
 
 const dialogOptions = {
@@ -31,12 +32,16 @@ const dialogOptions = {
   },
 };
 
-const Dialog = ({ open, onClose, type, id, router }: DialogProps) => {
-  const [deleteContent, { loading }] = useMutation(`/api/${type}/${id}/delete`, 'DELETE');
+const Dialog = ({ open, onClose, type, id }: DialogProps) => {
+  const router = useRouter();
+  const [deleteContent, { loading }] = useMutation(
+    `/api/${type}/${id}/delete`,
+    'DELETE',
+  );
 
   const handleDelete = async () => {
     if (loading) return;
-    await deleteContent();
+    await deleteContent(id);
     router.push(dialogOptions[type].path);
     router.refresh();
   };

@@ -14,6 +14,9 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
 
     return NextResponse.json({ ok: true, data });
   } catch (error) {
-    return NextResponse.json({ message: 'Failed to fetch notices' }, { status: 500 });
+    return NextResponse.json(
+      { message: 'Failed to fetch notices' },
+      { status: 500 },
+    );
   }
 }

@@ -1,8 +1,9 @@
 import { fetchAPI } from '@libs/client/fetcher';
 import NoticeDetailClient from './NoticeDetail.client';
+import { Notice } from '@prisma/client';
 
 async function getNoticeDetail(id: string) {
-  const notice = await fetchAPI(`/api/notice/${id}`, 'force-cache');
+  const notice = await fetchAPI<Notice>(`/api/notice/${id}`, 'force-cache');
   return notice;
 }
 

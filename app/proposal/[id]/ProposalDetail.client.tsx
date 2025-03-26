@@ -11,6 +11,7 @@ import { phoneFomatter } from 'utils/common';
 import AWS from 'aws-sdk';
 import { statusIcons } from '../list/ProposalList.client';
 import Dialog from '@components/Content/Dialog';
+import { Reservation, ReservationFile } from '@prisma/client';
 
 const statusOptions = {
   pending: [
@@ -26,8 +27,12 @@ const statusOptions = {
     { value: 'ready', label: '대기' },
   ],
 };
+interface ProposalDetailClientProps {
+  id: string;
+  data: Reservation & { files: ReservationFile[] };
+}
 
-const ProposalDetail: NextPage = ({ data, id }) => {
+const ProposalDetail = ({ data, id }: ProposalDetailClientProps) => {
   const router = useRouter();
   const [editor, setEditor] = useState(null);
   const [editState, setEditState] = useState(false);
@@ -38,11 +43,11 @@ const ProposalDetail: NextPage = ({ data, id }) => {
   const [item, setItem] = useState('');
   const [fileData, setFileData] = useState<any[]>([]);
 
-  const { mutate } = useSWR<ReservationResponse>(id ? `/api/proposal/${id}` : null);
+  const { mutate } = useSWR(id ? `/api/proposal/${id}` : null);
 
   const [editProposal, { data: editData, loading }] = useMutation(
     `/api/proposal/${id}/edit`,
-    'PUT'
+    'PUT',
   );
 
   const goBack = () => {
@@ -76,7 +81,7 @@ const ProposalDetail: NextPage = ({ data, id }) => {
     setFileData(data?.files);
   }, [data]);
 
-  const getStatus = (status: keyof typeof statusIcons) => {
+  const getStatus = (status: string) => {
     const statusData = statusIcons[status];
     return statusData ? (
       <span>
@@ -91,10 +96,10 @@ const ProposalDetail: NextPage = ({ data, id }) => {
     setItem(value);
   };
 
-  const getSelectBox = (status: keyof typeof statusOptions) => {
+  const getSelectBox = (status: string) => {
     return (
       <Select value={item} onChange={handleChange}>
-        {statusOptions[status]?.map((option) => (
+        {statusOptions[status]?.map(option => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
           </MenuItem>
@@ -141,7 +146,11 @@ const ProposalDetail: NextPage = ({ data, id }) => {
             <label className="mr-2">{getStatus(data?.status)}</label>
           </div>
           {getSelectBox(data?.status)}
-          <Button onClick={handleUpdate} style={{ color: 'black' }} className="mr-2">
+          <Button
+            onClick={handleUpdate}
+            style={{ color: 'black' }}
+            className="mr-2"
+          >
             변경
           </Button>
         </div>
@@ -166,7 +175,9 @@ const ProposalDetail: NextPage = ({ data, id }) => {
               <label>연락처</label>
             </div>
             <div className="w-full">
-              <label className="text-lg font-bold">{phoneFomatter('0' + data?.phone, '')}</label>
+              <label className="text-lg font-bold">
+                {phoneFomatter('0' + data?.phone, '')}
+              </label>
             </div>
           </div>
         </div>
@@ -201,7 +212,7 @@ const ProposalDetail: NextPage = ({ data, id }) => {
           <div className="my-4 flex w-full flex-row">
             <div className="flex min-w-[70px]">첨부파일 : </div>
             <div className="flex max-h-20 w-full flex-col overflow-y-auto">
-              {data?.files?.map((file) => (
+              {data?.files?.map(file => (
                 <>
                   <a
                     key={file.id}
@@ -219,7 +230,11 @@ const ProposalDetail: NextPage = ({ data, id }) => {
 
       <div className="flex justify-between">
         <div className="float-right ml-auto flex pt-2">
-          <Button onClick={handleDialogOpen} style={{ color: 'black' }} className="mr-2">
+          <Button
+            onClick={handleDialogOpen}
+            style={{ color: 'black' }}
+            className="mr-2"
+          >
             <DeleteOutlineOutlined className="mr-1" />
             삭제
           </Button>
@@ -234,7 +249,6 @@ const ProposalDetail: NextPage = ({ data, id }) => {
         type={'proposal'}
         onClose={handleClose}
         id={id}
-        router={router}
       />
     </div>
   );

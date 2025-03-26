@@ -12,8 +12,8 @@ interface ReviewDetailClientProps {
     id: string;
     title: string;
     content: string;
-    isPrimary: boolean;
-    updatedAt?: string;
+    isPrimary?: boolean | null;
+    updatedAt?: any;
     files?: { id: string; name: string }[];
   };
 }
@@ -35,7 +35,11 @@ const ReviewDetailClient = ({ id, review }: ReviewDetailClientProps) => {
       {editState ? (
         <Editor type={'review'} data={review} onCancel={handleCancel} />
       ) : (
-        <Content data={review} onEdit={handleEdit} handleDialogOpen={handleDeleteOpen} />
+        <Content
+          data={review}
+          onEdit={handleEdit}
+          handleDialogOpen={handleDeleteOpen}
+        />
       )}
 
       <div className="flex justify-end pt-2">
@@ -49,7 +53,6 @@ const ReviewDetailClient = ({ id, review }: ReviewDetailClientProps) => {
         type={'review'}
         onClose={handleDeleteClose}
         id={id}
-        router={router}
       />
     </div>
   );

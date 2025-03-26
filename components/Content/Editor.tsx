@@ -13,7 +13,7 @@ interface ContentEditorProps {
     id: string;
     title: string;
     content: string;
-    isPrimary: boolean;
+    isPrimary?: boolean | null;
     files?: { id: string; name: string }[];
   };
   type?: 'notice' | 'review';
@@ -33,9 +33,9 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
 
   const [editContent, { data: editData, loading }] = useMutation(
     `/api/${type}/${data.id}/edit`,
-    'PUT'
+    'PUT',
   );
-  const [createUpload] = useMutation<FileResponse>('/api/upload');
+  const [createUpload] = useMutation('/api/upload');
 
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(!checked);
@@ -65,7 +65,7 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
   };
 
   const handleCancel = () => {
-    onCancel(false);
+    onCancel();
   };
 
   const onUploadClick = (type: string) => setUploadType(type);
@@ -76,14 +76,17 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
   };
 
   const uploadFileMeta = () => {
-    const imageList = editorRef?.current?.editor?.getBody()?.querySelectorAll('img');
+    const imageList = editorRef?.current?.editor
+      ?.getBody()
+      ?.querySelectorAll('img');
 
     const newImageList = [...imageList].filter(
-      (image) => !fileData?.some((uploaded) => uploaded.id === image.getAttribute('id'))
+      image =>
+        !fileData?.some(uploaded => uploaded.id === image.getAttribute('id')),
     );
 
     if (newImageList && newImageList.length > 0) {
-      [...newImageList].map((el) => {
+      [...newImageList].map(el => {
         const fileId = el.getAttribute('id');
         const url = el.getAttribute('src');
         const name = el.getAttribute('data-name');
@@ -100,7 +103,7 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
 
   useEffect(() => {
     if (data) {
-      setFileData(data.files);
+      setFileData(data.files ?? []);
     }
   }, [data]);
 
@@ -125,32 +128,38 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
             <label>제목</label>
           </div>
           <div className="flex w-full flex-row">
-            <input
-              value={title}
-              onChange={handleChange}
-              type="text"
-              className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
-            />
-            {isLogin && (
-              <>
-                <div className="flex">
-                  <Button onClick={handleSave} style={{ color: 'black' }} className="mx-2 w-[73px]">
-                    <DoneOutlined className="mr-1" />
-                    저장
-                  </Button>
-                </div>
-                <div className="flex">
-                  <Button
-                    onClick={handleCancel}
-                    style={{ color: 'black' }}
-                    className="mr-2 w-[73px]"
-                  >
-                    <CancelOutlined className="mr-1" />
-                    취소
-                  </Button>
-                </div>
-              </>
-            )}
+            <>
+              <input
+                value={title}
+                onChange={handleChange}
+                type="text"
+                className="w-full appearance-none rounded-md  border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-[#a9ce8e] focus:outline-none focus:ring-[#a9ce8e]"
+              />
+              {isLogin && (
+                <>
+                  <div className="flex">
+                    <Button
+                      onClick={handleSave}
+                      style={{ color: 'black' }}
+                      className="mx-2 w-[73px]"
+                    >
+                      <DoneOutlined className="mr-1" />
+                      저장
+                    </Button>
+                  </div>
+                  <div className="flex">
+                    <Button
+                      onClick={handleCancel}
+                      style={{ color: 'black' }}
+                      className="mr-2 w-[73px]"
+                    >
+                      <CancelOutlined className="mr-1" />
+                      취소
+                    </Button>
+                  </div>
+                </>
+              )}
+            </>
           </div>
         </div>
       </div>
@@ -201,7 +210,7 @@ const ContentEditor = ({ data, type, onCancel }: ContentEditorProps) => {
           <div className="my-4 flex w-full flex-row">
             <div className="flex min-w-[70px]">첨부파일 : </div>
             <div className="flex max-h-20 w-full flex-col overflow-y-auto">
-              {fileData?.map((file) => (
+              {fileData?.map(file => (
                 <>
                   <a
                     key={file.id}

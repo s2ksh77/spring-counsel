@@ -1,26 +1,19 @@
 'use client';
-/* eslint-disable @next/next/no-before-interactive-script-outside-document */
 import '../styles/globals.css';
-import type { AppProps } from 'next/app';
-import { SWRConfig } from 'swr';
 import GNB from '@components/GNB';
 import Layout from '@components/Layout';
 import Head from 'next/head';
 import Footer from '@components/Footer';
-import { usePathname, useRouter } from 'next/navigation';
-import Menu from '@components/Menu';
-import { Component, ReactNode, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { ReactNode } from 'react';
 import Section from '@components/Section';
 import Content from '@components/Content';
 import Script from 'next/script';
 import CustomHead from './head';
 
 function MyApp({ children }: { children: ReactNode }) {
-  const router = useRouter();
   const pathname = usePathname();
-  const [menu, setMenu] = useState('');
-  const title = '봄, 심리상담센터';
-  const { isHome, isLogin, isProposalList } = getPageState(pathname);
+  const { isHome, isLogin } = getPageState(pathname);
   const showSection = isHome && !isLogin;
   const withContent = !(isHome || isLogin);
 
@@ -39,10 +32,6 @@ function MyApp({ children }: { children: ReactNode }) {
         return { isHome: false, isLogin: false, isProposalList: false };
     }
   }
-
-  useEffect(() => {
-    setMenu(pathname.split('/')[1]);
-  }, [pathname]);
 
   return (
     <html lang="ko">

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReviewClient from './Review.client';
-import client from '@libs/server/client';
 import { fetchAPI } from '@libs/client/fetcher';
 import { Review, ReviewFile } from '@prisma/client';
 

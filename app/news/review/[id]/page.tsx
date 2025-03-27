@@ -3,7 +3,7 @@ import ReviewDetailClient from './ReviewDetail.client';
 import { Review } from '@prisma/client';
 
 async function getReviewDetail(id: string) {
-  const review = await fetchAPI<Review>(`/api/review/${id}`, 'force-cache');
+  const review = await fetchAPI<Review>(`/api/review/${id}`);
   return review;
 }
 
